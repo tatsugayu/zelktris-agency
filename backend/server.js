@@ -37,8 +37,11 @@ app.use(helmet({
 
 // CORS — seulement le frontend autorisé
 const allowedOrigins = [
-  process.env.FRONTEND_URL || 'http://localhost:3333',
+  'https://zelktris-agency.netlify.app',
+  process.env.FRONTEND_URL || 'http://localhost:8080',
+  'http://localhost:8080',
   'http://localhost:3333',
+  'http://127.0.0.1:8080',
   'http://127.0.0.1:3333',
 ];
 app.use(cors({
