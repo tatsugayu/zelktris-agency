@@ -1,0 +1,1565 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZELKTRIS — Aperçus vitrines clients Cameroun</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@400;600;700;800&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #0A0010;
+      --blue: #0066FF;
+      --violet: #8B00FF;
+      --gold: #FFD700;
+      --white: #F0F0FF;
+      --glass: rgba(255,255,255,0.04);
+      --glass-border: rgba(255,255,255,0.10);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: #05000F;
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-thumb { background: var(--violet); border-radius: 3px; }
+
+    /* ── GALAXY BG ── */
+    #bg-canvas {
+      position: fixed; inset: 0;
+      z-index: 0; pointer-events: none;
+    }
+
+    .wrapper { position: relative; z-index: 1; padding: 0 5% 100px; }
+
+    /* ── HEADER ── */
+    .page-top {
+      text-align: center;
+      padding: 80px 0 60px;
+    }
+    .top-tag {
+      display: inline-block;
+      padding: 6px 20px;
+      background: rgba(255,215,0,0.1);
+      border: 1px solid rgba(255,215,0,0.25);
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .page-top h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, #fff, #00AAFF, #B44FFF, #FFD700);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+    .page-top p {
+      font-size: 1.05rem;
+      color: rgba(240,240,255,0.55);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── SITE CARD ── */
+    .site-row {
+      margin-bottom: 80px;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .site-row.visible { opacity: 1; transform: translateY(0); }
+
+    .site-label-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .site-num {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      line-height: 1;
+      opacity: 0.15;
+    }
+    .site-info h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+    .site-info .sub {
+      font-size: 0.82rem;
+      color: rgba(240,240,255,0.4);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .palette-dots {
+      display: flex;
+      gap: 6px;
+      margin-left: auto;
+      align-items: center;
+    }
+    .dot {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.15);
+    }
+
+    /* ── BROWSER MOCKUP ── */
+    .browser {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+      transition: transform 0.4s, box-shadow 0.4s;
+      cursor: default;
+    }
+    .browser:hover {
+      transform: translateY(-8px) scale(1.005);
+      box-shadow: 0 50px 100px rgba(0,0,0,0.6);
+    }
+    .browser-bar {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 12px;
+      background: rgba(20,20,35,0.95);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .browser-dots { display: flex; gap: 6px; }
+    .browser-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .browser-dot.red    { background: #FF5F57; }
+    .browser-dot.yellow { background: #FFBD2E; }
+    .browser-dot.green  { background: #28C840; }
+    .browser-url {
+      flex: 1;
+      background: rgba(255,255,255,0.06);
+      border-radius: 6px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      font-size: 0.72rem;
+      color: rgba(240,240,255,0.4);
+      font-family: monospace;
+    }
+    .browser-content {
+      min-height: 480px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ── DESIGN CHIPS ── */
+    .design-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+    .chip {
+      padding: 5px 14px;
+      border-radius: 50px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .chip-tech { background: rgba(0,102,255,0.1); border: 1px solid rgba(0,102,255,0.25); color: #00AAFF; }
+    .chip-style { background: rgba(139,0,255,0.1); border: 1px solid rgba(139,0,255,0.25); color: #B44FFF; }
+    .chip-mood { background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.2); color: var(--gold); }
+
+    /* ============================================================
+       MOCKUP 1 — UNIVERSITÉ
+    ============================================================ */
+    .uni-bg {
+      background: linear-gradient(160deg, #0A1628 0%, #0D2347 40%, #0A2030 100%);
+    }
+    .uni-nav {
+      background: rgba(10,22,40,0.95);
+      backdrop-filter: blur(12px);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      border-bottom: 1px solid rgba(255,215,0,0.15);
+    }
+    .uni-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 2px;
+    }
+    .uni-logo span { color: #FFD700; }
+    .uni-nav-links { display: flex; gap: 24px; font-size: 0.75rem; color: rgba(255,255,255,0.6); }
+    .uni-hero-content {
+      padding: 48px 40px 32px;
+      position: relative;
+    }
+    .uni-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px;
+      background: rgba(255,215,0,0.1);
+      border: 1px solid rgba(255,215,0,0.3);
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #FFD700;
+      margin-bottom: 16px;
+    }
+    .uni-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .uni-title span { color: #FFD700; }
+    .uni-sub {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.6);
+      max-width: 480px;
+      margin-bottom: 24px;
+      line-height: 1.7;
+    }
+    .uni-btns { display: flex; gap: 12px; }
+    .uni-btn-primary {
+      padding: 10px 24px;
+      background: #FFD700;
+      color: #0A1628;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+    }
+    .uni-btn-outline {
+      padding: 10px 24px;
+      background: transparent;
+      color: #fff;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.3);
+      cursor: pointer;
+    }
+    .uni-stats {
+      display: flex;
+      gap: 32px;
+      padding: 20px 40px;
+      background: rgba(255,215,0,0.05);
+      border-top: 1px solid rgba(255,215,0,0.1);
+    }
+    .uni-stat-val { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 700; color: #FFD700; }
+    .uni-stat-lbl { font-size: 0.68rem; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px; }
+    .uni-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255,215,0,0.08);
+    }
+    .uni-card {
+      padding: 20px 16px;
+      background: rgba(10,22,40,0.9);
+      text-align: center;
+    }
+    .uni-card-icon { font-size: 1.6rem; margin-bottom: 8px; }
+    .uni-card-title { font-size: 0.78rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .uni-card-sub { font-size: 0.66rem; color: rgba(255,255,255,0.4); }
+    .uni-ribbon {
+      background: linear-gradient(90deg, #FFD700, #FF8C00);
+      padding: 10px 40px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #0A1628;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ============================================================
+       MOCKUP 2 — RESTAURANT
+    ============================================================ */
+    .resto-bg {
+      background: linear-gradient(160deg, #1A0800 0%, #2D1200 50%, #1A0800 100%);
+    }
+    .resto-nav {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 36px;
+      background: rgba(10,4,0,0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(212,160,23,0.2);
+    }
+    .resto-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #D4A017;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    .resto-nav-links {
+      display: flex; gap: 24px;
+      font-size: 0.72rem;
+      color: rgba(255,240,200,0.6);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .resto-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 280px;
+    }
+    .resto-left {
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .resto-tag {
+      font-size: 0.68rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #D4A017;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .resto-tag::before { content:''; width:30px; height:1px; background:#D4A017; }
+    .resto-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #FFF0D0;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .resto-title em { color: #D4A017; font-style: italic; }
+    .resto-sub {
+      font-size: 0.82rem;
+      color: rgba(255,240,200,0.5);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .resto-btn {
+      display: inline-block;
+      padding: 10px 24px;
+      background: #D4A017;
+      color: #1A0800;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+    .resto-right {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #2D1200, #4A1F00);
+    }
+    .resto-emoji-big { font-size: 7rem; filter: drop-shadow(0 0 30px rgba(212,160,23,0.5)); }
+    .resto-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 36px;
+      background: rgba(212,160,23,0.06);
+      border-top: 1px solid rgba(212,160,23,0.12);
+      border-bottom: 1px solid rgba(212,160,23,0.12);
+    }
+    .resto-menu-item {
+      flex: 1;
+      text-align: center;
+      padding: 8px;
+    }
+    .resto-menu-name { font-size: 0.72rem; font-weight: 700; color: #D4A017; letter-spacing: 1px; text-transform: uppercase; }
+    .resto-menu-price { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #FFF0D0; margin-top: 3px; }
+    .resto-menu-sep { width: 1px; background: rgba(212,160,23,0.2); align-self: stretch; }
+    .resto-bottom {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(212,160,23,0.1);
+    }
+    .resto-bottom-item {
+      padding: 16px 20px;
+      background: rgba(10,4,0,0.9);
+      text-align: center;
+    }
+    .resto-bottom-icon { font-size: 1.4rem; margin-bottom: 6px; }
+    .resto-bottom-label { font-size: 0.7rem; color: rgba(255,240,200,0.45); letter-spacing: 1px; text-transform: uppercase; }
+    .resto-bottom-val { font-size: 0.85rem; font-weight: 700; color: #FFF0D0; margin-top: 2px; }
+
+    /* ============================================================
+       MOCKUP 3 — CABINET AVOCATS
+    ============================================================ */
+    .law-bg {
+      background: linear-gradient(160deg, #0D0D18 0%, #12121F 60%, #0A0A14 100%);
+    }
+    .law-top-bar {
+      height: 36px;
+      background: #8B7336;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      font-size: 0.66rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.9);
+      font-weight: 600;
+    }
+    .law-top-bar span { opacity: 0.6; }
+    .law-nav {
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      background: rgba(13,13,24,0.98);
+      border-bottom: 2px solid #8B7336;
+    }
+    .law-logo {
+      display: flex;
+      flex-direction: column;
+    }
+    .law-logo-main {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 2px;
+    }
+    .law-logo-sub {
+      font-size: 0.6rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #8B7336;
+    }
+    .law-nav-links {
+      display: flex; gap: 28px;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .law-nav-btn {
+      padding: 8px 20px;
+      background: #8B7336;
+      color: #fff;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .law-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .law-hero-left {
+      padding: 40px;
+      background: linear-gradient(135deg, rgba(139,115,54,0.08), transparent);
+      border-right: 1px solid rgba(139,115,54,0.15);
+    }
+    .law-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #8B7336;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .law-eyebrow::after { content:''; flex:1; height:1px; background:rgba(139,115,54,0.3); }
+    .law-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .law-title span { color: #8B7336; font-style: italic; }
+    .law-sub {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+    .law-expertise {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .law-exp-item {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.7);
+    }
+    .law-exp-item::before { content:'§'; color:#8B7336; font-weight:700; }
+    .law-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      background: linear-gradient(135deg, #8B7336, #B8962A);
+      color: #fff;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .law-hero-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, rgba(139,115,54,0.04), rgba(0,0,0,0.3));
+      padding: 30px;
+    }
+    .law-shield { font-size: 5rem; filter: drop-shadow(0 0 20px rgba(139,115,54,0.5)); }
+    .law-stat-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      width: 100%;
+    }
+    .law-stat-card {
+      padding: 12px;
+      background: rgba(139,115,54,0.08);
+      border: 1px solid rgba(139,115,54,0.2);
+      border-radius: 8px;
+      text-align: center;
+    }
+    .law-stat-val { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: #B8962A; }
+    .law-stat-lbl { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+    .law-footer-strip {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 40px;
+      background: rgba(139,115,54,0.08);
+      border-top: 1px solid rgba(139,115,54,0.15);
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 1px;
+    }
+
+    /* ============================================================
+       MOCKUP 4 — PARFUMERIE
+    ============================================================ */
+    .perfume-bg {
+      background: linear-gradient(160deg, #0D0008 0%, #1A0012 50%, #0D0008 100%);
+    }
+    .perfume-nav {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 36px;
+      background: rgba(10,0,8,0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,182,193,0.1);
+    }
+    .perfume-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+    .perfume-logo span { color: #E8B4C4; }
+    .perfume-nav-links { display: flex; gap: 24px; font-size: 0.72rem; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase; }
+    .perfume-icons { display: flex; gap: 16px; font-size: 1rem; color: rgba(255,255,255,0.6); }
+    .perfume-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 260px;
+    }
+    .perfume-left {
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .perfume-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #E8B4C4;
+      margin-bottom: 14px;
+    }
+    .perfume-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .perfume-title em { color: #E8B4C4; font-style: italic; }
+    .perfume-sub {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .perfume-btns { display: flex; gap: 12px; }
+    .perfume-btn-main {
+      padding: 10px 24px;
+      background: linear-gradient(135deg, #C8688A, #E8B4C4);
+      color: #fff;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      border: none;
+    }
+    .perfume-btn-out {
+      padding: 10px 24px;
+      background: transparent;
+      color: #E8B4C4;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1px solid rgba(232,180,196,0.3);
+    }
+    .perfume-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(ellipse at center, rgba(200,104,138,0.15) 0%, transparent 70%);
+      position: relative;
+    }
+    .perfume-bottle { font-size: 7rem; filter: drop-shadow(0 0 40px rgba(200,104,138,0.6)); animation: floatAnim 3s ease-in-out infinite; }
+    @keyframes floatAnim { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+    .perfume-products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(232,180,196,0.08);
+      border-top: 1px solid rgba(232,180,196,0.1);
+    }
+    .perfume-product {
+      padding: 18px 12px;
+      background: rgba(10,0,8,0.95);
+      text-align: center;
+    }
+    .product-emoji { font-size: 1.8rem; margin-bottom: 8px; }
+    .product-name { font-size: 0.72rem; font-weight: 700; color: #E8B4C4; letter-spacing: 1px; text-transform: uppercase; }
+    .product-price { font-family: 'Playfair Display', serif; font-size: 1rem; color: #fff; margin-top: 4px; }
+    .product-btn {
+      margin-top: 8px;
+      padding: 4px 12px;
+      background: rgba(200,104,138,0.15);
+      border: 1px solid rgba(200,104,138,0.3);
+      border-radius: 50px;
+      font-size: 0.66rem;
+      color: #E8B4C4;
+      cursor: pointer;
+    }
+
+    /* ============================================================
+       MOCKUP 5 — LOGISTIQUE PME
+    ============================================================ */
+    .logis-bg {
+      background: linear-gradient(160deg, #0A0F1A 0%, #0F1825 60%, #080D16 100%);
+    }
+    .logis-topbar {
+      height: 36px;
+      background: #E65100;
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      gap: 24px;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,0.9);
+    }
+    .logis-topbar span { opacity: 0.7; font-weight: 400; }
+    .logis-nav {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      background: rgba(10,15,26,0.98);
+      border-bottom: 1px solid rgba(230,81,0,0.2);
+    }
+    .logis-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 3px;
+    }
+    .logis-logo span { color: #E65100; }
+    .logis-nav-links {
+      display: flex; gap: 24px;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .logis-nav-btn {
+      padding: 8px 20px;
+      background: #E65100;
+      color: #fff;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .logis-hero {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      min-height: 240px;
+      position: relative;
+    }
+    .logis-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 80% 50%, rgba(230,81,0,0.08) 0%, transparent 60%);
+    }
+    .logis-left { padding: 36px 32px; position: relative; z-index: 1; }
+    .logis-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.66rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #E65100;
+      margin-bottom: 12px;
+    }
+    .logis-eyebrow::before { content:''; width:20px; height:2px; background:#E65100; border-radius:2px; }
+    .logis-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .logis-title span { color: #E65100; }
+    .logis-sub { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.7; margin-bottom: 20px; }
+    .logis-btns { display: flex; gap: 10px; }
+    .logis-btn-main { padding: 10px 22px; background: #E65100; color: #fff; border-radius: 6px; font-size: 0.78rem; font-weight: 700; }
+    .logis-btn-out  { padding: 10px 22px; background: transparent; color: rgba(255,255,255,0.7); border-radius: 6px; font-size: 0.78rem; font-weight: 600; border: 1px solid rgba(255,255,255,0.2); }
+    .logis-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+    .logis-truck { font-size: 6rem; filter: drop-shadow(0 0 20px rgba(230,81,0,0.4)); }
+    .logis-kpis {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: rgba(230,81,0,0.06);
+      border-top: 1px solid rgba(230,81,0,0.15);
+    }
+    .logis-kpi {
+      padding: 18px 16px;
+      text-align: center;
+      border-right: 1px solid rgba(230,81,0,0.1);
+    }
+    .logis-kpi:last-child { border-right: none; }
+    .logis-kpi-val { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 700; color: #E65100; }
+    .logis-kpi-lbl { font-size: 0.64rem; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.4); margin-top: 3px; }
+    .logis-services {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.04);
+    }
+    .logis-svc {
+      padding: 16px;
+      background: rgba(10,15,26,0.95);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .logis-svc-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .logis-svc-name { font-size: 0.75rem; font-weight: 700; color: #fff; margin-bottom: 3px; }
+    .logis-svc-desc { font-size: 0.65rem; color: rgba(255,255,255,0.4); line-height: 1.5; }
+
+    /* ============================================================
+       MOCKUP 6 — DENTISTE
+    ============================================================ */
+    .dent-bg {
+      background: linear-gradient(160deg, #010E12 0%, #021520 60%, #010E12 100%);
+    }
+    .dent-nav {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 36px;
+      background: rgba(1,14,18,0.95);
+      border-bottom: 1px solid rgba(0,200,180,0.12);
+    }
+    .dent-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .dent-logo-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, #00C8B4, #0066AA);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+    .dent-logo-text .name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+    .dent-logo-text .tagline {
+      font-size: 0.58rem;
+      color: #00C8B4;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .dent-nav-links {
+      display: flex; gap: 24px;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.6);
+    }
+    .dent-nav-btn {
+      padding: 8px 18px;
+      background: linear-gradient(135deg, #00C8B4, #0066AA);
+      color: #fff;
+      border-radius: 50px;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+    .dent-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 240px;
+    }
+    .dent-left {
+      padding: 36px 32px;
+    }
+    .dent-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      background: rgba(0,200,180,0.1);
+      border: 1px solid rgba(0,200,180,0.25);
+      border-radius: 50px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #00C8B4;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .dent-badge::before { content:'●'; font-size:0.5rem; animation: pulse 2s infinite; }
+    .dent-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .dent-title span { color: #00C8B4; }
+    .dent-sub { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.7; margin-bottom: 18px; }
+    .dent-trust {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .dent-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.6);
+    }
+    .dent-trust-item::before { content:'✓'; color:#00C8B4; font-weight:700; }
+    .dent-btns { display: flex; gap: 10px; }
+    .dent-btn-main {
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #00C8B4, #0066AA);
+      color: #fff;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .dent-btn-out {
+      padding: 10px 20px;
+      background: transparent;
+      color: #00C8B4;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border: 1px solid rgba(0,200,180,0.3);
+    }
+    .dent-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      background: radial-gradient(ellipse, rgba(0,200,180,0.06), transparent);
+    }
+    .dent-rdv {
+      width: 100%;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(0,200,180,0.15);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .dent-rdv-title { font-size: 0.78rem; font-weight: 700; color: #fff; margin-bottom: 12px; text-align: center; }
+    .dent-rdv-dates {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .dent-date-btn {
+      padding: 8px 4px;
+      background: rgba(0,200,180,0.08);
+      border: 1px solid rgba(0,200,180,0.15);
+      border-radius: 8px;
+      text-align: center;
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.6);
+      cursor: pointer;
+    }
+    .dent-date-btn.active {
+      background: rgba(0,200,180,0.15);
+      border-color: #00C8B4;
+      color: #00C8B4;
+      font-weight: 700;
+    }
+    .dent-date-day { font-size: 0.58rem; color: rgba(255,255,255,0.35); margin-bottom: 2px; }
+    .dent-confirm-btn {
+      width: 100%;
+      padding: 10px;
+      background: linear-gradient(135deg, #00C8B4, #0066AA);
+      color: #fff;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .dent-services {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(0,200,180,0.06);
+      border-top: 1px solid rgba(0,200,180,0.08);
+    }
+    .dent-svc {
+      padding: 16px;
+      background: rgba(1,14,18,0.95);
+      text-align: center;
+    }
+    .dent-svc-icon { font-size: 1.5rem; margin-bottom: 6px; }
+    .dent-svc-name { font-size: 0.72rem; font-weight: 700; color: #fff; }
+    .dent-svc-price { font-size: 0.68rem; color: #00C8B4; margin-top: 3px; }
+
+    /* ── FOOTER NOTE ── */
+    .bottom-note {
+      text-align: center;
+      padding: 48px 0 0;
+    }
+    .bottom-note h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--white), var(--blue), var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+    }
+    .bottom-note p { font-size: 0.95rem; color: rgba(240,240,255,0.55); margin-bottom: 28px; line-height: 1.7; }
+    .approve-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .approve-btn {
+      padding: 12px 28px;
+      border-radius: 50px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .approve-btn:hover { transform: translateY(-3px); }
+    .approve-btn.primary {
+      background: linear-gradient(135deg, #0066FF, #8B00FF);
+      color: #fff;
+      box-shadow: 0 8px 30px rgba(0,102,255,0.4);
+    }
+    .approve-btn.gold {
+      background: linear-gradient(135deg, #FFD700, #FF8C00);
+      color: #0A0010;
+      box-shadow: 0 8px 30px rgba(255,215,0,0.3);
+    }
+  </style>
+</head>
+<body>
+<canvas id="bg-canvas"></canvas>
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <div class="page-top">
+    <div class="top-tag">✦ Zelktris Agency — Aperçus Clients</div>
+    <h1>Maquettes Vitrines<br>Cameroun</h1>
+    <p>Voici les 6 concepts visuels pour les sites vitrine. Fais-moi part de tes retours pour qu'on construise les versions finales.</p>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       SITE 1 — UNIVERSITÉ
+  ══════════════════════════════════════════════════ -->
+  <div class="site-row">
+    <div class="site-label-row">
+      <div class="site-num" style="color:#FFD700;">01</div>
+      <div class="site-info">
+        <h2 style="color:#FFD700;">Université de l'Excellence de Yaoundé</h2>
+        <div class="sub">Institution académique • Académique & Prestige</div>
+      </div>
+      <div class="palette-dots">
+        <div class="dot" style="background:#0A1628;"></div>
+        <div class="dot" style="background:#0D2347;"></div>
+        <div class="dot" style="background:#FFD700;"></div>
+        <div class="dot" style="background:#ffffff;"></div>
+      </div>
+    </div>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots">
+          <div class="browser-dot red"></div>
+          <div class="browser-dot yellow"></div>
+          <div class="browser-dot green"></div>
+        </div>
+        <div class="browser-url">🔒 www.uey-cameroun.cm</div>
+      </div>
+      <div class="browser-content uni-bg">
+        <div class="uni-ribbon">🎓 Inscriptions 2025–2026 ouvertes — Dépôt de dossiers jusqu'au 30 juin · Sciences, Droit, Médecine, Technologie</div>
+        <div class="uni-nav">
+          <div class="uni-logo">UEY<span>★</span></div>
+          <div class="uni-nav-links">
+            <span>Formations</span><span>Recherche</span><span>Vie Campus</span><span>International</span>
+          </div>
+          <div style="padding:7px 18px;background:#FFD700;color:#0A1628;border-radius:6px;font-size:0.72rem;font-weight:800;letter-spacing:1px;">S'inscrire</div>
+        </div>
+        <div class="uni-hero-content">
+          <div class="uni-badge">★ Classée N°1 au Cameroun — 2025</div>
+          <div class="uni-title">Former les Leaders<br>de l'Afrique <span>de Demain</span></div>
+          <div class="uni-sub">L'Université de l'Excellence de Yaoundé offre des programmes d'excellence en sciences, technologie, droit et médecine, reconnus internationalement depuis 1985.</div>
+          <div class="uni-btns">
+            <div class="uni-btn-primary">Découvrir les filières</div>
+            <div class="uni-btn-outline">Visite virtuelle 360°</div>
+          </div>
+        </div>
+        <div class="uni-stats">
+          <div class="uni-stat"><div class="uni-stat-val">18 000</div><div class="uni-stat-lbl">Étudiants</div></div>
+          <div class="uni-stat"><div class="uni-stat-val">120</div><div class="uni-stat-lbl">Programmes</div></div>
+          <div class="uni-stat"><div class="uni-stat-val">40 ans</div><div class="uni-stat-lbl">D'excellence</div></div>
+          <div class="uni-stat"><div class="uni-stat-val">94%</div><div class="uni-stat-lbl">Insertion pro</div></div>
+        </div>
+        <div class="uni-cards">
+          <div class="uni-card"><div class="uni-card-icon">🔬</div><div class="uni-card-title">Sciences & Tech</div><div class="uni-card-sub">32 filières</div></div>
+          <div class="uni-card"><div class="uni-card-icon">⚖️</div><div class="uni-card-title">Droit & Économie</div><div class="uni-card-sub">18 filières</div></div>
+          <div class="uni-card"><div class="uni-card-icon">🩺</div><div class="uni-card-title">Médecine & Santé</div><div class="uni-card-sub">15 filières</div></div>
+          <div class="uni-card"><div class="uni-card-icon">🎨</div><div class="uni-card-title">Arts & Lettres</div><div class="uni-card-sub">22 filières</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="design-chips">
+      <span class="chip chip-mood">Académique & Prestige</span>
+      <span class="chip chip-tech">Bleu nuit + Or</span>
+      <span class="chip chip-style">Playfair Display + Orbitron</span>
+      <span class="chip chip-mood">Inscription en ligne • Catalogue filières • Vie campus</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       SITE 2 — RESTAURANT
+  ══════════════════════════════════════════════════ -->
+  <div class="site-row">
+    <div class="site-label-row">
+      <div class="site-num" style="color:#D4A017;">02</div>
+      <div class="site-info">
+        <h2 style="color:#D4A017;">Le Rendez-Vous — Restaurant Gastronomique</h2>
+        <div class="sub">Restauration premium • Douala, Cameroun</div>
+      </div>
+      <div class="palette-dots">
+        <div class="dot" style="background:#1A0800;"></div>
+        <div class="dot" style="background:#2D1200;"></div>
+        <div class="dot" style="background:#D4A017;"></div>
+        <div class="dot" style="background:#FFF0D0;"></div>
+      </div>
+    </div>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots">
+          <div class="browser-dot red"></div><div class="browser-dot yellow"></div><div class="browser-dot green"></div>
+        </div>
+        <div class="browser-url">🔒 www.lerendezvous-douala.cm</div>
+      </div>
+      <div class="browser-content resto-bg">
+        <div class="resto-nav">
+          <div class="resto-logo">Le Rendez-Vous</div>
+          <div class="resto-nav-links">
+            <span>Menu</span><span>Privatisation</span><span>Vins & Cocktails</span><span>Réservation</span>
+          </div>
+          <div style="padding:7px 18px;border:1px solid #D4A017;color:#D4A017;border-radius:4px;font-size:0.72rem;font-weight:700;letter-spacing:1px;">Réserver</div>
+        </div>
+        <div class="resto-hero">
+          <div class="resto-left">
+            <div class="resto-tag">Restaurant Gastronomique</div>
+            <div class="resto-title">L'Art de la Table<br><em>à la Camerounaise</em></div>
+            <div class="resto-sub">Une expérience culinaire d'exception au cœur de Douala — cuisine africaine raffinée, produits locaux de saison et cave à vins internationale.</div>
+            <div class="resto-btn">Réserver une table</div>
+          </div>
+          <div class="resto-right">
+            <div class="resto-emoji-big">🍽️</div>
+          </div>
+        </div>
+        <div class="resto-divider">
+          <div class="resto-menu-item"><div class="resto-menu-name">Ndolé Royal</div><div class="resto-menu-price">12 500 F</div></div>
+          <div class="resto-menu-sep"></div>
+          <div class="resto-menu-item"><div class="resto-menu-name">Poulet DG</div><div class="resto-menu-price">15 000 F</div></div>
+          <div class="resto-menu-sep"></div>
+          <div class="resto-menu-item"><div class="resto-menu-name">Okok Grillé</div><div class="resto-menu-price">9 500 F</div></div>
+          <div class="resto-menu-sep"></div>
+          <div class="resto-menu-item"><div class="resto-menu-name">Koki Prestige</div><div class="resto-menu-price">8 000 F</div></div>
+        </div>
+        <div class="resto-bottom">
+          <div class="resto-bottom-item"><div class="resto-bottom-icon">⏰</div><div class="resto-bottom-label">Ouvert</div><div class="resto-bottom-val">12h – 23h</div></div>
+          <div class="resto-bottom-item"><div class="resto-bottom-icon">📍</div><div class="resto-bottom-label">Adresse</div><div class="resto-bottom-val">Bonanjo, Douala</div></div>
+          <div class="resto-bottom-item"><div class="resto-bottom-icon">📞</div><div class="resto-bottom-label">Réservation</div><div class="resto-bottom-val">+237 699 00 00 00</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="design-chips">
+      <span class="chip chip-mood">Luxe & Gastronomique</span>
+      <span class="chip chip-tech">Noir brun + Or chaud + Crème</span>
+      <span class="chip chip-style">Playfair Display • Elegant serif</span>
+      <span class="chip chip-mood">Menu en ligne • Réservation • Privatisation événements</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       SITE 3 — CABINET AVOCATS
+  ══════════════════════════════════════════════════ -->
+  <div class="site-row">
+    <div class="site-label-row">
+      <div class="site-num" style="color:#B8962A;">03</div>
+      <div class="site-info">
+        <h2 style="color:#B8962A;">Nguema & Associés — Cabinet d'Avocats</h2>
+        <div class="sub">Droit des affaires & contentieux • Yaoundé, Cameroun</div>
+      </div>
+      <div class="palette-dots">
+        <div class="dot" style="background:#0D0D18;"></div>
+        <div class="dot" style="background:#12121F;"></div>
+        <div class="dot" style="background:#8B7336;"></div>
+        <div class="dot" style="background:#B8962A;"></div>
+      </div>
+    </div>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots">
+          <div class="browser-dot red"></div><div class="browser-dot yellow"></div><div class="browser-dot green"></div>
+        </div>
+        <div class="browser-url">🔒 www.nguema-avocats.cm</div>
+      </div>
+      <div class="browser-content law-bg">
+        <div class="law-top-bar">
+          <span>📞 +237 222 23 45 67</span>
+          <span>✉️ contact@nguema-avocats.cm</span>
+          <span>📍 Avenue de l'Indépendance, Yaoundé</span>
+        </div>
+        <div class="law-nav">
+          <div class="law-logo">
+            <div class="law-logo-main">NGUEMA & ASSOCIÉS</div>
+            <div class="law-logo-sub">Cabinet d'Avocats depuis 1998</div>
+          </div>
+          <div class="law-nav-links">
+            <span>Domaines</span><span>L'équipe</span><span>Publications</span><span>Contact</span>
+          </div>
+          <div class="law-nav-btn">Consultation</div>
+        </div>
+        <div class="law-hero">
+          <div class="law-hero-left">
+            <div class="law-eyebrow">Excellence juridique</div>
+            <div class="law-title">Défendre vos droits.<br>Protéger vos <span>intérêts.</span></div>
+            <div class="law-sub">Cabinet de référence au Cameroun, NGUEMA & ASSOCIÉS accompagne entreprises, institutions et particuliers dans leurs enjeux juridiques complexes depuis 26 ans.</div>
+            <div class="law-expertise">
+              <div class="law-exp-item">Droit des affaires & OHADA</div>
+              <div class="law-exp-item">Contentieux & arbitrage</div>
+              <div class="law-exp-item">Droit fiscal & douanier</div>
+              <div class="law-exp-item">Propriété intellectuelle</div>
+            </div>
+            <div class="law-btn">📋 Prendre rendez-vous</div>
+          </div>
+          <div class="law-hero-right">
+            <div class="law-shield">⚖️</div>
+            <div class="law-stat-cards">
+              <div class="law-stat-card"><div class="law-stat-val">26</div><div class="law-stat-lbl">Ans d'expérience</div></div>
+              <div class="law-stat-card"><div class="law-stat-val">500+</div><div class="law-stat-lbl">Dossiers gagnés</div></div>
+              <div class="law-stat-card"><div class="law-stat-val">8</div><div class="law-stat-lbl">Avocats associés</div></div>
+              <div class="law-stat-card"><div class="law-stat-val">98%</div><div class="law-stat-lbl">Satisfaction client</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="law-footer-strip">
+          <span>Barreau du Cameroun · Membre OHADA · UNODC Partenaire</span>
+          <span>Lun–Ven 8h–18h · Urgences 24/7</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="design-chips">
+      <span class="chip chip-mood">Autorité & Confiance</span>
+      <span class="chip chip-tech">Noir profond + Or bronze + Ivoire</span>
+      <span class="chip chip-style">Playfair Display • Institutionnel sobre</span>
+      <span class="chip chip-mood">Prise de RDV • Domaines d'expertise • Publications juridiques</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       SITE 4 — PARFUMERIE
+  ══════════════════════════════════════════════════ -->
+  <div class="site-row">
+    <div class="site-label-row">
+      <div class="site-num" style="color:#E8B4C4;">04</div>
+      <div class="site-info">
+        <h2 style="color:#E8B4C4;">Lumière — Boutique Parfums & Cosmétiques</h2>
+        <div class="sub">Beauté premium • Yaoundé & Douala, Cameroun</div>
+      </div>
+      <div class="palette-dots">
+        <div class="dot" style="background:#0D0008;"></div>
+        <div class="dot" style="background:#1A0012;"></div>
+        <div class="dot" style="background:#C8688A;"></div>
+        <div class="dot" style="background:#E8B4C4;"></div>
+      </div>
+    </div>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots">
+          <div class="browser-dot red"></div><div class="browser-dot yellow"></div><div class="browser-dot green"></div>
+        </div>
+        <div class="browser-url">🔒 www.lumiere-beaute.cm</div>
+      </div>
+      <div class="browser-content perfume-bg">
+        <div class="perfume-nav">
+          <div class="perfume-logo">LUMIÈRE<span>✦</span></div>
+          <div class="perfume-nav-links">
+            <span>Parfums</span><span>Soins</span><span>Maquillage</span><span>Collections</span>
+          </div>
+          <div class="perfume-icons">
+            <span>🔍</span><span>♡</span><span>🛍️</span>
+          </div>
+        </div>
+        <div class="perfume-hero">
+          <div class="perfume-left">
+            <div class="perfume-eyebrow">Nouvelle Collection 2025</div>
+            <div class="perfume-title">L'Essence de la<br>Beauté <em>Africaine</em></div>
+            <div class="perfume-sub">Parfums d'auteur, soins naturels et cosmétiques luxe — inspirés des trésors botaniques du Cameroun pour révéler votre éclat naturel.</div>
+            <div class="perfume-btns">
+              <div class="perfume-btn-main">Découvrir la collection</div>
+              <div class="perfume-btn-out">Mon panier ♡</div>
+            </div>
+          </div>
+          <div class="perfume-right">
+            <div class="perfume-bottle">🌸</div>
+            <div style="position:absolute;top:16px;right:16px;padding:6px 14px;background:rgba(200,104,138,0.15);border:1px solid rgba(200,104,138,0.3);border-radius:50px;font-size:0.68rem;color:#E8B4C4;font-weight:700;">✦ Exclusivité Lumière</div>
+          </div>
+        </div>
+        <div class="perfume-products">
+          <div class="perfume-product"><div class="product-emoji">🌹</div><div class="product-name">Rose du Sahel</div><div class="product-price">45 000 F</div><div class="product-btn">Ajouter ♡</div></div>
+          <div class="perfume-product"><div class="product-emoji">🌿</div><div class="product-name">Oud du Wouri</div><div class="product-price">62 000 F</div><div class="product-btn">Ajouter ♡</div></div>
+          <div class="perfume-product"><div class="product-emoji">✨</div><div class="product-name">Nuit Bamiléké</div><div class="product-price">38 000 F</div><div class="product-btn">Ajouter ♡</div></div>
+          <div class="perfume-product"><div class="product-emoji">🍃</div><div class="product-name">Cèdre Adamaoua</div><div class="product-price">55 000 F</div><div class="product-btn">Ajouter ♡</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="design-chips">
+      <span class="chip chip-mood">Luxe & Sensualité</span>
+      <span class="chip chip-tech">Noir profond + Rose poudré + Fuschia</span>
+      <span class="chip chip-style">Playfair Display italic • Élégance féminine</span>
+      <span class="chip chip-mood">Boutique en ligne • Lookbook • Conseils beauté</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       SITE 5 — LOGISTIQUE
+  ══════════════════════════════════════════════════ -->
+  <div class="site-row">
+    <div class="site-label-row">
+      <div class="site-num" style="color:#E65100;">05</div>
+      <div class="site-info">
+        <h2 style="color:#E65100;">CamLogis — PME de Logistique & Transport</h2>
+        <div class="sub">Transport & Supply Chain • Douala — National & International</div>
+      </div>
+      <div class="palette-dots">
+        <div class="dot" style="background:#0A0F1A;"></div>
+        <div class="dot" style="background:#0F1825;"></div>
+        <div class="dot" style="background:#E65100;"></div>
+        <div class="dot" style="background:#FF8C42;"></div>
+      </div>
+    </div>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots">
+          <div class="browser-dot red"></div><div class="browser-dot yellow"></div><div class="browser-dot green"></div>
+        </div>
+        <div class="browser-url">🔒 www.camlogis.cm</div>
+      </div>
+      <div class="browser-content logis-bg">
+        <div class="logis-topbar">
+          <span>📞 +237 233 42 00 00</span>
+          <span>·</span>
+          <span>📍 Zone Industrielle, Douala</span>
+          <span>·</span>
+          <span style="color:#FF8C42;font-weight:700;">⚡ Suivi en temps réel disponible</span>
+        </div>
+        <div class="logis-nav">
+          <div class="logis-logo">CAM<span>LOGIS</span></div>
+          <div class="logis-nav-links">
+            <span>Services</span><span>Suivi colis</span><span>Flotte</span><span>Devis</span>
+          </div>
+          <div class="logis-nav-btn">Demander un devis</div>
+        </div>
+        <div class="logis-hero">
+          <div class="logis-left">
+            <div class="logis-eyebrow">Transport & Logistique</div>
+            <div class="logis-title">Livré à temps,<br>partout au <span>Cameroun</span></div>
+            <div class="logis-sub">Solutions de transport routier, maritime et aérien — du fret industriel à la livraison express. Présent dans les 10 régions du Cameroun.</div>
+            <div class="logis-btns">
+              <div class="logis-btn-main">🔍 Suivre mon colis</div>
+              <div class="logis-btn-out">Demander un devis</div>
+            </div>
+          </div>
+          <div class="logis-right">
+            <div class="logis-truck">🚛</div>
+          </div>
+        </div>
+        <div class="logis-kpis">
+          <div class="logis-kpi"><div class="logis-kpi-val">10</div><div class="logis-kpi-lbl">Régions couvertes</div></div>
+          <div class="logis-kpi"><div class="logis-kpi-val">120+</div><div class="logis-kpi-lbl">Véhicules</div></div>
+          <div class="logis-kpi"><div class="logis-kpi-val">98%</div><div class="logis-kpi-lbl">Livraisons à l'heure</div></div>
+          <div class="logis-kpi"><div class="logis-kpi-val">15ans</div><div class="logis-kpi-lbl">D'expérience</div></div>
+        </div>
+        <div class="logis-services">
+          <div class="logis-svc"><div class="logis-svc-icon">🚛</div><div><div class="logis-svc-name">Transport routier</div><div class="logis-svc-desc">National & régional</div></div></div>
+          <div class="logis-svc"><div class="logis-svc-icon">🚢</div><div><div class="logis-svc-name">Fret maritime</div><div class="logis-svc-desc">Port de Douala</div></div></div>
+          <div class="logis-svc"><div class="logis-svc-icon">✈️</div><div><div class="logis-svc-name">Express aérien</div><div class="logis-svc-desc">International 48h</div></div></div>
+          <div class="logis-svc"><div class="logis-svc-icon">🏭</div><div><div class="logis-svc-name">Entrepôt & stock</div><div class="logis-svc-desc">5 000 m² Douala</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="design-chips">
+      <span class="chip chip-mood">Fiabilité & Performance</span>
+      <span class="chip chip-tech">Bleu marine + Orange vif + Blanc</span>
+      <span class="chip chip-style">Montserrat + Orbitron • Industriel & Tech</span>
+      <span class="chip chip-mood">Tracking colis • Devis en ligne • Flotte connectée</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       SITE 6 — DENTISTE
+  ══════════════════════════════════════════════════ -->
+  <div class="site-row">
+    <div class="site-label-row">
+      <div class="site-num" style="color:#00C8B4;">06</div>
+      <div class="site-info">
+        <h2 style="color:#00C8B4;">Sourire Dentaire — Cabinet Dentaire</h2>
+        <div class="sub">Santé dentaire premium • Yaoundé, Cameroun</div>
+      </div>
+      <div class="palette-dots">
+        <div class="dot" style="background:#010E12;"></div>
+        <div class="dot" style="background:#021520;"></div>
+        <div class="dot" style="background:#00C8B4;"></div>
+        <div class="dot" style="background:#0066AA;"></div>
+      </div>
+    </div>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots">
+          <div class="browser-dot red"></div><div class="browser-dot yellow"></div><div class="browser-dot green"></div>
+        </div>
+        <div class="browser-url">🔒 www.souriredentaire-yaounde.cm</div>
+      </div>
+      <div class="browser-content dent-bg">
+        <div class="dent-nav">
+          <div class="dent-logo">
+            <div class="dent-logo-icon">🦷</div>
+            <div class="dent-logo-text">
+              <div class="name">SOURIRE DENTAIRE</div>
+              <div class="tagline">Cabinet Dr. Mbarga</div>
+            </div>
+          </div>
+          <div class="dent-nav-links">
+            <span>Soins</span><span>L'équipe</span><span>Tarifs</span><span>Urgences</span>
+          </div>
+          <div class="dent-nav-btn">Prendre RDV</div>
+        </div>
+        <div class="dent-hero">
+          <div class="dent-left">
+            <div class="dent-badge">Patients acceptés · Urgences 24/7</div>
+            <div class="dent-title">Votre <span>Sourire</span>,<br>Notre Priorité</div>
+            <div class="dent-sub">Cabinet dentaire moderne au cœur de Yaoundé — soins conservateurs, orthodontie, implants et esthétique dentaire par des praticiens expérimentés.</div>
+            <div class="dent-trust">
+              <div class="dent-trust-item">Sans douleur</div>
+              <div class="dent-trust-item">Équipement 3D</div>
+              <div class="dent-trust-item">Mutuelle acceptée</div>
+            </div>
+            <div class="dent-btns">
+              <div class="dent-btn-main">📅 Réserver en ligne</div>
+              <div class="dent-btn-out">📞 Urgences</div>
+            </div>
+          </div>
+          <div class="dent-right">
+            <div class="dent-rdv">
+              <div class="dent-rdv-title">📅 Prochains créneaux disponibles</div>
+              <div class="dent-rdv-dates">
+                <div class="dent-date-btn active"><div class="dent-date-day">LUN</div>12 Mai</div>
+                <div class="dent-date-btn"><div class="dent-date-day">MAR</div>13 Mai</div>
+                <div class="dent-date-btn"><div class="dent-date-day">JEU</div>15 Mai</div>
+              </div>
+              <button class="dent-confirm-btn">Confirmer le rendez-vous →</button>
+            </div>
+          </div>
+        </div>
+        <div class="dent-services">
+          <div class="dent-svc"><div class="dent-svc-icon">🦷</div><div class="dent-svc-name">Soins conservateurs</div><div class="dent-svc-price">à partir de 15 000 F</div></div>
+          <div class="dent-svc"><div class="dent-svc-icon">😁</div><div class="dent-svc-name">Blanchiment</div><div class="dent-svc-price">à partir de 45 000 F</div></div>
+          <div class="dent-svc"><div class="dent-svc-icon">🔩</div><div class="dent-svc-name">Implants</div><div class="dent-svc-price">à partir de 180 000 F</div></div>
+          <div class="dent-svc"><div class="dent-svc-icon">🦴</div><div class="dent-svc-name">Orthodontie</div><div class="dent-svc-price">à partir de 120 000 F</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="design-chips">
+      <span class="chip chip-mood">Confiance & Modernité médicale</span>
+      <span class="chip chip-tech">Noir profond + Turquoise + Bleu médical</span>
+      <span class="chip chip-style">Montserrat • Clean & médical</span>
+      <span class="chip chip-mood">RDV en ligne · Urgences 24/7 · Tarifs · Équipe</span>
+    </div>
+  </div>
+
+  <!-- ── BOTTOM CTA ── -->
+  <div class="bottom-note">
+    <h3>✅ Les 6 sites sont construits et disponibles</h3>
+    <p>Tous les sites vitrines sont complets et intégrés dans la page portfolio de Zelktris Agency.</p>
+    <div class="approve-row">
+      <a href="portfolio.html" class="approve-btn primary" style="text-decoration:none">🗂️ Voir le Portfolio ZELKTRIS</a>
+      <a href="vitrines/universite/index.html" target="_blank" class="approve-btn" style="background:rgba(255,215,0,0.12);border:1px solid rgba(255,215,0,0.3);color:#FFD700;text-decoration:none">🎓 Université</a>
+      <a href="vitrines/restaurant/index.html" target="_blank" class="approve-btn" style="background:rgba(212,160,23,0.1);border:1px solid rgba(212,160,23,0.3);color:#D4A017;text-decoration:none">🍽️ Restaurant</a>
+      <a href="vitrines/avocats/index.html" target="_blank" class="approve-btn" style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);color:#C9A84C;text-decoration:none">⚖️ Avocats</a>
+      <a href="vitrines/parfum/index.html" target="_blank" class="approve-btn" style="background:rgba(200,104,138,0.1);border:1px solid rgba(200,104,138,0.3);color:#C8688A;text-decoration:none">🌸 Parfum</a>
+      <a href="vitrines/logistique/index.html" target="_blank" class="approve-btn" style="background:rgba(230,81,0,0.1);border:1px solid rgba(230,81,0,0.3);color:#FF7722;text-decoration:none">🚛 Logistique</a>
+      <a href="vitrines/dentiste/index.html" target="_blank" class="approve-btn" style="background:rgba(0,200,180,0.08);border:1px solid rgba(0,200,180,0.3);color:#00C8B4;text-decoration:none">🦷 Dentiste</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- Galaxy BG -->
+<script>
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, stars = [];
+  function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
+  function initStars(){
+    stars=[];
+    const n=Math.floor(W*H/4000);
+    for(let i=0;i<n;i++){
+      stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5+0.3,a:Math.random(),s:Math.random()*0.001+0.0002,o:Math.random()*Math.PI*2,c:Math.random()<0.7?'#fff':Math.random()<0.5?'#aabfff':'#FFD700'});
+    }
+  }
+  let t=0;
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const bg=ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,Math.max(W,H));
+    bg.addColorStop(0,'rgba(18,0,35,1)');bg.addColorStop(0.6,'rgba(6,0,14,1)');bg.addColorStop(1,'rgba(3,0,8,1)');
+    ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+    t+=0.01;
+    stars.forEach(s=>{
+      const tw=0.4+0.6*Math.sin(t*s.s*500+s.o);
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=s.c;ctx.globalAlpha=s.a*tw;ctx.fill();
+    });
+    ctx.globalAlpha=1;
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',()=>{resize();initStars();});
+  resize();initStars();draw();
+
+  // Scroll reveal
+  const rows=document.querySelectorAll('.site-row');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+  },{threshold:0.08});
+  rows.forEach(r=>obs.observe(r));
+</script>
+</body>
+</html>

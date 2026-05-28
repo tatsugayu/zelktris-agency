@@ -1,0 +1,919 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zelktris Admin — Panneau de Contrôle</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#05000F;
+  --bg2:#0A0018;
+  --bg3:#110020;
+  --card:rgba(255,255,255,0.04);
+  --border:rgba(255,255,255,0.08);
+  --blue:#0066FF;
+  --blue-lt:#00AAFF;
+  --violet:#8B00FF;
+  --violet-lt:#B44FFF;
+  --gold:#FFD700;
+  --green:#00C853;
+  --red:#FF3366;
+  --orange:#FF6600;
+  --white:#F0F0FF;
+  --gray:rgba(240,240,255,0.5);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.6;min-height:100vh}
+
+/* LOGIN */
+#loginScreen{position:fixed;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(139,0,255,0.1),transparent 60%),radial-gradient(ellipse at 70% 60%,rgba(0,102,255,0.08),transparent 60%),var(--bg);display:flex;align-items:center;justify-content:center;z-index:1000}
+.login-box{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(20px);padding:3rem 2.5rem;width:100%;max-width:420px;text-align:center}
+.login-logo{font-size:2rem;font-weight:900;letter-spacing:.1em;background:linear-gradient(135deg,var(--white),var(--blue-lt));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.3rem}
+.login-sub{font-size:.8rem;color:var(--gray);letter-spacing:.2em;text-transform:uppercase;margin-bottom:2.5rem}
+.login-field{text-align:left;margin-bottom:1.2rem}
+.login-field label{display:block;font-size:.75rem;color:var(--gray);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem}
+.login-field input{width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--white);padding:.85rem 1rem;font-size:.95rem;outline:none;transition:border-color .3s}
+.login-field input:focus{border-color:var(--blue)}
+.login-btn{width:100%;background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;padding:.9rem;font-size:1rem;font-weight:700;border:none;cursor:pointer;letter-spacing:.05em;transition:opacity .3s;margin-top:.5rem}
+.login-btn:hover{opacity:.9}
+.login-error{color:var(--red);font-size:.85rem;margin-top:.8rem;display:none}
+.login-hint{font-size:.75rem;color:rgba(240,240,255,0.3);margin-top:1.5rem}
+
+/* LAYOUT */
+#adminApp{display:none;min-height:100vh}
+.admin-layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+
+/* SIDEBAR */
+.sidebar{background:var(--bg2);border-right:1px solid var(--border);padding:0;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
+.sidebar-logo{padding:1.5rem 1.5rem 1rem;border-bottom:1px solid var(--border)}
+.sidebar-logo .logo-text{font-size:1.3rem;font-weight:900;letter-spacing:.1em;background:linear-gradient(135deg,var(--white),var(--violet-lt));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sidebar-logo .logo-sub{font-size:.65rem;color:var(--gray);letter-spacing:.2em;text-transform:uppercase}
+.sidebar-nav{flex:1;padding:1rem 0}
+.nav-section{padding:.5rem 1.2rem .3rem;font-size:.65rem;color:rgba(240,240,255,0.3);letter-spacing:.15em;text-transform:uppercase;font-weight:700}
+.nav-item{display:flex;align-items:center;gap:.8rem;padding:.7rem 1.5rem;color:var(--gray);text-decoration:none;font-size:.88rem;font-weight:500;cursor:pointer;transition:all .2s;border-left:3px solid transparent;user-select:none}
+.nav-item:hover{color:var(--white);background:rgba(255,255,255,0.04)}
+.nav-item.active{color:var(--white);background:rgba(0,102,255,0.1);border-left-color:var(--blue)}
+.nav-item .nav-icon{font-size:1rem;min-width:20px;text-align:center}
+.nav-badge{margin-left:auto;background:var(--red);color:#fff;font-size:.65rem;font-weight:700;padding:.15rem .5rem;border-radius:50px;min-width:20px;text-align:center}
+.nav-badge.green{background:var(--green)}
+.sidebar-footer{padding:1rem 1.5rem;border-top:1px solid var(--border)}
+.sidebar-user{display:flex;align-items:center;gap:.7rem}
+.user-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--violet));display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;flex-shrink:0}
+.user-info .user-name{font-size:.85rem;font-weight:600;color:var(--white)}
+.user-info .user-role{font-size:.7rem;color:var(--gold)}
+.logout-btn{margin-left:auto;background:none;border:none;color:var(--gray);cursor:pointer;font-size:1rem;padding:.2rem;transition:color .2s}
+.logout-btn:hover{color:var(--red)}
+
+/* MAIN CONTENT */
+.admin-main{background:var(--bg);overflow:auto}
+.admin-topbar{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 2rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(5,0,15,0.9);backdrop-filter:blur(12px);z-index:10}
+.page-title{font-size:1.2rem;font-weight:700;color:var(--white)}
+.page-breadcrumb{font-size:.8rem;color:var(--gray);margin-top:.1rem}
+.topbar-actions{display:flex;align-items:center;gap:.8rem}
+.topbar-btn{padding:.5rem 1.2rem;border-radius:50px;border:1px solid var(--border);background:var(--card);color:var(--gray);font-size:.82rem;cursor:pointer;transition:all .2s}
+.topbar-btn:hover{border-color:var(--blue);color:var(--blue-lt)}
+.topbar-btn.primary{background:linear-gradient(135deg,var(--blue),var(--violet));border-color:transparent;color:#fff}
+.topbar-btn.primary:hover{opacity:.9}
+
+/* PANELS */
+.panel{display:none;padding:2rem}
+.panel.active{display:block}
+
+/* STATS GRID */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-bottom:2rem}
+.stat-card{background:var(--card);border:1px solid var(--border);padding:1.5rem;border-radius:8px;position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent,var(--blue))}
+.stat-card.green::before{background:var(--green)}
+.stat-card.gold::before{background:var(--gold)}
+.stat-card.violet::before{background:var(--violet)}
+.stat-value{font-size:2rem;font-weight:700;color:var(--white);line-height:1}
+.stat-label{font-size:.78rem;color:var(--gray);margin-top:.3rem;text-transform:uppercase;letter-spacing:.08em}
+.stat-change{font-size:.75rem;margin-top:.5rem}
+.stat-change.up{color:var(--green)}
+.stat-change.down{color:var(--red)}
+.stat-icon{position:absolute;top:1.2rem;right:1.2rem;font-size:1.8rem;opacity:.15}
+
+/* TABLES */
+.table-card{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:1.5rem}
+.table-header{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.5rem;border-bottom:1px solid var(--border)}
+.table-title{font-size:.9rem;font-weight:700;color:var(--white)}
+.table-actions{display:flex;gap:.5rem}
+.tbl-btn{padding:.35rem .9rem;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--gray);font-size:.78rem;cursor:pointer;border-radius:4px;transition:all .2s}
+.tbl-btn:hover{border-color:var(--blue);color:var(--blue-lt)}
+table{width:100%;border-collapse:collapse}
+th{padding:.7rem 1.5rem;text-align:left;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);background:rgba(255,255,255,0.02);border-bottom:1px solid var(--border)}
+td{padding:.85rem 1.5rem;font-size:.85rem;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,0.02)}
+.status-badge{padding:.2rem .7rem;border-radius:50px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.status-badge.new{background:rgba(0,102,255,0.15);color:var(--blue-lt);border:1px solid rgba(0,102,255,0.3)}
+.status-badge.read{background:rgba(240,240,255,0.05);color:var(--gray);border:1px solid var(--border)}
+.status-badge.replied{background:rgba(0,200,83,0.12);color:var(--green);border:1px solid rgba(0,200,83,0.3)}
+.action-icon{background:none;border:none;color:var(--gray);cursor:pointer;font-size:1rem;padding:.2rem .4rem;transition:color .2s;border-radius:4px}
+.action-icon:hover{color:var(--white);background:rgba(255,255,255,0.08)}
+
+/* TARIFS EDITOR */
+.tarifs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+.tarif-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.5rem}
+.tarif-card h4{font-size:.9rem;font-weight:700;color:var(--white);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.tarif-field{margin-bottom:1rem}
+.tarif-field label{display:block;font-size:.72rem;color:var(--gray);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem}
+.tarif-field input{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--white);padding:.6rem .8rem;font-size:.88rem;border-radius:4px;outline:none;transition:border-color .2s}
+.tarif-field input:focus{border-color:var(--blue)}
+.tarif-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.save-btn{background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;padding:.7rem 1.5rem;font-size:.85rem;font-weight:700;border:none;cursor:pointer;border-radius:4px;transition:opacity .2s}
+.save-btn:hover{opacity:.9}
+.save-ok{color:var(--green);font-size:.82rem;margin-left:.8rem;display:none}
+
+/* SETTINGS */
+.settings-section{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.5rem;margin-bottom:1.5rem}
+.settings-section h4{font-size:.9rem;font-weight:700;color:var(--white);margin-bottom:1.2rem;padding-bottom:.8rem;border-bottom:1px solid var(--border)}
+.setting-row{display:flex;align-items:center;justify-content:space-between;padding:.8rem 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.setting-row:last-child{border-bottom:none}
+.setting-label{font-size:.88rem;color:var(--white)}
+.setting-desc{font-size:.75rem;color:var(--gray);margin-top:.15rem}
+.setting-input{background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--white);padding:.5rem .8rem;font-size:.85rem;border-radius:4px;outline:none;min-width:200px;transition:border-color .2s}
+.setting-input:focus{border-color:var(--blue)}
+.toggle-switch{position:relative;width:44px;height:24px;flex-shrink:0}
+.toggle-switch input{opacity:0;width:0;height:0}
+.toggle-slider{position:absolute;inset:0;background:rgba(255,255,255,0.1);border-radius:12px;cursor:pointer;transition:.3s}
+.toggle-slider::before{content:'';position:absolute;width:18px;height:18px;left:3px;bottom:3px;background:var(--gray);border-radius:50%;transition:.3s}
+.toggle-switch input:checked + .toggle-slider{background:var(--blue)}
+.toggle-switch input:checked + .toggle-slider::before{transform:translateX(20px);background:#fff}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:500;backdrop-filter:blur(4px)}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--bg2);border:1px solid var(--border);padding:2rem;width:100%;max-width:600px;max-height:80vh;overflow-y:auto;border-radius:8px}
+.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
+.modal-title{font-size:1rem;font-weight:700;color:var(--white)}
+.modal-close{background:none;border:none;color:var(--gray);font-size:1.3rem;cursor:pointer}
+.modal-field{margin-bottom:1rem}
+.modal-field label{display:block;font-size:.72rem;color:var(--gray);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.4rem}
+.modal-field .val{font-size:.9rem;color:var(--white);padding:.6rem .8rem;background:rgba(255,255,255,0.04);border-radius:4px;border:1px solid var(--border)}
+.modal-field .note{font-size:.82rem;color:var(--gray);white-space:pre-wrap;word-break:break-word;background:rgba(255,255,255,0.03);padding:.8rem;border:1px solid var(--border);border-radius:4px;max-height:160px;overflow-y:auto}
+.modal-actions{display:flex;gap:.8rem;margin-top:1.5rem;flex-wrap:wrap}
+.modal-btn{padding:.6rem 1.4rem;border-radius:4px;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s}
+.modal-btn.primary{background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;border:none}
+.modal-btn.danger{background:rgba(255,51,102,0.1);border:1px solid rgba(255,51,102,0.3);color:var(--red)}
+.modal-btn.ghost{background:var(--card);border:1px solid var(--border);color:var(--gray)}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:4rem 2rem}
+.empty-state .empty-icon{font-size:3rem;margin-bottom:1rem;opacity:.4}
+.empty-state p{color:var(--gray);font-size:.9rem}
+
+/* CHART */
+.chart-bar-row{display:flex;align-items:center;gap:.8rem;margin-bottom:.6rem}
+.chart-label{font-size:.8rem;color:var(--gray);min-width:100px}
+.chart-bar-wrap{flex:1;background:rgba(255,255,255,0.05);border-radius:4px;height:8px;overflow:hidden}
+.chart-bar{height:100%;border-radius:4px;transition:width 1s ease}
+.chart-value{font-size:.8rem;color:var(--white);min-width:50px;text-align:right}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .admin-layout{grid-template-columns:1fr}
+  .sidebar{position:fixed;left:-240px;z-index:200;transition:left .3s;height:100vh}
+  .sidebar.open{left:0}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .tarifs-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .stats-grid{grid-template-columns:1fr}
+  .panel{padding:1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">ZELKTRIS</div>
+    <div class="login-sub">Panneau Administrateur</div>
+    <div class="login-field">
+      <label>Identifiant</label>
+      <input type="text" id="loginUser" placeholder="admin" autocomplete="username">
+    </div>
+    <div class="login-field">
+      <label>Mot de passe</label>
+      <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <button class="login-btn" onclick="doLogin()">Se connecter →</button>
+    <div class="login-error" id="loginError">Identifiants incorrects. Réessayez.</div>
+    <div class="login-hint">Accès réservé à l'administrateur ZELKTRIS</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="adminApp">
+  <div class="admin-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-text">ZEL<span style="-webkit-text-fill-color:var(--violet-lt)">KTRIS</span></div>
+        <div class="logo-sub">Admin Panel v1.0</div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">Principal</div>
+        <div class="nav-item active" onclick="showPanel('dashboard')">
+          <span class="nav-icon">📊</span> Tableau de bord
+        </div>
+        <div class="nav-item" onclick="showPanel('demandes')">
+          <span class="nav-icon">📩</span> Demandes
+          <span class="nav-badge" id="badge-demandes">0</span>
+        </div>
+        <div class="nav-item" onclick="showPanel('newsletter')">
+          <span class="nav-icon">📧</span> Newsletter
+          <span class="nav-badge green" id="badge-newsletter">0</span>
+        </div>
+        <div class="nav-section">Configuration</div>
+        <div class="nav-item" onclick="showPanel('tarifs')">
+          <span class="nav-icon">💰</span> Tarifs & Prix
+        </div>
+        <div class="nav-item" onclick="showPanel('portfolio')">
+          <span class="nav-icon">🗂️</span> Portfolio
+        </div>
+        <div class="nav-item" onclick="showPanel('settings')">
+          <span class="nav-icon">⚙️</span> Paramètres
+        </div>
+        <div class="nav-section">Liens Rapides</div>
+        <div class="nav-item" onclick="window.open('../index.html','_blank')">
+          <span class="nav-icon">🌐</span> Voir le site
+        </div>
+        <div class="nav-item" onclick="window.open('../contact.html','_blank')">
+          <span class="nav-icon">✉️</span> Formulaire contact
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="user-avatar">A</div>
+          <div class="user-info">
+            <div class="user-name" id="adminName">Administrateur</div>
+            <div class="user-role">Super Admin</div>
+          </div>
+          <button class="logout-btn" onclick="doLogout()" title="Se déconnecter">⏻</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="admin-main">
+      <div class="admin-topbar">
+        <div>
+          <div class="page-title" id="topbarTitle">Tableau de Bord</div>
+          <div class="page-breadcrumb" id="topbarBreadcrumb">Zelktris Admin / Accueil</div>
+        </div>
+        <div class="topbar-actions">
+          <button class="topbar-btn" onclick="refreshData()">🔄 Actualiser</button>
+          <button class="topbar-btn primary" onclick="showPanel('demandes')">📩 Voir les demandes</button>
+        </div>
+      </div>
+
+      <!-- DASHBOARD -->
+      <div class="panel active" id="panel-dashboard">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">📩</div>
+            <div class="stat-value" id="stat-total">0</div>
+            <div class="stat-label">Demandes totales</div>
+            <div class="stat-change up" id="stat-today">↑ 0 aujourd'hui</div>
+          </div>
+          <div class="stat-card green">
+            <div class="stat-icon">🔥</div>
+            <div class="stat-value" id="stat-new">0</div>
+            <div class="stat-label">Non lues</div>
+            <div class="stat-change up">À traiter en priorité</div>
+          </div>
+          <div class="stat-card gold">
+            <div class="stat-icon">📧</div>
+            <div class="stat-value" id="stat-nl">0</div>
+            <div class="stat-label">Abonnés Newsletter</div>
+            <div class="stat-change up" id="stat-nl-new">↑ 0 ce mois</div>
+          </div>
+          <div class="stat-card violet">
+            <div class="stat-icon">💰</div>
+            <div class="stat-value" id="stat-pipeline">0</div>
+            <div class="stat-label">Pipeline FCFA (estimé)</div>
+            <div class="stat-change up">Toutes demandes actives</div>
+          </div>
+        </div>
+
+        <!-- Demandes récentes -->
+        <div class="table-card">
+          <div class="table-header">
+            <span class="table-title">📩 Dernières demandes</span>
+            <div class="table-actions">
+              <button class="tbl-btn" onclick="showPanel('demandes')">Voir tout →</button>
+            </div>
+          </div>
+          <table>
+            <thead><tr><th>Nom</th><th>Projet</th><th>Budget</th><th>Date</th><th>Statut</th><th></th></tr></thead>
+            <tbody id="recentDemandesBody">
+              <tr><td colspan="6"><div class="empty-state"><div class="empty-icon">📭</div><p>Aucune demande pour l'instant</p></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Sources chart -->
+        <div class="table-card">
+          <div class="table-header"><span class="table-title">📈 Répartition par type de projet</span></div>
+          <div style="padding:1.5rem" id="projectChart">
+            <div class="empty-state"><div class="empty-icon">📊</div><p>Les données apparaîtront dès les premières demandes</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DEMANDES -->
+      <div class="panel" id="panel-demandes">
+        <div style="display:flex;gap:.8rem;margin-bottom:1.5rem;flex-wrap:wrap;">
+          <button class="tbl-btn" onclick="filterDemandes('all')" id="flt-all" style="border-color:var(--blue);color:var(--blue-lt)">Toutes</button>
+          <button class="tbl-btn" onclick="filterDemandes('new')" id="flt-new">Nouvelles</button>
+          <button class="tbl-btn" onclick="filterDemandes('read')" id="flt-read">Lues</button>
+          <button class="tbl-btn" onclick="filterDemandes('replied')" id="flt-replied">Répondues</button>
+        </div>
+        <div class="table-card">
+          <div class="table-header">
+            <span class="table-title">Toutes les demandes</span>
+            <div class="table-actions">
+              <button class="tbl-btn" onclick="exportCSV('demandes')">⬇️ CSV</button>
+              <button class="tbl-btn" onclick="clearAllDemandes()" style="color:var(--red)">🗑️ Tout supprimer</button>
+            </div>
+          </div>
+          <table>
+            <thead><tr><th>Nom & Société</th><th>Contact</th><th>Type de projet</th><th>Budget</th><th>Maintenance</th><th>Date</th><th>Statut</th><th>Actions</th></tr></thead>
+            <tbody id="demandesBody">
+              <tr><td colspan="8"><div class="empty-state"><div class="empty-icon">📭</div><p>Aucune demande reçue</p></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- NEWSLETTER -->
+      <div class="panel" id="panel-newsletter">
+        <div class="table-card">
+          <div class="table-header">
+            <span class="table-title">📧 Abonnés Newsletter</span>
+            <div class="table-actions">
+              <button class="tbl-btn" onclick="exportCSV('newsletter')">⬇️ CSV</button>
+              <button class="tbl-btn" onclick="clearAllNewsletter()" style="color:var(--red)">🗑️ Tout supprimer</button>
+            </div>
+          </div>
+          <table>
+            <thead><tr><th>Email</th><th>Date d'inscription</th><th>Source</th><th>Actions</th></tr></thead>
+            <tbody id="newsletterBody">
+              <tr><td colspan="4"><div class="empty-state"><div class="empty-icon">📭</div><p>Aucun abonné pour l'instant</p></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TARIFS -->
+      <div class="panel" id="panel-tarifs">
+        <p style="color:var(--gray);font-size:.88rem;margin-bottom:1.5rem">Modifiez les tarifs affichés sur le site. Les changements sont sauvegardés localement et reflétés sur le formulaire de contact.</p>
+        <div class="tarifs-grid" id="tarifsGrid">
+          <!-- Généré par JS -->
+        </div>
+        <div style="margin-top:1.5rem">
+          <button class="save-btn" onclick="saveTarifs()">💾 Sauvegarder les tarifs</button>
+          <span class="save-ok" id="tarifsSaveOk">✓ Sauvegardé avec succès !</span>
+        </div>
+
+        <!-- Maintenance -->
+        <h3 style="font-size:1rem;font-weight:700;color:var(--white);margin:2rem 0 1rem">Plans de Maintenance Mensuelle</h3>
+        <div class="tarifs-grid" id="maintenanceGrid2"><!-- Généré par JS --></div>
+        <div style="margin-top:1.5rem">
+          <button class="save-btn" onclick="saveMaintenance()">💾 Sauvegarder la maintenance</button>
+          <span class="save-ok" id="maintSaveOk">✓ Sauvegardé !</span>
+        </div>
+      </div>
+
+      <!-- PORTFOLIO -->
+      <div class="panel" id="panel-portfolio">
+        <div class="table-card">
+          <div class="table-header">
+            <span class="table-title">🗂️ Sites Vitrines Portfolio</span>
+            <div class="table-actions">
+              <button class="tbl-btn" onclick="window.open('../portfolio.html','_blank')">Voir la page →</button>
+            </div>
+          </div>
+          <table>
+            <thead><tr><th>Site</th><th>Catégorie</th><th>Lien</th><th>Statut</th></tr></thead>
+            <tbody>
+              <tr><td>🎓 Université de l'Excellence</td><td>Éducation</td><td><a href="../vitrines/universite/index.html" target="_blank" style="color:var(--blue-lt)">Ouvrir ↗</a></td><td><span class="status-badge replied">En ligne</span></td></tr>
+              <tr><td>🍽️ Le Rendez-Vous Restaurant</td><td>Restauration</td><td><a href="../vitrines/restaurant/index.html" target="_blank" style="color:var(--blue-lt)">Ouvrir ↗</a></td><td><span class="status-badge replied">En ligne</span></td></tr>
+              <tr><td>⚖️ Nguema & Associés</td><td>Juridique</td><td><a href="../vitrines/avocats/index.html" target="_blank" style="color:var(--blue-lt)">Ouvrir ↗</a></td><td><span class="status-badge replied">En ligne</span></td></tr>
+              <tr><td>🌸 Lumière Boutique</td><td>Cosmétiques</td><td><a href="../vitrines/parfum/index.html" target="_blank" style="color:var(--blue-lt)">Ouvrir ↗</a></td><td><span class="status-badge replied">En ligne</span></td></tr>
+              <tr><td>🚛 CamLogis</td><td>Logistique</td><td><a href="../vitrines/logistique/index.html" target="_blank" style="color:var(--blue-lt)">Ouvrir ↗</a></td><td><span class="status-badge replied">En ligne</span></td></tr>
+              <tr><td>🦷 Sourire Dentaire</td><td>Médical</td><td><a href="../vitrines/dentiste/index.html" target="_blank" style="color:var(--blue-lt)">Ouvrir ↗</a></td><td><span class="status-badge replied">En ligne</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="panel" id="panel-settings">
+        <div class="settings-section">
+          <h4>🔐 Sécurité & Accès</h4>
+          <div class="setting-row">
+            <div><div class="setting-label">Identifiant admin</div><div class="setting-desc">Nom d'utilisateur pour la connexion</div></div>
+            <input class="setting-input" id="settingUsername" type="text" value="admin">
+          </div>
+          <div class="setting-row">
+            <div><div class="setting-label">Nouveau mot de passe</div><div class="setting-desc">Laissez vide pour ne pas changer</div></div>
+            <input class="setting-input" id="settingPassword" type="password" placeholder="Nouveau mot de passe">
+          </div>
+          <div style="margin-top:1rem">
+            <button class="save-btn" onclick="saveCredentials()">💾 Mettre à jour</button>
+            <span class="save-ok" id="credsSaveOk">✓ Sauvegardé !</span>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h4>🌐 Informations Agence</h4>
+          <div class="setting-row">
+            <div><div class="setting-label">Nom de l'agence</div></div>
+            <input class="setting-input" id="settingAgencyName" type="text" value="Zelktris Agency">
+          </div>
+          <div class="setting-row">
+            <div><div class="setting-label">Email de contact</div></div>
+            <input class="setting-input" id="settingEmail" type="email" value="hello@zelktris.agency">
+          </div>
+          <div class="setting-row">
+            <div><div class="setting-label">Téléphone / WhatsApp</div></div>
+            <input class="setting-input" id="settingPhone" type="text" value="+237 690 12 34 56">
+          </div>
+          <div class="setting-row">
+            <div><div class="setting-label">Adresse</div></div>
+            <input class="setting-input" id="settingAddress" type="text" value="Bastos, Yaoundé, Cameroun">
+          </div>
+          <div style="margin-top:1rem">
+            <button class="save-btn" onclick="saveSettings()">💾 Sauvegarder</button>
+            <span class="save-ok" id="settingsSaveOk">✓ Sauvegardé !</span>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h4>🔔 Notifications</h4>
+          <div class="setting-row">
+            <div><div class="setting-label">Notification par email</div><div class="setting-desc">Recevoir un email à chaque nouvelle demande</div></div>
+            <label class="toggle-switch"><input type="checkbox" id="notifEmail" checked><span class="toggle-slider"></span></label>
+          </div>
+          <div class="setting-row">
+            <div><div class="setting-label">Alerte newsletter</div><div class="setting-desc">Recevoir un email à chaque nouvel abonné</div></div>
+            <label class="toggle-switch"><input type="checkbox" id="notifNewsletter"><span class="toggle-slider"></span></label>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h4>🗑️ Données</h4>
+          <div class="setting-row">
+            <div><div class="setting-label">Exporter toutes les données</div><div class="setting-desc">Télécharger demandes + newsletter en CSV</div></div>
+            <button class="tbl-btn" onclick="exportAll()">⬇️ Exporter tout</button>
+          </div>
+          <div class="setting-row">
+            <div><div class="setting-label" style="color:var(--red)">Réinitialiser toutes les données</div><div class="setting-desc">Supprimer définitivement toutes les demandes et abonnés</div></div>
+            <button class="tbl-btn" style="color:var(--red);border-color:rgba(255,51,102,0.3)" onclick="resetAllData()">⚠️ Réinitialiser</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- MODAL DÉTAIL DEMANDE -->
+<div class="modal-overlay" id="demandeModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="modal-title">📩 Détail de la demande</span>
+      <button class="modal-close" onclick="closeModal('demandeModal')">✕</button>
+    </div>
+    <div id="modalContent"></div>
+    <div class="modal-actions">
+      <button class="modal-btn primary" onclick="markReplied()">✅ Marquer comme répondue</button>
+      <button class="modal-btn ghost" id="modalEmailBtn" onclick="openEmail()">📧 Envoyer un email</button>
+      <button class="modal-btn ghost" id="modalWhatsappBtn" onclick="openWhatsapp()">💬 WhatsApp</button>
+      <button class="modal-btn danger" onclick="deleteCurrentDemande()">🗑️ Supprimer</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── STORAGE ──────────────────────────────────────────────────
+const STORAGE = {
+  get: k => { try { return JSON.parse(localStorage.getItem('ZELKTRIS_'+k)) || null; } catch{ return null; }},
+  set: (k,v) => localStorage.setItem('ZELKTRIS_'+k, JSON.stringify(v)),
+  del: k => localStorage.removeItem('ZELKTRIS_'+k)
+};
+
+// ── DEFAULT DATA ──────────────────────────────────────────────
+const DEFAULT_CREDS = { username:'admin', password:'ZELKTRIS2024' };
+const DEFAULT_TARIFS = [
+  { id:'web_vitrine',  name:'🌐 Site Vitrine Simple',   min:200000,  max:500000  },
+  { id:'web_premium',  name:'✨ Site Vitrine Premium',   min:450000,  max:900000  },
+  { id:'ecommerce',    name:'🛒 Site E-commerce',        min:900000,  max:2500000 },
+  { id:'mobile',       name:'📱 Application Mobile',    min:1500000, max:5000000 },
+  { id:'logiciel',     name:'⚙️ Logiciel Sur Mesure',   min:3000000, max:12000000},
+  { id:'ia',           name:'🤖 IA & Automatisation',   min:1000000, max:8000000 },
+  { id:'design',       name:'🎨 Design UX/UI',          min:250000,  max:1000000 },
+  { id:'seo',          name:'📈 SEO & Growth',          min:150000,  max:600000  },
+];
+const DEFAULT_MAINT = [
+  { id:'starter',  name:'Starter',  price:35000,  desc:'Hébergement + SSL + monitoring' },
+  { id:'standard', name:'Standard', price:85000,  desc:'+ Mises à jour + 2h support' },
+  { id:'premium',  name:'Premium',  price:180000, desc:'+ SEO + rapport + 5h support' },
+  { id:'enterprise',name:'Enterprise',price:300000,desc:'Tout inclus + astreinte 24/7' },
+];
+
+// ── INIT DATA ─────────────────────────────────────────────────
+if (!STORAGE.get('creds'))    STORAGE.set('creds', DEFAULT_CREDS);
+if (!STORAGE.get('tarifs'))   STORAGE.set('tarifs', DEFAULT_TARIFS);
+if (!STORAGE.get('maint'))    STORAGE.set('maint', DEFAULT_MAINT);
+if (!STORAGE.get('demandes')) STORAGE.set('demandes', []);
+if (!STORAGE.get('newsletter'))STORAGE.set('newsletter',[]);
+if (!STORAGE.get('settings')) STORAGE.set('settings',{
+  agencyName:'Zelktris Agency', email:'hello@zelktris.agency',
+  phone:'+237 690 12 34 56', address:'Bastos, Yaoundé, Cameroun'
+});
+
+// ── AUTH ──────────────────────────────────────────────────────
+function doLogin(){
+  const u = document.getElementById('loginUser').value.trim();
+  const p = document.getElementById('loginPass').value;
+  const creds = STORAGE.get('creds');
+  if(u === creds.username && p === creds.password){
+    STORAGE.set('session', { user: u, ts: Date.now() });
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminApp').style.display = 'block';
+    document.getElementById('adminName').textContent = u;
+    initApp();
+  } else {
+    const err = document.getElementById('loginError');
+    err.style.display = 'block';
+    document.getElementById('loginPass').value = '';
+    setTimeout(()=>err.style.display='none', 3000);
+  }
+}
+function doLogout(){
+  STORAGE.del('session');
+  document.getElementById('adminApp').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('loginUser').value = '';
+  document.getElementById('loginPass').value = '';
+}
+// Auto-login if session exists (< 8h)
+const sess = STORAGE.get('session');
+if(sess && Date.now() - sess.ts < 8*3600*1000){
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('adminApp').style.display = 'block';
+  document.getElementById('adminName').textContent = sess.user;
+  document.addEventListener('DOMContentLoaded', initApp);
+}
+
+// ── NAVIGATION ────────────────────────────────────────────────
+const PANEL_TITLES = {
+  dashboard:  ['Tableau de Bord',     'Zelktris Admin / Accueil'],
+  demandes:   ['Demandes Clients',    'Zelktris Admin / Demandes'],
+  newsletter: ['Newsletter',          'Zelktris Admin / Newsletter'],
+  tarifs:     ['Tarifs & Prix',       'Zelktris Admin / Configuration'],
+  portfolio:  ['Portfolio Vitrines',  'Zelktris Admin / Portfolio'],
+  settings:   ['Paramètres',          'Zelktris Admin / Paramètres'],
+};
+function showPanel(id){
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => {
+    if(n.textContent.toLowerCase().includes(PANEL_TITLES[id][0].toLowerCase().split(' ')[0].toLowerCase())) n.classList.add('active');
+  });
+  const [title, breadcrumb] = PANEL_TITLES[id] || ['Admin','Zelktris Admin'];
+  document.getElementById('topbarTitle').textContent = title;
+  document.getElementById('topbarBreadcrumb').textContent = breadcrumb;
+  if(id==='demandes') renderDemandes();
+  if(id==='newsletter') renderNewsletter();
+  if(id==='tarifs') renderTarifs();
+  if(id==='dashboard') renderDashboard();
+}
+
+// ── APP INIT ──────────────────────────────────────────────────
+function initApp(){
+  renderDashboard();
+  renderTarifs();
+  loadSettings();
+  // Poll for new data from API if available
+  fetchFromAPI();
+  setInterval(fetchFromAPI, 30000);
+}
+function refreshData(){ fetchFromAPI(); renderDashboard(); }
+
+// ── API FETCH ─────────────────────────────────────────────────
+async function fetchFromAPI(){
+  try {
+    const apiBase = window.location.hostname === 'localhost' ? 'http://localhost:4000' : 'https://zelktris-api.onrender.com';
+    const res = await fetch(apiBase + '/api/admin/data', {
+      headers: { 'X-Admin-Token': btoa(JSON.stringify(STORAGE.get('creds'))) }
+    });
+    if(res.ok){
+      const data = await res.json();
+      if(data.demandes) { STORAGE.set('demandes', data.demandes); renderDashboard(); }
+      if(data.newsletter) { STORAGE.set('newsletter', data.newsletter); }
+    }
+  } catch(e){ /* API offline — on utilise le localStorage */ }
+}
+
+// ── DASHBOARD ─────────────────────────────────────────────────
+function renderDashboard(){
+  const demandes = STORAGE.get('demandes') || [];
+  const nl = STORAGE.get('newsletter') || [];
+  const today = new Date().toDateString();
+  const todayCount = demandes.filter(d => new Date(d.date).toDateString()===today).length;
+  const newCount = demandes.filter(d => d.status==='new').length;
+  const pipeline = demandes.filter(d=>d.status!=='deleted').reduce((acc,d)=>{
+    const m = (d.estimate||'').replace(/\D/g,'').substring(0,8);
+    return acc + (parseInt(m)||0);
+  }, 0);
+
+  document.getElementById('stat-total').textContent = demandes.length;
+  document.getElementById('stat-today').textContent = '↑ '+todayCount+' aujourd\'hui';
+  document.getElementById('stat-new').textContent = newCount;
+  document.getElementById('stat-nl').textContent = nl.length;
+  document.getElementById('stat-pipeline').textContent = pipeline > 0 ? fmt2(pipeline) : '—';
+  document.getElementById('badge-demandes').textContent = newCount;
+  document.getElementById('badge-newsletter').textContent = nl.length;
+
+  // Tableau récent
+  const tbody = document.getElementById('recentDemandesBody');
+  if(!demandes.length){
+    tbody.innerHTML = '<tr><td colspan="6"><div class="empty-state"><div class="empty-icon">📭</div><p>Aucune demande pour l\'instant</p></div></td></tr>';
+  } else {
+    tbody.innerHTML = demandes.slice(-5).reverse().map(d => `
+      <tr>
+        <td><strong>${esc(d.name)}</strong><br><span style="font-size:.76rem;color:var(--gray)">${esc(d.company||'')}</span></td>
+        <td>${esc(d.projectType||'—')}</td>
+        <td style="font-size:.8rem">${esc(d.budget||'—')}</td>
+        <td style="font-size:.78rem;color:var(--gray)">${fmtDate(d.date)}</td>
+        <td><span class="status-badge ${d.status||'new'}">${d.status==='replied'?'Répondue':d.status==='read'?'Lue':'Nouvelle'}</span></td>
+        <td><button class="action-icon" onclick="openDemande('${d.id}')">👁️</button></td>
+      </tr>
+    `).join('');
+  }
+
+  // Chart types projets
+  const types = {};
+  demandes.forEach(d => { if(d.projectType) types[d.projectType] = (types[d.projectType]||0)+1; });
+  const chartEl = document.getElementById('projectChart');
+  if(!Object.keys(types).length){
+    chartEl.innerHTML = '<div class="empty-state"><div class="empty-icon">📊</div><p>Les données apparaîtront dès les premières demandes</p></div>';
+  } else {
+    const max = Math.max(...Object.values(types));
+    chartEl.innerHTML = Object.entries(types).sort((a,b)=>b[1]-a[1]).map(([t,c])=>`
+      <div class="chart-bar-row">
+        <span class="chart-label">${esc(t)}</span>
+        <div class="chart-bar-wrap"><div class="chart-bar" style="width:${(c/max*100).toFixed(0)}%;background:linear-gradient(90deg,var(--blue),var(--violet))"></div></div>
+        <span class="chart-value">${c}</span>
+      </div>
+    `).join('');
+  }
+}
+
+// ── DEMANDES ──────────────────────────────────────────────────
+let currentFilter = 'all', currentDemandeId = null;
+function filterDemandes(f){
+  currentFilter = f;
+  ['all','new','read','replied'].forEach(id=>{
+    const btn = document.getElementById('flt-'+id);
+    if(btn) btn.style.borderColor = id===f?'var(--blue)':'';
+    if(btn) btn.style.color = id===f?'var(--blue-lt)':'';
+  });
+  renderDemandes();
+}
+function renderDemandes(){
+  const all = STORAGE.get('demandes') || [];
+  const list = currentFilter==='all' ? all : all.filter(d=>d.status===currentFilter);
+  const tbody = document.getElementById('demandesBody');
+  if(!list.length){
+    tbody.innerHTML = '<tr><td colspan="8"><div class="empty-state"><div class="empty-icon">📭</div><p>Aucune demande</p></div></td></tr>';
+    return;
+  }
+  tbody.innerHTML = [...list].reverse().map(d=>`
+    <tr>
+      <td><strong>${esc(d.name)}</strong><br><span style="font-size:.76rem;color:var(--gray)">${esc(d.company||'')}</span></td>
+      <td><span style="font-size:.8rem">${esc(d.email)}</span><br><span style="font-size:.76rem;color:var(--gray)">${esc(d.phone||'')}</span></td>
+      <td>${esc(d.projectType||'—')}</td>
+      <td style="font-size:.8rem">${esc(d.budget||'—')}</td>
+      <td style="font-size:.8rem;color:var(--blue-lt)">${esc(d.maintenance&&d.maintenance!=='none'?d.maintenance:'—')}</td>
+      <td style="font-size:.78rem;color:var(--gray)">${fmtDate(d.date)}</td>
+      <td><span class="status-badge ${d.status||'new'}">${d.status==='replied'?'Répondue':d.status==='read'?'Lue':'Nouvelle'}</span></td>
+      <td>
+        <button class="action-icon" onclick="openDemande('${d.id}')" title="Voir">👁️</button>
+        <button class="action-icon" onclick="deleteDemande('${d.id}')" title="Supprimer">🗑️</button>
+      </td>
+    </tr>
+  `).join('');
+}
+function openDemande(id){
+  const d = (STORAGE.get('demandes')||[]).find(x=>x.id===id);
+  if(!d) return;
+  currentDemandeId = id;
+  // Mark as read
+  const all = STORAGE.get('demandes')||[];
+  const idx = all.findIndex(x=>x.id===id);
+  if(all[idx].status==='new'){ all[idx].status='read'; STORAGE.set('demandes',all); }
+  document.getElementById('modalContent').innerHTML = `
+    <div class="modal-field"><label>Nom & Société</label><div class="val">${esc(d.name)} ${d.company?'— '+esc(d.company):''}</div></div>
+    <div class="modal-field"><label>Contact</label><div class="val">${esc(d.email)} ${d.phone?' · '+esc(d.phone):''}</div></div>
+    <div class="modal-field"><label>Type de Projet</label><div class="val">${esc(d.projectType||'Non spécifié')}</div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem">
+      <div class="modal-field"><label>Budget</label><div class="val">${esc(d.budget||'—')} FCFA</div></div>
+      <div class="modal-field"><label>Estimation</label><div class="val" style="color:var(--gold)">${esc(d.estimate||'—')}</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem">
+      <div class="modal-field"><label>Maintenance</label><div class="val">${esc(d.maintenance||'none')}</div></div>
+      <div class="modal-field"><label>Délai souhaité</label><div class="val">${esc(d.deadline||'—')}</div></div>
+    </div>
+    <div class="modal-field"><label>Source</label><div class="val">${esc(d.source||'—')}</div></div>
+    <div class="modal-field"><label>Message</label><div class="note">${esc(d.message)}</div></div>
+    <div class="modal-field"><label>Date</label><div class="val">${fmtDate(d.date)}</div></div>
+  `;
+  document.getElementById('modalEmailBtn').setAttribute('data-email', d.email);
+  document.getElementById('modalWhatsappBtn').setAttribute('data-phone', d.phone||'');
+  document.getElementById('demandeModal').classList.add('open');
+}
+function markReplied(){
+  const all = STORAGE.get('demandes')||[];
+  const idx = all.findIndex(x=>x.id===currentDemandeId);
+  if(idx>=0){ all[idx].status='replied'; STORAGE.set('demandes',all); }
+  closeModal('demandeModal'); renderDemandes();
+}
+function deleteDemande(id){
+  if(!confirm('Supprimer cette demande ?')) return;
+  const all = (STORAGE.get('demandes')||[]).filter(x=>x.id!==id);
+  STORAGE.set('demandes',all); renderDemandes(); renderDashboard();
+}
+function deleteCurrentDemande(){ deleteDemande(currentDemandeId); closeModal('demandeModal'); }
+function clearAllDemandes(){ if(confirm('Supprimer TOUTES les demandes ?')){ STORAGE.set('demandes',[]); renderDemandes(); renderDashboard(); } }
+function openEmail(){ const e = document.getElementById('modalEmailBtn').dataset.email; window.open('mailto:'+e); }
+function openWhatsapp(){ const p = document.getElementById('modalWhatsappBtn').dataset.phone; if(p) window.open('https://wa.me/'+p.replace(/\D/g,'')); }
+
+// ── NEWSLETTER ────────────────────────────────────────────────
+function renderNewsletter(){
+  const list = STORAGE.get('newsletter') || [];
+  const tbody = document.getElementById('newsletterBody');
+  if(!list.length){ tbody.innerHTML = '<tr><td colspan="4"><div class="empty-state"><div class="empty-icon">📭</div><p>Aucun abonné</p></div></td></tr>'; return; }
+  tbody.innerHTML = [...list].reverse().map((s,i)=>`
+    <tr>
+      <td>${esc(typeof s==='string'?s:s.email)}</td>
+      <td style="font-size:.8rem;color:var(--gray)">${fmtDate(s.date||new Date())}</td>
+      <td style="font-size:.8rem;color:var(--gray)">${esc(s.source||'Formulaire')}</td>
+      <td><button class="action-icon" onclick="deleteNewsletter(${i})" title="Supprimer">🗑️</button></td>
+    </tr>
+  `).join('');
+}
+function deleteNewsletter(i){ const a=STORAGE.get('newsletter')||[]; a.splice(i,1); STORAGE.set('newsletter',a); renderNewsletter(); renderDashboard(); }
+function clearAllNewsletter(){ if(confirm('Supprimer tous les abonnés ?')){ STORAGE.set('newsletter',[]); renderNewsletter(); renderDashboard(); } }
+
+// ── TARIFS ────────────────────────────────────────────────────
+function renderTarifs(){
+  const tarifs = STORAGE.get('tarifs') || DEFAULT_TARIFS;
+  const maint = STORAGE.get('maint') || DEFAULT_MAINT;
+  document.getElementById('tarifsGrid').innerHTML = tarifs.map(t=>`
+    <div class="tarif-card">
+      <h4>${t.name}</h4>
+      <div class="tarif-row">
+        <div class="tarif-field"><label>Prix min (FCFA)</label><input type="number" id="tarif_min_${t.id}" value="${t.min}" step="10000"></div>
+        <div class="tarif-field"><label>Prix max (FCFA)</label><input type="number" id="tarif_max_${t.id}" value="${t.max}" step="10000"></div>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('maintenanceGrid2').innerHTML = maint.map(m=>`
+    <div class="tarif-card">
+      <h4>${m.name}</h4>
+      <div class="tarif-field"><label>Description</label><input type="text" id="maint_desc_${m.id}" value="${esc(m.desc)}"></div>
+      <div class="tarif-field"><label>Prix mensuel (FCFA)</label><input type="number" id="maint_price_${m.id}" value="${m.price}" step="5000"></div>
+    </div>
+  `).join('');
+}
+function saveTarifs(){
+  const tarifs = STORAGE.get('tarifs') || DEFAULT_TARIFS;
+  tarifs.forEach(t=>{
+    const minEl = document.getElementById('tarif_min_'+t.id);
+    const maxEl = document.getElementById('tarif_max_'+t.id);
+    if(minEl) t.min = parseInt(minEl.value)||t.min;
+    if(maxEl) t.max = parseInt(maxEl.value)||t.max;
+  });
+  STORAGE.set('tarifs', tarifs);
+  const ok = document.getElementById('tarifsSaveOk');
+  ok.style.display = 'inline'; setTimeout(()=>ok.style.display='none', 2000);
+}
+function saveMaintenance(){
+  const maint = STORAGE.get('maint') || DEFAULT_MAINT;
+  maint.forEach(m=>{
+    const priceEl = document.getElementById('maint_price_'+m.id);
+    const descEl = document.getElementById('maint_desc_'+m.id);
+    if(priceEl) m.price = parseInt(priceEl.value)||m.price;
+    if(descEl) m.desc = descEl.value;
+  });
+  STORAGE.set('maint', maint);
+  const ok = document.getElementById('maintSaveOk');
+  ok.style.display='inline'; setTimeout(()=>ok.style.display='none', 2000);
+}
+
+// ── SETTINGS ─────────────────────────────────────────────────
+function loadSettings(){
+  const s = STORAGE.get('settings')||{};
+  if(s.agencyName) document.getElementById('settingAgencyName').value = s.agencyName;
+  if(s.email) document.getElementById('settingEmail').value = s.email;
+  if(s.phone) document.getElementById('settingPhone').value = s.phone;
+  if(s.address) document.getElementById('settingAddress').value = s.address;
+  const u = STORAGE.get('creds')?.username||'admin';
+  document.getElementById('settingUsername').value = u;
+}
+function saveSettings(){
+  STORAGE.set('settings',{
+    agencyName: document.getElementById('settingAgencyName').value,
+    email: document.getElementById('settingEmail').value,
+    phone: document.getElementById('settingPhone').value,
+    address: document.getElementById('settingAddress').value,
+  });
+  const ok = document.getElementById('settingsSaveOk');
+  ok.style.display='inline'; setTimeout(()=>ok.style.display='none', 2000);
+}
+function saveCredentials(){
+  const u = document.getElementById('settingUsername').value.trim();
+  const p = document.getElementById('settingPassword').value;
+  if(!u) return;
+  const creds = STORAGE.get('creds')||DEFAULT_CREDS;
+  creds.username = u;
+  if(p) creds.password = p;
+  STORAGE.set('creds', creds);
+  document.getElementById('settingPassword').value='';
+  const ok = document.getElementById('credsSaveOk');
+  ok.style.display='inline'; setTimeout(()=>ok.style.display='none', 2000);
+}
+function resetAllData(){ if(confirm('⚠️ Supprimer TOUTES les données ? Cette action est irréversible.')){ STORAGE.set('demandes',[]); STORAGE.set('newsletter',[]); renderDashboard(); alert('Données supprimées.'); } }
+
+// ── EXPORT CSV ────────────────────────────────────────────────
+function exportCSV(type){
+  const data = STORAGE.get(type) || [];
+  if(!data.length) return alert('Aucune donnée à exporter.');
+  const keys = type==='demandes' ? ['name','company','email','phone','projectType','budget','maintenance','estimate','deadline','source','message','date','status'] : ['email','date','source'];
+  let csv = keys.join(';')+'\n';
+  data.forEach(row => {
+    csv += keys.map(k => '"'+(String(row[k]||'').replace(/"/g,'""'))+'"').join(';') + '\n';
+  });
+  const blob = new Blob(['﻿'+csv], {type:'text/csv;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'ZELKTRIS_'+type+'_'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
+}
+function exportAll(){ exportCSV('demandes'); setTimeout(()=>exportCSV('newsletter'),500); }
+
+// ── MODAL ─────────────────────────────────────────────────────
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', e=>{ if(e.target===m) closeModal(m.id); }));
+
+// ── HELPERS ───────────────────────────────────────────────────
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function fmt2(n){ return new Intl.NumberFormat('fr-FR').format(n); }
+function fmtDate(d){
+  if(!d) return '—';
+  try{ return new Date(d).toLocaleDateString('fr-FR',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}); }
+  catch{ return String(d); }
+}
+
+// ── WEBHOOK depuis le backend ─────────────────────────────────
+// Écouter les nouvelles soumissions de formulaire en polling
+window.addEventListener('storage', e => {
+  if(e.key && e.key.includes('ZELKTRIS')) renderDashboard();
+});
+
+// Intercepter les soumissions de formulaire pour les stocker localement
+const _origFetch = window.fetch;
+window.fetch = async function(url, opts){
+  const res = await _origFetch.apply(this, arguments);
+  if(typeof url==='string' && url.includes('/api/contact') && opts?.method==='POST'){
+    try{
+      const body = JSON.parse(opts.body||'{}');
+      const demandes = STORAGE.get('demandes')||[];
+      demandes.push({...body, id: Date.now().toString(36)+Math.random().toString(36).slice(2,6), date: new Date().toISOString(), status:'new'});
+      STORAGE.set('demandes', demandes);
+    }catch(e){}
+  }
+  if(typeof url==='string' && url.includes('/api/newsletter') && opts?.method==='POST'){
+    try{
+      const body = JSON.parse(opts.body||'{}');
+      const nl = STORAGE.get('newsletter')||[];
+      if(!nl.find(x=>(typeof x==='string'?x:x.email)===body.email)){
+        nl.push({email:body.email, date:new Date().toISOString(), source:'Newsletter'});
+        STORAGE.set('newsletter', nl);
+      }
+    }catch(e){}
+  }
+  return res;
+};
+</script>
+</body>
+</html>

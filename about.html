@@ -1,0 +1,283 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Zelktris Agency — Notre histoire, notre mission, notre équipe d'experts au service de votre transformation digitale.">
+  <title>Agence — Zelktris Agency</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="galaxy-canvas"></canvas>
+<div class="page-wrapper">
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <a href="index.html" class="nav-logo">ZEL<span>KTRIS</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="about.html">Agence</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="blog.html">Insights</a></li>
+      <li><a href="contact.html" class="nav-cta">Devis Gratuit</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </header>
+  <div class="mobile-menu">
+    <nav>
+      <a href="index.html">Accueil</a><a href="about.html">Agence</a>
+      <a href="services.html">Services</a><a href="portfolio.html">Portfolio</a>
+      <a href="blog.html">Insights</a><a href="contact.html">Devis Gratuit →</a>
+    </nav>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="hero-orb hero-orb-1" style="opacity:0.4;"></div>
+    <div class="hero-orb hero-orb-2" style="opacity:0.3;"></div>
+    <div class="breadcrumb reveal"><a href="index.html">Accueil</a> <span>/</span> Agence</div>
+    <h1 class="page-header-title reveal reveal-delay-1">Notre ADN Digital</h1>
+    <p class="page-header-sub reveal reveal-delay-2">Depuis 2012, nous construisons des expériences numériques qui marquent les esprits et transforment les marchés.</p>
+  </div>
+
+  <!-- ABOUT SPLIT -->
+  <section style="padding-top:40px;">
+    <div class="about-split">
+      <div class="about-visual reveal">
+        <div class="about-mockup">
+          <div class="about-glow"></div>
+          <div class="about-logo-large">NX</div>
+          <div class="about-floats">
+            <div class="float-badge b1">🏆 Google Partner</div>
+            <div class="float-badge b2">🌍 ISO 27001</div>
+            <div class="float-badge b3">⚡ PageSpeed 98</div>
+            <div class="float-badge b4">✦ 12 ans d'exp.</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-content reveal reveal-delay-2">
+        <div class="section-tag">Notre histoire</div>
+        <h2 class="section-title">Bâtir l'avenir<br><span class="accent">pixel par pixel</span></h2>
+        <div class="divider"></div>
+        <p class="section-sub" style="margin-bottom:20px;">
+          ZELKTRIS est née d'une conviction simple : le digital devrait être beau, performant et générateur de valeur réelle. Fondée en 2012 par des ingénieurs et designers passionnés, l'agence est aujourd'hui un acteur de référence qui accompagne grands comptes, ministères et startups ambitieuses.
+        </p>
+        <p style="font-size:0.92rem;color:rgba(240,240,255,0.55);line-height:1.75;margin-bottom:32px;">
+          Notre approche ? Fusionner stratégie, créativité et technologie de pointe pour livrer des solutions qui dépassent les attentes — et les KPIs. En 12 ans, nous avons livré plus de 250 projets dans 18 pays, générant en moyenne un ROI de 340% pour nos clients.
+        </p>
+        <div class="hero-actions" style="justify-content:flex-start;">
+          <a href="contact.html" class="btn btn-primary">Travailler avec nous</a>
+          <a href="portfolio.html" class="btn btn-glass">Voir nos projets</a>
+        </div>
+        <div class="about-values">
+          <div class="glass-card value-item">
+            <div class="value-icon">🎯</div>
+            <div>
+              <h4>Excellence</h4>
+              <p>Chaque détail compte. Nous refusons la médiocrité à chaque étape.</p>
+            </div>
+          </div>
+          <div class="glass-card value-item">
+            <div class="value-icon">💡</div>
+            <div>
+              <h4>Innovation</h4>
+              <p>Toujours à la pointe, nous intégrons les dernières technologies.</p>
+            </div>
+          </div>
+          <div class="glass-card value-item">
+            <div class="value-icon">🤝</div>
+            <div>
+              <h4>Partenariat</h4>
+              <p>Vos succès sont les nôtres. Une relation durable, pas un projet.</p>
+            </div>
+          </div>
+          <div class="glass-card value-item">
+            <div class="value-icon">🔒</div>
+            <div>
+              <h4>Fiabilité</h4>
+              <p>Délais tenus, budget respecté, qualité constante. Toujours.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NUMBERS -->
+  <section class="numbers-section">
+    <div class="numbers-grid">
+      <div class="glass-card number-card reveal">
+        <div class="number-val" data-count="250" data-suffix="+">0</div>
+        <div class="number-label">Projets livrés</div>
+      </div>
+      <div class="glass-card number-card gold-val reveal reveal-delay-1">
+        <div class="number-val" data-count="18" data-suffix="">0</div>
+        <div class="number-label">Pays desservis</div>
+      </div>
+      <div class="glass-card number-card reveal reveal-delay-2">
+        <div class="number-val" data-count="340" data-suffix="%">0</div>
+        <div class="number-label">ROI moyen client</div>
+      </div>
+      <div class="glass-card number-card gold-val reveal reveal-delay-3">
+        <div class="number-val" data-count="40" data-suffix="+">0</div>
+        <div class="number-label">Experts dédiés</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section style="padding:60px 5%;">
+    <div class="text-center" style="margin-bottom:48px;">
+      <div class="section-tag reveal">Certifications & Partenariats</div>
+      <h2 class="section-title reveal reveal-delay-1">Reconnus par les <span class="accent-gold">meilleurs</span></h2>
+    </div>
+    <div class="grid-4">
+      <div class="glass-card" style="padding:32px;text-align:center;" class="reveal">
+        <div style="font-size:2.5rem;margin-bottom:12px;">🏆</div>
+        <div style="font-family:var(--font-head);font-size:0.9rem;font-weight:700;color:var(--gold);letter-spacing:1px;">GOOGLE PARTNER</div>
+        <div style="font-size:0.8rem;color:rgba(240,240,255,0.45);margin-top:6px;">Premium Level</div>
+      </div>
+      <div class="glass-card" style="padding:32px;text-align:center;">
+        <div style="font-size:2.5rem;margin-bottom:12px;">🛡️</div>
+        <div style="font-family:var(--font-head);font-size:0.9rem;font-weight:700;color:var(--blue-lt);letter-spacing:1px;">ISO 27001</div>
+        <div style="font-size:0.8rem;color:rgba(240,240,255,0.45);margin-top:6px;">Sécurité certifiée</div>
+      </div>
+      <div class="glass-card" style="padding:32px;text-align:center;">
+        <div style="font-size:2.5rem;margin-bottom:12px;">☁️</div>
+        <div style="font-family:var(--font-head);font-size:0.9rem;font-weight:700;color:var(--violet-lt);letter-spacing:1px;">AWS PARTNER</div>
+        <div style="font-size:0.8rem;color:rgba(240,240,255,0.45);margin-top:6px;">Advanced Tier</div>
+      </div>
+      <div class="glass-card" style="padding:32px;text-align:center;">
+        <div style="font-size:2.5rem;margin-bottom:12px;">✨</div>
+        <div style="font-family:var(--font-head);font-size:0.9rem;font-weight:700;color:var(--gold);letter-spacing:1px;">BEST AGENCY</div>
+        <div style="font-size:0.8rem;color:rgba(240,240,255,0.45);margin-top:6px;">Awwwards 2024</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section>
+    <div class="text-center" style="margin-bottom:60px;">
+      <div class="section-tag reveal">Notre équipe</div>
+      <h2 class="section-title reveal reveal-delay-1">Les esprits derrière<br><span class="accent">ZELKTRIS</span></h2>
+      <p class="section-sub reveal reveal-delay-2">40 experts passionnés réunis autour d'une même mission : créer le digital de demain.</p>
+    </div>
+    <div class="grid-4">
+      <div class="glass-card team-card reveal">
+        <div class="team-avatar">
+          <div class="avatar-inner">👨‍💼</div>
+        </div>
+        <div class="team-name">Alexandre Martin</div>
+        <div class="team-role">CEO & Co-fondateur</div>
+        <p class="team-bio">Visionnaire serial entrepreneur, 15 ans d'expérience en transformation digitale internationale.</p>
+        <div class="team-socials">
+          <a href="#" class="social-btn">in</a>
+          <a href="#" class="social-btn">𝕏</a>
+        </div>
+      </div>
+      <div class="glass-card team-card reveal reveal-delay-1">
+        <div class="team-avatar">
+          <div class="avatar-inner">👩‍🎨</div>
+        </div>
+        <div class="team-name">Sarah Koné</div>
+        <div class="team-role">CTO & Lead Design</div>
+        <p class="team-bio">Designer primée, ex-Apple. Crée des interfaces qui révolutionnent l'expérience utilisateur.</p>
+        <div class="team-socials">
+          <a href="#" class="social-btn">in</a>
+          <a href="#" class="social-btn">◉</a>
+        </div>
+      </div>
+      <div class="glass-card team-card reveal reveal-delay-2">
+        <div class="team-avatar">
+          <div class="avatar-inner">👨‍💻</div>
+        </div>
+        <div class="team-name">Romain Dubois</div>
+        <div class="team-role">Lead Developer</div>
+        <p class="team-bio">Full-stack engineer avec 10 ans d'expérience sur des projets à fort trafic et haute disponibilité.</p>
+        <div class="team-socials">
+          <a href="#" class="social-btn">in</a>
+          <a href="#" class="social-btn">⌥</a>
+        </div>
+      </div>
+      <div class="glass-card team-card reveal reveal-delay-3">
+        <div class="team-avatar">
+          <div class="avatar-inner">👩‍🔬</div>
+        </div>
+        <div class="team-name">Fatima Ndiaye</div>
+        <div class="team-role">Head of AI & Data</div>
+        <p class="team-bio">PhD en Machine Learning, ancienne chercheuse DeepMind. Intègre l'IA dans chaque solution.</p>
+        <div class="team-socials">
+          <a href="#" class="social-btn">in</a>
+          <a href="#" class="social-btn">𝕏</a>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:48px;" class="reveal">
+      <a href="contact.html" class="btn btn-outline">Rejoindre l'aventure →</a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-box reveal">
+      <h2 class="section-title">Commençons quelque chose<br><span class="accent-gold">d'extraordinaire</span></h2>
+      <p class="section-sub">Une consultation gratuite de 30 minutes pour explorer votre projet avec nos experts.</p>
+      <div class="cta-actions">
+        <a href="contact.html" class="btn btn-gold">📞 Réserver maintenant</a>
+        <a href="services.html" class="btn btn-glass">Voir nos services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">ZELKTRIS</div>
+        <p class="footer-desc">L'agence digitale premium qui transforme les ambitions en réalités numériques.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn">in</a>
+          <a href="#" class="social-btn">𝕏</a>
+          <a href="#" class="social-btn">◉</a>
+          <a href="#" class="social-btn">●</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Services</h4><ul>
+        <li><a href="services.html">Web & Applications</a></li>
+        <li><a href="services.html">Mobile iOS & Android</a></li>
+        <li><a href="services.html">Intelligence Artificielle</a></li>
+        <li><a href="services.html">UI/UX Design</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Agence</h4><ul>
+        <li><a href="about.html">Notre histoire</a></li>
+        <li><a href="about.html">L'équipe</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul>
+        <li><a href="#">📍 Paris, France</a></li>
+        <li><a href="#">📞 +33 1 23 45 67 89</a></li>
+        <li><a href="#">✉️ hello@zelktris.agency</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Zelktris Agency. Tous droits réservés.</span>
+      <div class="footer-legal">
+        <a href="#">Mentions légales</a>
+        <a href="#">Confidentialité</a>
+        <a href="#">RGPD</a>
+      </div>
+    </div>
+  </footer>
+</div>
+<script src="galaxy.js"></script>
+  <script src="chatbot.js"></script>
+</body>
+</html>
+
+

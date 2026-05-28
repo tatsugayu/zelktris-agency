@@ -1,0 +1,517 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lumière Boutique — Parfums & Cosmétiques | Cameroun</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --dark:#0D0008;
+  --dark2:#130010;
+  --dark3:#1A0018;
+  --rose:#C8688A;
+  --rose-lt:#E8A0B8;
+  --pink:#F0C0D0;
+  --gold:#D4A052;
+  --white:#FDF8FA;
+  --cream:#F5E8EE;
+  --gray:#A090A0;
+  --font-head:'Cormorant Garamond',Georgia,serif;
+  --font-body:'Jost',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--white);font-family:var(--font-body);line-height:1.7;overflow-x:hidden}
+
+/* Particules flottantes */
+.particles{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.particle{position:absolute;border-radius:50%;animation:float linear infinite;opacity:0}
+@keyframes float{
+  0%{transform:translateY(100vh) scale(0);opacity:0}
+  10%{opacity:.6}
+  90%{opacity:.3}
+  100%{transform:translateY(-20px) scale(1);opacity:0}
+}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:75px;background:rgba(13,0,8,0.92);border-bottom:1px solid rgba(200,104,138,0.15);backdrop-filter:blur(16px)}
+.nav-logo{font-family:var(--font-head);font-size:1.6rem;font-weight:300;color:var(--white);letter-spacing:.15em;text-decoration:none;font-style:italic}
+.nav-logo em{font-style:normal;color:var(--rose)}
+.nav-logo span{display:block;font-size:.55rem;letter-spacing:.35em;color:var(--gray);font-family:var(--font-body);font-style:normal;text-transform:uppercase;margin-top:-2px}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{color:var(--cream);text-decoration:none;font-size:.85rem;letter-spacing:.1em;font-weight:300;transition:color .3s}
+.nav-links a:hover{color:var(--rose)}
+.nav-cta{background:transparent;border:1px solid var(--rose);color:var(--rose);padding:.55rem 1.5rem;font-family:var(--font-body);font-size:.8rem;letter-spacing:.12em;cursor:pointer;transition:all .3s}
+.nav-cta:hover{background:var(--rose);color:var(--white)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:24px;height:1px;background:var(--rose)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;background:radial-gradient(ellipse at 30% 50%,rgba(200,104,138,0.08) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(212,160,82,0.06) 0%,transparent 50%),var(--dark);position:relative;overflow:hidden;padding-top:75px}
+.hero-inner{width:90%;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1}
+.hero-tag{display:inline-flex;align-items:center;gap:.6rem;border:1px solid rgba(200,104,138,0.4);padding:.35rem 1.2rem;font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:var(--rose);margin-bottom:2rem;font-family:var(--font-body)}
+.hero h1{font-family:var(--font-head);font-size:clamp(3rem,5vw,5rem);font-weight:300;line-height:1.1;color:var(--white);margin-bottom:1.2rem;font-style:italic}
+.hero h1 strong{font-style:normal;font-weight:600;color:var(--rose);display:block}
+.hero-sub{font-size:.95rem;color:var(--cream);opacity:.8;margin-bottom:2.5rem;line-height:1.9;font-weight:300;letter-spacing:.03em}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-rose{background:linear-gradient(135deg,var(--rose),#A84870);color:var(--white);padding:.9rem 2.5rem;font-family:var(--font-body);font-size:.85rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;border:none;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block}
+.btn-rose:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(200,104,138,0.3)}
+.btn-ghost{border:1px solid rgba(200,104,138,0.4);color:var(--rose);padding:.9rem 2.5rem;font-family:var(--font-body);font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;background:transparent;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block}
+.btn-ghost:hover{background:rgba(200,104,138,0.08)}
+.hero-visual{display:flex;flex-direction:column;gap:1.5rem;align-items:center}
+.perfume-showcase{position:relative;display:flex;justify-content:center;padding:2rem}
+.perfume-bottle{width:140px;height:200px;background:linear-gradient(160deg,rgba(200,104,138,0.3),rgba(13,0,8,0.8),rgba(212,160,82,0.2));border:1px solid rgba(200,104,138,0.4);border-radius:0 0 50% 50% / 0 0 30% 30%;position:relative;margin:0 auto;box-shadow:0 20px 60px rgba(200,104,138,0.2),inset 0 1px 0 rgba(255,255,255,0.1)}
+.perfume-bottle::before{content:'';position:absolute;top:-30px;left:50%;transform:translateX(-50%);width:20px;height:35px;background:linear-gradient(var(--rose),var(--gold));border-radius:3px 3px 0 0}
+.perfume-label{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);text-align:center;width:90%}
+.perfume-label span{font-family:var(--font-head);font-style:italic;font-size:1.1rem;color:var(--rose-lt)}
+.perfume-label small{display:block;font-size:.6rem;letter-spacing:.2em;color:var(--gray);margin-top:2px}
+.hero-badges{display:grid;grid-template-columns:1fr 1fr;gap:1rem;width:100%}
+.hbadge{background:rgba(200,104,138,0.06);border:1px solid rgba(200,104,138,0.15);padding:1rem;text-align:center}
+.hbadge strong{font-family:var(--font-head);font-size:1.5rem;color:var(--rose);display:block}
+.hbadge span{font-size:.7rem;color:var(--gray);letter-spacing:.1em;text-transform:uppercase}
+
+/* SECTION */
+section{padding:6rem 5%;position:relative}
+.section-inner{max-width:1200px;margin:0 auto}
+.section-tag{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--rose);margin-bottom:.8rem;display:block;font-family:var(--font-body)}
+.section-title{font-family:var(--font-head);font-size:clamp(2rem,3.5vw,3rem);font-weight:300;color:var(--white);margin-bottom:.5rem;font-style:italic;line-height:1.2}
+.section-title em{font-style:normal;color:var(--rose)}
+.section-divider{display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:rgba(200,104,138,0.2)}
+.section-divider::before{max-width:50px}
+.divider-ornament{font-size:1rem;color:var(--rose);opacity:.6}
+
+/* COLLECTIONS */
+.collections{background:var(--dark2)}
+.collections-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem;margin-top:3rem}
+.product-card{background:var(--dark3);border:1px solid rgba(200,104,138,0.1);overflow:hidden;transition:all .4s;cursor:pointer}
+.product-card:hover{border-color:rgba(200,104,138,0.3);transform:translateY(-6px);box-shadow:0 20px 50px rgba(200,104,138,0.12)}
+.product-img{height:220px;background:linear-gradient(135deg,rgba(200,104,138,0.15),rgba(13,0,8,0.9),rgba(212,160,82,0.1));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.product-img::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at center,rgba(200,104,138,0.1),transparent 60%)}
+.product-icon{font-size:4rem;position:relative;z-index:1}
+.product-badge{position:absolute;top:1rem;right:1rem;background:var(--rose);color:var(--white);padding:.2rem .8rem;font-size:.7rem;letter-spacing:.1em;font-family:var(--font-body)}
+.product-info{padding:1.5rem}
+.product-collection{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);margin-bottom:.4rem;display:block}
+.product-info h3{font-family:var(--font-head);font-size:1.2rem;color:var(--white);margin-bottom:.4rem;font-style:italic}
+.product-desc{font-size:.85rem;color:var(--gray);line-height:1.6;margin-bottom:1rem}
+.product-price{font-family:var(--font-head);color:var(--gold);font-size:1.1rem;font-weight:600}
+.product-price span{font-size:.75rem;color:var(--gray);font-family:var(--font-body);font-weight:300;margin-left:.3rem}
+
+/* UNIVERS */
+.univers{background:var(--dark)}
+.univers-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.univers-content p{color:var(--cream);opacity:.8;line-height:1.9;font-weight:300;margin-bottom:1.5rem}
+.univers-list{list-style:none;display:flex;flex-direction:column;gap:.8rem}
+.univers-list li{display:flex;align-items:center;gap:.8rem;font-size:.9rem;color:var(--cream);opacity:.9}
+.univers-list li::before{content:'✦';color:var(--rose);font-size:.6rem}
+.univers-visual{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.uv-card{background:rgba(200,104,138,0.06);border:1px solid rgba(200,104,138,0.15);padding:2rem;text-align:center}
+.uv-icon{font-size:2rem;display:block;margin-bottom:.8rem}
+.uv-card h4{font-family:var(--font-head);color:var(--rose-lt);font-size:1rem;margin-bottom:.4rem;font-style:italic}
+.uv-card p{font-size:.8rem;color:var(--gray);line-height:1.5}
+
+/* SOINS */
+.soins{background:var(--dark2)}
+.soins-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-top:3rem}
+.soin-card{text-align:center;padding:2rem 1.2rem;border:1px solid rgba(200,104,138,0.1);background:var(--dark3);transition:all .4s}
+.soin-card:hover{border-color:rgba(200,104,138,0.3);background:rgba(200,104,138,0.05)}
+.soin-icon{font-size:2.5rem;display:block;margin-bottom:1rem}
+.soin-card h3{font-family:var(--font-head);font-size:1.1rem;color:var(--white);margin-bottom:.6rem;font-style:italic}
+.soin-card p{font-size:.85rem;color:var(--gray);line-height:1.6}
+.soin-tag{display:inline-block;margin-top:.8rem;padding:.2rem .8rem;background:rgba(200,104,138,0.1);border:1px solid rgba(200,104,138,0.2);font-size:.7rem;color:var(--rose);letter-spacing:.1em}
+
+/* TEMOIGNAGES */
+.testimonials{background:var(--dark)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem}
+.testi-card{background:var(--dark2);border:1px solid rgba(200,104,138,0.1);padding:2.5rem;position:relative;overflow:hidden}
+.testi-card::before{content:'"';position:absolute;top:.5rem;left:1.5rem;font-family:var(--font-head);font-size:6rem;color:rgba(200,104,138,0.08);line-height:1}
+.testi-stars{color:var(--rose);font-size:.9rem;margin-bottom:1rem;display:block;position:relative;z-index:1}
+.testi-text{font-family:var(--font-head);font-style:italic;color:var(--cream);line-height:1.8;margin-bottom:1.5rem;position:relative;z-index:1;font-size:.95rem}
+.testi-author{display:flex;align-items:center;gap:.8rem;position:relative;z-index:1}
+.testi-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--rose),#7A3050);display:flex;align-items:center;justify-content:center;font-size:.85rem;color:var(--white);font-family:var(--font-head);font-weight:600}
+.testi-info strong{color:var(--white);font-size:.9rem;display:block;font-family:var(--font-head)}
+.testi-info span{font-size:.75rem;color:var(--rose)}
+
+/* NEWSLETTER */
+.newsletter{background:linear-gradient(135deg,rgba(200,104,138,0.12),rgba(13,0,8,0.95),rgba(212,160,82,0.06));border-top:1px solid rgba(200,104,138,0.12);border-bottom:1px solid rgba(200,104,138,0.12)}
+.newsletter-inner{max-width:700px;margin:0 auto;text-align:center}
+.newsletter h2{font-family:var(--font-head);font-size:2.5rem;font-weight:300;font-style:italic;color:var(--white);margin-bottom:1rem}
+.newsletter p{color:var(--cream);opacity:.8;margin-bottom:2rem;font-size:.95rem;line-height:1.8}
+.nl-form{display:flex;gap:1rem;max-width:500px;margin:0 auto}
+.nl-form input{flex:1;background:rgba(200,104,138,0.07);border:1px solid rgba(200,104,138,0.3);color:var(--white);padding:.9rem 1.2rem;font-family:var(--font-body);font-size:.9rem;outline:none;transition:border-color .3s}
+.nl-form input:focus{border-color:var(--rose)}
+.nl-form input::placeholder{color:var(--gray)}
+.nl-form button{background:var(--rose);color:var(--white);border:none;padding:.9rem 1.8rem;font-family:var(--font-body);font-size:.85rem;letter-spacing:.1em;cursor:pointer;transition:all .3s;white-space:nowrap}
+.nl-form button:hover{background:#A84870}
+
+/* BOUTIQUES */
+.boutiques{background:var(--dark2)}
+.boutiques-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:3rem}
+.boutique-card{background:var(--dark3);border:1px solid rgba(200,104,138,0.12);padding:2rem;display:flex;gap:1.5rem;align-items:flex-start}
+.boutique-icon-box{width:56px;height:56px;background:rgba(200,104,138,0.1);border:1px solid rgba(200,104,138,0.3);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+.boutique-card h3{font-family:var(--font-head);color:var(--white);font-size:1.1rem;margin-bottom:.3rem;font-style:italic}
+.boutique-address{font-size:.85rem;color:var(--gray);line-height:1.6}
+.boutique-phone{font-size:.85rem;color:var(--rose);margin-top:.4rem}
+
+/* FOOTER */
+footer{background:var(--dark);border-top:1px solid rgba(200,104,138,0.08);padding:3rem 5% 1.5rem}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:2rem;border-bottom:1px solid rgba(200,104,138,0.06)}
+.footer-logo{font-family:var(--font-head);font-size:1.6rem;font-weight:300;color:var(--white);font-style:italic;display:inline-block;margin-bottom:.8rem}
+.footer-logo em{font-style:normal;color:var(--rose)}
+.footer-brand p{font-size:.85rem;color:var(--gray);line-height:1.7;max-width:260px}
+.footer-col h4{font-family:var(--font-head);color:var(--rose);font-size:.95rem;margin-bottom:1.2rem;font-style:italic}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.footer-col ul li a{color:var(--gray);text-decoration:none;font-size:.85rem;transition:color .3s}
+.footer-col ul li a:hover{color:var(--rose)}
+.footer-bottom{max-width:1200px;margin:1.5rem auto 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-bottom p{font-size:.8rem;color:var(--gray)}
+.ZELKTRIS-credit{font-size:.8rem;color:var(--gray)}
+.ZELKTRIS-credit a{color:var(--rose);text-decoration:none}
+
+@media(max-width:1024px){
+  .collections-grid{grid-template-columns:repeat(2,1fr)}
+  .soins-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-inner{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .hero-inner,.univers-inner{grid-template-columns:1fr}
+  .hero{text-align:center}
+  .hero-actions{justify-content:center}
+  .collections-grid,.testi-grid,.boutiques-grid{grid-template-columns:1fr}
+  .soins-grid{grid-template-columns:1fr 1fr}
+  .univers-visual{grid-template-columns:1fr 1fr}
+  .nl-form{flex-direction:column}
+  .footer-inner{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- Particules -->
+<div class="particles" id="particles"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo"><em>Lumière</em> Boutique<span>Parfums &amp; Cosmétiques · Cameroun</span></a>
+  <ul class="nav-links">
+    <li><a href="#collections">Collections</a></li>
+    <li><a href="#soins">Soins</a></li>
+    <li><a href="#univers">Notre Univers</a></li>
+    <li><a href="#boutiques">Boutiques</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('collections').scrollIntoView({behavior:'smooth'})">Découvrir</button>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">✦ L'Art du Luxe Africain</div>
+      <h1>L'Élégance <strong>à Fleur de Peau</strong></h1>
+      <p class="hero-sub">Parfums envoûtants, soins précieux et cosmétiques de luxe inspirés des senteurs d'Afrique. Lumière Boutique — votre rituel de beauté au Cameroun.</p>
+      <div class="hero-actions">
+        <a href="#collections" class="btn-rose">Explorer les Collections</a>
+        <a href="#boutiques" class="btn-ghost">Nos Boutiques</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="perfume-showcase">
+        <div class="perfume-bottle">
+          <div class="perfume-label"><span>Lumière Noire</span><small>Eau de Parfum · 75ml</small></div>
+        </div>
+      </div>
+      <div class="hero-badges">
+        <div class="hbadge"><strong>200+</strong><span>Références</span></div>
+        <div class="hbadge"><strong>15+</strong><span>Années</span></div>
+        <div class="hbadge"><strong>2</strong><span>Boutiques</span></div>
+        <div class="hbadge"><strong>100%</strong><span>Authentique</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTIONS -->
+<section class="collections" id="collections">
+  <div class="section-inner">
+    <span class="section-tag">Nos Produits</span>
+    <h2 class="section-title">Collections <em>Signature</em></h2>
+    <div class="section-divider"><div class="divider-ornament">✦</div></div>
+    <div class="collections-grid">
+      <div class="product-card">
+        <div class="product-img">
+          <span class="product-icon">🌹</span>
+          <span class="product-badge">Bestseller</span>
+        </div>
+        <div class="product-info">
+          <span class="product-collection">Collection Florale</span>
+          <h3>Rose Noire d'Abuja</h3>
+          <p class="product-desc">Notes de rose bulgare, patchouli et musc blanc. Une fragrance ensorcelante aux accents africains.</p>
+          <div class="product-price">45 000 FCFA <span>· 75ml EDP</span></div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <span class="product-icon">🌿</span>
+          <span class="product-badge">Nouveau</span>
+        </div>
+        <div class="product-info">
+          <span class="product-collection">Collection Naturelle</span>
+          <h3>Vétiver Cameroun</h3>
+          <p class="product-desc">Racines de vétiver local, bois de cèdre et ambre. Un parfum terreux d'une profondeur unique.</p>
+          <div class="product-price">38 000 FCFA <span>· 50ml EDP</span></div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <span class="product-icon">✨</span>
+        </div>
+        <div class="product-info">
+          <span class="product-collection">Collection Prestige</span>
+          <h3>Or Blanc de Kribi</h3>
+          <p class="product-desc">Jasmin de Grasse, santal d'Inde et fond vanillé. La quintessence du luxe en flacon collector.</p>
+          <div class="product-price">85 000 FCFA <span>· 100ml EDP</span></div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <span class="product-icon">🫧</span>
+        </div>
+        <div class="product-info">
+          <span class="product-collection">Soins Corps</span>
+          <h3>Lait Karité Impérial</h3>
+          <p class="product-desc">Beurre de karité du Burkina, huile d'argan et aloe vera. Hydratation intense pour une peau lumineuse.</p>
+          <div class="product-price">18 500 FCFA <span>· 250ml</span></div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <span class="product-icon">💄</span>
+          <span class="product-badge">Exclusif</span>
+        </div>
+        <div class="product-info">
+          <span class="product-collection">Maquillage</span>
+          <h3>Rouge Lèvres Wouri</h3>
+          <p class="product-desc">Formule longue tenue enrichie en vitamine E. 24 teintes adaptées aux carnations africaines.</p>
+          <div class="product-price">12 000 FCFA <span>· 3.5g</span></div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <span class="product-icon">🧴</span>
+        </div>
+        <div class="product-info">
+          <span class="product-collection">Cheveux</span>
+          <h3>Sérum Capillaire Baobab</h3>
+          <p class="product-desc">Huile de baobab pressée à froid et kératine végétale. Répare, nourrit et illumine les cheveux.</p>
+          <div class="product-price">22 000 FCFA <span>· 100ml</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UNIVERS -->
+<section class="univers" id="univers">
+  <div class="section-inner univers-inner">
+    <div class="univers-content">
+      <span class="section-tag">Notre Univers</span>
+      <h2 class="section-title">La Beauté <em>Africaine</em> Réinventée</h2>
+      <div class="section-divider"><div class="divider-ornament">✦</div></div>
+      <p>Depuis 2009, Lumière Boutique célèbre la richesse des ressources naturelles africaines en créant des produits d'exception. Nos parfumeurs et cosmétologues puisent dans la biodiversité camerounaise pour formuler des créations uniques.</p>
+      <p>Chaque produit est conçu avec des ingrédients sourcés de manière éthique, souvent auprès de coopératives féminines locales. Luxe et responsabilité ne sont pas incompatibles.</p>
+      <ul class="univers-list">
+        <li>Ingrédients d'origine naturelle certifiée</li>
+        <li>Formules sans parabènes ni sulfates</li>
+        <li>Testés dermatologiquement</li>
+        <li>Emballages recyclables et éco-responsables</li>
+        <li>Partenariats avec coopératives locales</li>
+      </ul>
+    </div>
+    <div class="univers-visual">
+      <div class="uv-card"><span class="uv-icon">🌺</span><h4>Ingrédients Naturels</h4><p>Directement sourcés auprès de producteurs camerounais certifiés.</p></div>
+      <div class="uv-card"><span class="uv-icon">🧪</span><h4>Formules Exclusives</h4><p>Développées par nos parfumeurs et dermatologues internes.</p></div>
+      <div class="uv-card"><span class="uv-icon">♻️</span><h4>Éco-Responsable</h4><p>Emballages recyclables, refills disponibles pour tous les parfums.</p></div>
+      <div class="uv-card"><span class="uv-icon">🤝</span><h4>Impact Local</h4><p>40% de nos ingrédients achetés à des coopératives féminines.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOINS -->
+<section class="soins" id="soins">
+  <div class="section-inner">
+    <span class="section-tag">Gamme Complète</span>
+    <h2 class="section-title">Vos <em>Rituels de Beauté</em></h2>
+    <div class="section-divider"><div class="divider-ornament">✦</div></div>
+    <div class="soins-grid">
+      <div class="soin-card">
+        <span class="soin-icon">🌸</span>
+        <h3>Parfums Femme</h3>
+        <p>Fragrances florales, orientales et boisées. Collections exclusives et grands classiques.</p>
+        <span class="soin-tag">60+ références</span>
+      </div>
+      <div class="soin-card">
+        <span class="soin-icon">🌑</span>
+        <h3>Parfums Homme</h3>
+        <p>Eaux de toilette et parfums masculins aux notes profondes et sophistiquées.</p>
+        <span class="soin-tag">45+ références</span>
+      </div>
+      <div class="soin-card">
+        <span class="soin-icon">💆</span>
+        <h3>Soins Visage</h3>
+        <p>Crèmes hydratantes, sérums anti-âge et masques régénérants adaptés aux peaux africaines.</p>
+        <span class="soin-tag">35+ produits</span>
+      </div>
+      <div class="soin-card">
+        <span class="soin-icon">✋</span>
+        <h3>Soins Corps</h3>
+        <p>Laits corporels, gels douche luxueux, huiles précieuses et exfoliants naturels.</p>
+        <span class="soin-tag">40+ produits</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEMOIGNAGES -->
+<section class="testimonials">
+  <div class="section-inner">
+    <span class="section-tag">Avis Clients</span>
+    <h2 class="section-title"><em>Elles</em> en Parlent</h2>
+    <div class="section-divider"><div class="divider-ornament">✦</div></div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <span class="testi-stars">★★★★★</span>
+        <p class="testi-text">« Rose Noire d'Abuja est mon parfum signature depuis 3 ans. Des compliments à chaque fois que je le porte. Incroyablement longue tenue ! »</p>
+        <div class="testi-author">
+          <div class="testi-avatar">GN</div>
+          <div class="testi-info"><strong>Grace Nguetsop</strong><span>Cliente fidèle · Yaoundé</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <span class="testi-stars">★★★★★</span>
+        <p class="testi-text">« Le Lait Karité Impérial a transformé ma peau. Enfin un produit naturel qui tient vraiment ses promesses, sans chimie agressive. »</p>
+        <div class="testi-author">
+          <div class="testi-avatar">AF</div>
+          <div class="testi-info"><strong>Amina Fanta</strong><span>Cliente · Douala</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <span class="testi-stars">★★★★★</span>
+        <p class="testi-text">« Le service en boutique est exceptionnel. On prend vraiment le temps de vous conseiller et de trouver le parfum qui vous correspond. »</p>
+        <div class="testi-author">
+          <div class="testi-avatar">PB</div>
+          <div class="testi-info"><strong>Patricia Biwole</strong><span>Cliente · Yaoundé</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <div class="section-inner newsletter-inner">
+    <span class="section-tag" style="text-align:center;display:block">Restez Informée</span>
+    <h2>Recevez Nos <em style="color:var(--rose)">Nouveautés</em></h2>
+    <p>Soyez la première informée de nos nouvelles collections, promotions exclusives et conseils beauté personnalisés.</p>
+    <div class="nl-form">
+      <input type="email" placeholder="votre@email.cm">
+      <button onclick="this.textContent='Inscrite ✓';this.style.background='#4CAF50'">S'inscrire</button>
+    </div>
+  </div>
+</section>
+
+<!-- BOUTIQUES -->
+<section class="boutiques" id="boutiques">
+  <div class="section-inner">
+    <span class="section-tag">Nous Trouver</span>
+    <h2 class="section-title">Nos <em>Boutiques</em></h2>
+    <div class="section-divider"><div class="divider-ornament">✦</div></div>
+    <div class="boutiques-grid">
+      <div class="boutique-card">
+        <div class="boutique-icon-box">🏪</div>
+        <div>
+          <h3>Boutique Yaoundé — Centre Ville</h3>
+          <p class="boutique-address">Immeuble Lumière, Avenue Kennedy<br>Centre Commercial Mokolo, Yaoundé<br>Lun–Sam : 09h00–20h00 · Dim : 10h00–18h00</p>
+          <p class="boutique-phone">+237 222 11 22 33</p>
+        </div>
+      </div>
+      <div class="boutique-card">
+        <div class="boutique-icon-box">🏪</div>
+        <div>
+          <h3>Boutique Douala — Akwa</h3>
+          <p class="boutique-address">Galerie Beauty Palace, Boulevard de la Liberté<br>Quartier Akwa, Douala<br>Lun–Sam : 09h00–20h30 · Dim : 10h00–18h00</p>
+          <p class="boutique-phone">+237 233 44 55 66</p>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2rem">
+      <p style="color:var(--gray);font-size:.9rem">Commandes en ligne disponibles · Livraison sur Yaoundé et Douala · WhatsApp : <span style="color:var(--rose)">+237 690 88 00 22</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="footer-logo"><em>Lumière</em> Boutique</a>
+      <p>Parfums et cosmétiques de luxe inspirés de l'Afrique. L'élégance naturelle à votre portée depuis 2009.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Collections</h4>
+      <ul>
+        <li><a href="#">Parfums Femme</a></li>
+        <li><a href="#">Parfums Homme</a></li>
+        <li><a href="#">Soins Visage</a></li>
+        <li><a href="#">Soins Corps</a></li>
+        <li><a href="#">Maquillage</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Informations</h4>
+      <ul>
+        <li><a href="#">Notre Histoire</a></li>
+        <li><a href="#">Nos Valeurs</a></li>
+        <li><a href="#">Blog Beauté</a></li>
+        <li><a href="#">Programme Fidélité</a></li>
+        <li><a href="#">Carte Cadeau</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Service Client</h4>
+      <ul>
+        <li><a href="#">Livraison & Retours</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">WhatsApp Business</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Lumière Boutique Cameroun. Tous droits réservés. · RCCM Yaoundé N° YAO-2009-LB</p>
+    <p class="ZELKTRIS-credit">Site réalisé par <a href="#">Zelktris Agency</a></p>
+  </div>
+</footer>
+
+<script>
+// Particules flottantes
+const container = document.getElementById('particles');
+const colors = ['rgba(200,104,138,0.4)','rgba(212,160,82,0.3)','rgba(240,192,208,0.3)'];
+for(let i=0;i<25;i++){
+  const p=document.createElement('div');
+  p.className='particle';
+  const size=Math.random()*4+1;
+  p.style.cssText=`width:${size}px;height:${size}px;left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${Math.random()*12+8}s;animation-delay:${Math.random()*8}s`;
+  container.appendChild(p);
+}
+function toggleMenu(){
+  const links=document.querySelector('.nav-links');
+  if(links) links.style.display=links.style.display==='flex'?'none':'flex';
+}
+</script>
+</body>
+</html>

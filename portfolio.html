@@ -1,0 +1,726 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Zelktris Agency — Portfolio : études de cas, réalisations web, mobile et IA pour grands comptes, ministères et PME.">
+  <title>Portfolio — Zelktris Agency</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .filter-bar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+    .filter-btn {
+      padding: 8px 22px;
+      border-radius: 50px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      color: rgba(240,240,255,0.6);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      backdrop-filter: var(--glass-blur);
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: rgba(0,102,255,0.15);
+      border-color: rgba(0,102,255,0.4);
+      color: var(--blue-lt);
+    }
+    .portfolio-full-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .pf-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: var(--glass-blur);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .pf-card:hover {
+      border-color: rgba(139,0,255,0.3);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .pf-thumb {
+      width: 100%;
+      aspect-ratio: 16/10;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pf-thumb-emoji {
+      font-size: 5rem;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 0 20px rgba(139,0,255,0.5));
+      transition: transform 0.4s;
+    }
+    .pf-card:hover .pf-thumb-emoji { transform: scale(1.1); }
+    .pf-body { padding: 24px; }
+    .pf-cat {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .pf-title {
+      font-family: var(--font-head);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .pf-desc {
+      font-size: 0.85rem;
+      color: rgba(240,240,255,0.55);
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+    .pf-results {
+      display: flex;
+      gap: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--glass-border);
+    }
+    .pf-result-item { text-align: center; }
+    .pf-result-val {
+      font-family: var(--font-head);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--blue-lt);
+    }
+    .pf-result-val.gold { color: var(--gold); }
+    .pf-result-val.violet { color: var(--violet-lt); }
+    .pf-result-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(240,240,255,0.4);
+      margin-top: 2px;
+    }
+    .case-study-banner {
+      padding: 60px 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      margin: 0 0 28px;
+    }
+    .cs-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(255,215,0,0.1);
+      border: 1px solid rgba(255,215,0,0.2);
+      border-radius: 50px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .cs-title {
+      font-family: var(--font-head);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    .cs-desc {
+      font-size: 0.92rem;
+      color: rgba(240,240,255,0.6);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .cs-kpis {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .cs-kpi { text-align: center; }
+    .cs-kpi-val {
+      font-family: var(--font-head);
+      font-size: 2rem;
+      font-weight: 900;
+    }
+    .cs-kpi-val.blue { color: var(--blue-lt); }
+    .cs-kpi-val.violet { color: var(--violet-lt); }
+    .cs-kpi-val.gold { color: var(--gold); }
+    .cs-kpi-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: rgba(240,240,255,0.45);
+      margin-top: 2px;
+    }
+    .cs-visual {
+      border-radius: var(--radius-lg);
+      min-height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 7rem;
+      position: relative;
+      overflow: hidden;
+    }
+    @media (max-width:900px) {
+      .portfolio-full-grid { grid-template-columns: 1fr 1fr; }
+      .case-study-banner { grid-template-columns: 1fr; }
+    }
+    @media (max-width:600px) {
+      .portfolio-full-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<canvas id="galaxy-canvas"></canvas>
+<div class="page-wrapper">
+
+  <header class="navbar">
+    <a href="index.html" class="nav-logo">ZEL<span>KTRIS</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="about.html">Agence</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="blog.html">Insights</a></li>
+      <li><a href="contact.html" class="nav-cta">Devis Gratuit</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </header>
+  <div class="mobile-menu">
+    <nav>
+      <a href="index.html">Accueil</a><a href="about.html">Agence</a>
+      <a href="services.html">Services</a><a href="portfolio.html">Portfolio</a>
+      <a href="blog.html">Insights</a><a href="contact.html">Devis Gratuit →</a>
+    </nav>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="hero-orb hero-orb-1" style="opacity:0.4;"></div>
+    <div class="hero-orb hero-orb-2" style="opacity:0.3;"></div>
+    <div class="breadcrumb reveal"><a href="index.html">Accueil</a> <span>/</span> Portfolio</div>
+    <h1 class="page-header-title reveal reveal-delay-1">Nos Réalisations</h1>
+    <p class="page-header-sub reveal reveal-delay-2">250+ projets livrés dans 18 pays. Voici quelques-unes de nos réalisations les plus marquantes.</p>
+  </div>
+
+  <!-- FEATURED CASE STUDY -->
+  <section style="padding-top:20px;">
+    <div class="text-center" style="margin-bottom:36px;">
+      <div class="section-tag reveal">Étude de cas phare</div>
+      <h2 class="section-title reveal reveal-delay-1">Projets <span class="accent-gold">remarquables</span></h2>
+    </div>
+
+    <div class="glass-card case-study-banner reveal">
+      <div>
+        <div class="cs-tag">★ Cas client #1</div>
+        <h3 class="cs-title">Portail Digital du Ministère de l'Économie</h3>
+        <p class="cs-desc">Refonte complète du portail numérique avec espace citoyen personnalisé, démarches en ligne et tableau de bord analytique. Architecture sécurisée ISO 27001, accessibilité RGAA niveau AA.</p>
+        <div class="cs-kpis">
+          <div class="cs-kpi"><div class="cs-kpi-val blue">98</div><div class="cs-kpi-label">PageSpeed</div></div>
+          <div class="cs-kpi"><div class="cs-kpi-val gold">-60%</div><div class="cs-kpi-label">Temps de traitement</div></div>
+          <div class="cs-kpi"><div class="cs-kpi-val violet">2M+</div><div class="cs-kpi-label">Visiteurs/mois</div></div>
+        </div>
+        <a href="contact.html" class="btn btn-primary">Projet similaire →</a>
+      </div>
+      <div class="cs-visual" style="background:linear-gradient(135deg,rgba(0,102,255,0.12),rgba(139,0,255,0.15));border:1px solid rgba(139,0,255,0.15);">
+        <div style="font-size:7rem;filter:drop-shadow(0 0 30px rgba(0,102,255,0.5));">🏛️</div>
+        <div style="position:absolute;bottom:20px;left:20px;right:20px;display:flex;gap:10px;">
+          <div style="flex:1;padding:10px;background:rgba(0,0,0,0.6);border-radius:10px;text-align:center;font-size:0.75rem;color:var(--gold);font-weight:600;">⬆ +340% conversions</div>
+          <div style="flex:1;padding:10px;background:rgba(0,0,0,0.6);border-radius:10px;text-align:center;font-size:0.75rem;color:var(--blue-lt);font-weight:600;">⚡ 0.8s load time</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass-card case-study-banner reveal" style="background:linear-gradient(135deg,rgba(139,0,255,0.05),rgba(0,102,255,0.05));">
+      <div class="cs-visual" style="background:linear-gradient(135deg,rgba(255,215,0,0.06),rgba(139,0,255,0.1));border:1px solid rgba(255,215,0,0.12);">
+        <div style="font-size:7rem;filter:drop-shadow(0 0 30px rgba(255,215,0,0.4));">🛒</div>
+        <div style="position:absolute;bottom:20px;left:20px;right:20px;display:flex;gap:10px;">
+          <div style="flex:1;padding:10px;background:rgba(0,0,0,0.6);border-radius:10px;text-align:center;font-size:0.75rem;color:var(--violet-lt);font-weight:600;">📱 App mobile incluse</div>
+          <div style="flex:1;padding:10px;background:rgba(0,0,0,0.6);border-radius:10px;text-align:center;font-size:0.75rem;color:var(--gold);font-weight:600;">💳 200K clients/j</div>
+        </div>
+      </div>
+      <div>
+        <div class="cs-tag">★ Cas client #2</div>
+        <h3 class="cs-title">SuperStore — E-Commerce +340% de CA</h3>
+        <p class="cs-desc">Refonte complète de la plateforme e-commerce : nouveau design premium, moteur de recommandation IA, app mobile et tunnel de conversion optimisé. Résultats en 90 jours.</p>
+        <div class="cs-kpis">
+          <div class="cs-kpi"><div class="cs-kpi-val gold">+340%</div><div class="cs-kpi-label">Chiffre d'affaires</div></div>
+          <div class="cs-kpi"><div class="cs-kpi-val blue">+82%</div><div class="cs-kpi-label">Taux de conversion</div></div>
+          <div class="cs-kpi"><div class="cs-kpi-val violet">-45%</div><div class="cs-kpi-label">Abandon panier</div></div>
+        </div>
+        <a href="contact.html" class="btn btn-primary">Projet similaire →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILTER BAR -->
+  <section>
+    <div class="filter-bar reveal">
+      <button class="filter-btn active">Tous</button>
+      <button class="filter-btn">Web</button>
+      <button class="filter-btn">Mobile</button>
+      <button class="filter-btn">IA & Data</button>
+      <button class="filter-btn">Design</button>
+      <button class="filter-btn">Gouvernement</button>
+      <button class="filter-btn">Finance</button>
+      <button class="filter-btn" onclick="document.getElementById('vitrines-section').scrollIntoView({behavior:'smooth'})">Vitrines 🇨🇲</button>
+    </div>
+
+    <div class="portfolio-full-grid">
+      <!-- Card 1 -->
+      <div class="pf-card reveal">
+        <div class="pf-thumb" style="background:linear-gradient(135deg,#0066FF,#8B00FF);">
+          <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.08),transparent);"></div>
+          <div class="pf-thumb-emoji">🏦</div>
+        </div>
+        <div class="pf-body">
+          <div class="pf-cat">Finance • Web App</div>
+          <div class="pf-title">BankPro — Plateforme FinTech</div>
+          <p class="pf-desc">Dashboard bancaire nouvelle génération avec analytics temps réel, gestion de portefeuille IA et interface conversationnelle.</p>
+          <div class="pf-results">
+            <div class="pf-result-item"><div class="pf-result-val">500K</div><div class="pf-result-label">Utilisateurs</div></div>
+            <div class="pf-result-item"><div class="pf-result-val gold">+210%</div><div class="pf-result-label">Engagement</div></div>
+            <div class="pf-result-item"><div class="pf-result-val violet">4.9★</div><div class="pf-result-label">App Store</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="pf-card reveal reveal-delay-1">
+        <div class="pf-thumb" style="background:linear-gradient(135deg,#8B00FF,#FF8C00);">
+          <div style="position:absolute;inset:0;background:radial-gradient(circle at 70% 70%,rgba(255,255,255,0.06),transparent);"></div>
+          <div class="pf-thumb-emoji">🎓</div>
+        </div>
+        <div class="pf-body">
+          <div class="pf-cat">EdTech • Mobile App</div>
+          <div class="pf-title">EduSphere — Plateforme e-learning</div>
+          <p class="pf-desc">Application mobile d'apprentissage adaptatif avec IA pédagogique, gamification et suivi de progression personnalisé.</p>
+          <div class="pf-results">
+            <div class="pf-result-item"><div class="pf-result-val">1.2M</div><div class="pf-result-label">Apprenants</div></div>
+            <div class="pf-result-item"><div class="pf-result-val gold">+68%</div><div class="pf-result-label">Rétention</div></div>
+            <div class="pf-result-item"><div class="pf-result-val violet">98%</div><div class="pf-result-label">Satisfaction</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="pf-card reveal reveal-delay-2">
+        <div class="pf-thumb" style="background:linear-gradient(135deg,#001F6B,#0066FF);">
+          <div class="pf-thumb-emoji">🌍</div>
+        </div>
+        <div class="pf-body">
+          <div class="pf-cat">Gouvernement • Portail</div>
+          <div class="pf-title">Portail Services Publics +</div>
+          <p class="pf-desc">Plateforme unifiée des démarches administratives pour 3 millions de citoyens. RGAA, sécurité renforcée, accessibilité totale.</p>
+          <div class="pf-results">
+            <div class="pf-result-item"><div class="pf-result-val">3M</div><div class="pf-result-label">Citoyens</div></div>
+            <div class="pf-result-item"><div class="pf-result-val gold">-60%</div><div class="pf-result-label">Délai traitement</div></div>
+            <div class="pf-result-item"><div class="pf-result-val violet">RGAA</div><div class="pf-result-label">Niveau AA</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="pf-card reveal">
+        <div class="pf-thumb" style="background:linear-gradient(135deg,#0A0010,#8B00FF 50%,#FFD700);">
+          <div class="pf-thumb-emoji">✈️</div>
+        </div>
+        <div class="pf-body">
+          <div class="pf-cat">Travel • SaaS</div>
+          <div class="pf-title">AeroBook — Réservation intelligente</div>
+          <p class="pf-desc">Plateforme SaaS de gestion des voyages d'affaires avec IA de recommandation, reporting CO₂ et intégration ERP.</p>
+          <div class="pf-results">
+            <div class="pf-result-item"><div class="pf-result-val">85</div><div class="pf-result-label">Entreprises clientes</div></div>
+            <div class="pf-result-item"><div class="pf-result-val gold">-30%</div><div class="pf-result-label">Coûts voyages</div></div>
+            <div class="pf-result-item"><div class="pf-result-val violet">2h</div><div class="pf-result-label">Temps gagné/semaine</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="pf-card reveal reveal-delay-1">
+        <div class="pf-thumb" style="background:linear-gradient(135deg,#1a0030,#B44FFF);">
+          <div class="pf-thumb-emoji">🏥</div>
+        </div>
+        <div class="pf-body">
+          <div class="pf-cat">Santé • Plateforme</div>
+          <div class="pf-title">MediConnect — Télémédecine</div>
+          <p class="pf-desc">Plateforme de télémédecine sécurisée avec IA de triage, agenda médical intelligent et dossier patient unifié.</p>
+          <div class="pf-results">
+            <div class="pf-result-item"><div class="pf-result-val">50K</div><div class="pf-result-label">Consultations/mois</div></div>
+            <div class="pf-result-item"><div class="pf-result-val gold">HDS</div><div class="pf-result-label">Certification</div></div>
+            <div class="pf-result-item"><div class="pf-result-val violet">+92%</div><div class="pf-result-label">Satisfaction</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="pf-card reveal reveal-delay-2">
+        <div class="pf-thumb" style="background:linear-gradient(135deg,#0A1628,#FFD700 120%);">
+          <div class="pf-thumb-emoji">⚡</div>
+        </div>
+        <div class="pf-body">
+          <div class="pf-cat">Énergie • Dashboard</div>
+          <div class="pf-title">EnergyOS — Smart Grid Analytics</div>
+          <p class="pf-desc">Dashboard temps réel de gestion intelligente des réseaux énergétiques avec prédiction IA de la consommation.</p>
+          <div class="pf-results">
+            <div class="pf-result-item"><div class="pf-result-val">99.9%</div><div class="pf-result-label">Uptime garanti</div></div>
+            <div class="pf-result-item"><div class="pf-result-val gold">-25%</div><div class="pf-result-label">Conso énergétique</div></div>
+            <div class="pf-result-item"><div class="pf-result-val violet">IoT</div><div class="pf-result-label">Intégration capteurs</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VITRINES CAMEROUN -->
+  <section id="vitrines-section" style="padding-top:2rem">
+    <div class="text-center" style="margin-bottom:48px;">
+      <div class="section-tag reveal">Sites Vitrines · Cameroun</div>
+      <h2 class="section-title reveal reveal-delay-1">Présence digitale <span class="accent-gold">clés en main</span></h2>
+      <p class="section-sub reveal reveal-delay-2" style="max-width:680px;margin:0 auto;">Sites vitrines professionnels réalisés pour des établissements camerounais. Design premium, mobile-first, optimisés pour la conversion.</p>
+    </div>
+
+    <style>
+    .vitrine-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .vitrine-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: var(--glass-blur);
+      transition: var(--transition);
+    }
+    .vitrine-card:hover {
+      border-color: rgba(255,215,0,0.25);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+    .vitrine-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      gap: .5rem;
+    }
+    .vitrine-thumb-emoji {
+      font-size: 4rem;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.4s;
+      filter: drop-shadow(0 0 15px rgba(255,255,255,0.15));
+    }
+    .vitrine-card:hover .vitrine-thumb-emoji { transform: scale(1.12); }
+    .vitrine-thumb-name {
+      font-family: var(--font-head);
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      color: rgba(255,255,255,0.9);
+      position: relative;
+      z-index: 1;
+      text-transform: uppercase;
+    }
+    .vitrine-body { padding: 22px; }
+    .vitrine-cat {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .vitrine-title {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .vitrine-desc {
+      font-size: 0.83rem;
+      color: rgba(240,240,255,0.55);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+    .vitrine-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .vtag {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50px;
+      padding: 3px 10px;
+      font-size: .7rem;
+      color: rgba(240,240,255,0.5);
+    }
+    .vitrine-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      border-top: 1px solid var(--glass-border);
+    }
+    .vitrine-location {
+      font-size: .78rem;
+      color: var(--gray, rgba(240,240,255,0.4));
+    }
+    .vitrine-location span { color: var(--gold); margin-right: .3rem; }
+    .vitrine-link {
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--blue-lt);
+      text-decoration: none;
+      padding: 5px 14px;
+      border: 1px solid rgba(0,170,255,0.25);
+      border-radius: 50px;
+      transition: all .3s;
+    }
+    .vitrine-link:hover {
+      background: rgba(0,170,255,0.1);
+      border-color: rgba(0,170,255,0.4);
+    }
+    @media(max-width:900px){ .vitrine-grid { grid-template-columns: 1fr 1fr; } }
+    @media(max-width:600px){ .vitrine-grid { grid-template-columns: 1fr; } }
+    </style>
+
+    <div class="vitrine-grid">
+
+      <!-- Université -->
+      <div class="vitrine-card reveal">
+        <div class="vitrine-thumb" style="background:linear-gradient(135deg,#0A1628 0%,#112240 50%,#1A3060 100%);">
+          <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(255,215,0,0.08),transparent 70%)"></div>
+          <div class="vitrine-thumb-emoji">🎓</div>
+          <div class="vitrine-thumb-name" style="color:rgba(255,215,0,.85)">UEY — Université de l'Excellence</div>
+        </div>
+        <div class="vitrine-body">
+          <div class="vitrine-cat">Éducation · Site Vitrine</div>
+          <div class="vitrine-title">Université de l'Excellence de Yaoundé</div>
+          <p class="vitrine-desc">Site institutionnel complet avec catalogue des 6 filières, processus d'admissions en ligne, témoignages étudiants et informations du campus.</p>
+          <div class="vitrine-tags">
+            <span class="vtag">Design Navy/Gold</span>
+            <span class="vtag">Multi-sections</span>
+            <span class="vtag">Formulaire admissions</span>
+          </div>
+          <div class="vitrine-footer">
+            <span class="vitrine-location"><span>📍</span>Yaoundé, Cameroun</span>
+            <a href="vitrines/universite/index.html" class="vitrine-link" target="_blank">Voir le site →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Restaurant -->
+      <div class="vitrine-card reveal reveal-delay-1">
+        <div class="vitrine-thumb" style="background:linear-gradient(135deg,#120900 0%,#1E1000 50%,#2A1A08 100%);">
+          <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(212,160,23,0.1),transparent 70%)"></div>
+          <div class="vitrine-thumb-emoji">🍽️</div>
+          <div class="vitrine-thumb-name" style="color:rgba(212,160,23,.85)">Le Rendez-Vous — Gastronomique</div>
+        </div>
+        <div class="vitrine-body">
+          <div class="vitrine-cat">Restauration · Site Vitrine</div>
+          <div class="vitrine-title">Le Rendez-Vous — Restaurant Gastronomique</div>
+          <p class="vitrine-desc">Site gastronomique premium avec menu interactif en FCFA, galerie des plats signature, formulaire de réservation et ambiance visuelle immersive.</p>
+          <div class="vitrine-tags">
+            <span class="vtag">Design Dark/Gold</span>
+            <span class="vtag">Menu & Prix</span>
+            <span class="vtag">Réservations</span>
+          </div>
+          <div class="vitrine-footer">
+            <span class="vitrine-location"><span>📍</span>Bonanjo, Douala</span>
+            <a href="vitrines/restaurant/index.html" class="vitrine-link" target="_blank">Voir le site →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cabinet Avocats -->
+      <div class="vitrine-card reveal reveal-delay-2">
+        <div class="vitrine-thumb" style="background:linear-gradient(135deg,#0D0D18 0%,#15152A 50%,#1E1E30 100%);">
+          <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(201,168,76,0.08),transparent 70%)"></div>
+          <div class="vitrine-thumb-emoji">⚖️</div>
+          <div class="vitrine-thumb-name" style="color:rgba(201,168,76,.85)">Nguema & Associés · Avocats</div>
+        </div>
+        <div class="vitrine-body">
+          <div class="vitrine-cat">Juridique · Site Vitrine</div>
+          <div class="vitrine-title">Nguema & Associés — Cabinet d'Avocats</div>
+          <p class="vitrine-desc">Site institutionnel sobre et élégant : 6 domaines d'expertise, présentation de l'équipe des 4 avocats, processus juridique et prise de rendez-vous.</p>
+          <div class="vitrine-tags">
+            <span class="vtag">Design Dark/Bronze</span>
+            <span class="vtag">Équipe & Expertise</span>
+            <span class="vtag">Prise de RDV</span>
+          </div>
+          <div class="vitrine-footer">
+            <span class="vitrine-location"><span>📍</span>Bastos, Yaoundé</span>
+            <a href="vitrines/avocats/index.html" class="vitrine-link" target="_blank">Voir le site →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Parfum -->
+      <div class="vitrine-card reveal">
+        <div class="vitrine-thumb" style="background:linear-gradient(135deg,#0D0008 0%,#180010 50%,#220018 100%);">
+          <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(200,104,138,0.12),transparent 70%)"></div>
+          <div class="vitrine-thumb-emoji">🌸</div>
+          <div class="vitrine-thumb-name" style="color:rgba(200,104,138,.85)">Lumière Boutique · Parfums</div>
+        </div>
+        <div class="vitrine-body">
+          <div class="vitrine-cat">Beauté & Luxe · Site Vitrine</div>
+          <div class="vitrine-title">Lumière Boutique — Parfums & Cosmétiques</div>
+          <p class="vitrine-desc">Site e-commerce vitrine luxueux avec 6 produits phares, catalogue collections, univers de marque africain et localisation 2 boutiques.</p>
+          <div class="vitrine-tags">
+            <span class="vtag">Design Dark/Rose</span>
+            <span class="vtag">Catalogue Produits</span>
+            <span class="vtag">Newsletter</span>
+          </div>
+          <div class="vitrine-footer">
+            <span class="vitrine-location"><span>📍</span>Yaoundé &amp; Douala</span>
+            <a href="vitrines/parfum/index.html" class="vitrine-link" target="_blank">Voir le site →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logistique -->
+      <div class="vitrine-card reveal reveal-delay-1">
+        <div class="vitrine-thumb" style="background:linear-gradient(135deg,#0A0F1A 0%,#0F1820 50%,#162030 100%);">
+          <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(230,81,0,0.1),transparent 70%)"></div>
+          <div class="vitrine-thumb-emoji">🚛</div>
+          <div class="vitrine-thumb-name" style="color:rgba(255,119,34,.85)">CamLogis · Transport & Logistique</div>
+        </div>
+        <div class="vitrine-body">
+          <div class="vitrine-cat">Logistique · Site Vitrine</div>
+          <div class="vitrine-title">CamLogis — Transport & Logistique Cameroun</div>
+          <p class="vitrine-desc">Site B2B professionnel avec 6 services détaillés, zones géographiques couvertes, KPIs entreprise et formulaire de demande de devis en ligne.</p>
+          <div class="vitrine-tags">
+            <span class="vtag">Design Dark/Orange</span>
+            <span class="vtag">B2B & Devis</span>
+            <span class="vtag">Couverture Nationale</span>
+          </div>
+          <div class="vitrine-footer">
+            <span class="vitrine-location"><span>📍</span>Bassa, Douala</span>
+            <a href="vitrines/logistique/index.html" class="vitrine-link" target="_blank">Voir le site →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dentiste -->
+      <div class="vitrine-card reveal reveal-delay-2">
+        <div class="vitrine-thumb" style="background:linear-gradient(135deg,#010E12 0%,#061418 50%,#0A2028 100%);">
+          <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(0,200,180,0.1),transparent 70%)"></div>
+          <div class="vitrine-thumb-emoji">🦷</div>
+          <div class="vitrine-thumb-name" style="color:rgba(64,224,208,.85)">Sourire Dentaire · Dr. Mbarga</div>
+        </div>
+        <div class="vitrine-body">
+          <div class="vitrine-cat">Santé · Site Vitrine</div>
+          <div class="vitrine-title">Sourire Dentaire — Cabinet Dr. Mbarga</div>
+          <p class="vitrine-desc">Site médical moderne avec 6 soins détaillés avec tarifs, présentation de l'équipe de 3 praticiens, certifications et prise de rendez-vous en ligne.</p>
+          <div class="vitrine-tags">
+            <span class="vtag">Design Dark/Teal</span>
+            <span class="vtag">Soins & Tarifs</span>
+            <span class="vtag">Prise de RDV</span>
+          </div>
+          <div class="vitrine-footer">
+            <span class="vitrine-location"><span>📍</span>Nlongkak, Yaoundé</span>
+            <a href="vitrines/dentiste/index.html" class="vitrine-link" target="_blank">Voir le site →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-box reveal">
+      <h2 class="section-title">Votre projet sera notre<br><span class="accent-gold">prochaine fierté</span></h2>
+      <p class="section-sub">Discutons de vos objectifs et construisons ensemble votre success story digitale.</p>
+      <div class="cta-actions">
+        <a href="contact.html" class="btn btn-gold">🚀 Démarrer mon projet</a>
+        <a href="services.html" class="btn btn-glass">Voir nos services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">ZELKTRIS</div>
+        <p class="footer-desc">L'agence digitale premium qui transforme les ambitions en réalités numériques.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn">in</a><a href="#" class="social-btn">𝕏</a>
+          <a href="#" class="social-btn">◉</a><a href="#" class="social-btn">●</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Services</h4><ul>
+        <li><a href="services.html">Web & Applications</a></li>
+        <li><a href="services.html">Mobile iOS & Android</a></li>
+        <li><a href="services.html">Intelligence Artificielle</a></li>
+        <li><a href="services.html">UI/UX Design</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Agence</h4><ul>
+        <li><a href="about.html">Notre histoire</a></li>
+        <li><a href="about.html">L'équipe</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul>
+        <li><a href="#">📍 Paris, France</a></li>
+        <li><a href="#">📞 +33 1 23 45 67 89</a></li>
+        <li><a href="#">✉️ hello@zelktris.agency</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Zelktris Agency. Tous droits réservés.</span>
+      <div class="footer-legal"><a href="#">Mentions légales</a><a href="#">Confidentialité</a><a href="#">RGPD</a></div>
+    </div>
+  </footer>
+</div>
+<script src="galaxy.js"></script>
+<script>
+  // Filter buttons interaction
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
+  <script src="chatbot.js"></script>
+</body>
+</html>
+
+

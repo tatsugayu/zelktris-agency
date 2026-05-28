@@ -1,0 +1,553 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CamLogis — Logistique & Transport | Douala, Cameroun</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@400;600;700;800&display=swap" media="print" onload="this.media='all'">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --dark:#0A0F1A;
+  --dark2:#0F1520;
+  --dark3:#161E2C;
+  --orange:#E65100;
+  --orange-lt:#FF7722;
+  --amber:#FFA040;
+  --blue:#1A3A5C;
+  --white:#F0F4F8;
+  --gray:#8A9AAA;
+  --font-head:'Barlow Condensed',sans-serif;
+  --font-body:'Barlow',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--white);font-family:var(--font-body);line-height:1.6;overflow-x:hidden}
+
+/* RIBBON */
+.ribbon{background:var(--orange);color:#fff;text-align:center;padding:.4rem 5%;font-size:.8rem;font-family:var(--font-body);font-weight:600;letter-spacing:.08em}
+.ribbon strong{color:var(--amber)}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:72px;background:rgba(10,15,26,0.97);border-bottom:1px solid rgba(230,81,0,0.2);backdrop-filter:blur(12px)}
+.nav-logo{display:flex;align-items:center;gap:.8rem;text-decoration:none}
+.nav-logo-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--orange),var(--amber));display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:900;color:#fff;font-family:var(--font-head);letter-spacing:-.02em}
+.nav-logo-text{font-family:var(--font-head);font-size:1.4rem;font-weight:800;color:var(--white);letter-spacing:.05em;line-height:1}
+.nav-logo-text span{display:block;font-size:.6rem;letter-spacing:.2em;color:var(--gray);font-weight:400;font-family:var(--font-body)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{color:var(--white);text-decoration:none;font-size:.9rem;font-weight:500;letter-spacing:.03em;transition:color .3s}
+.nav-links a:hover{color:var(--orange-lt)}
+.nav-cta{background:var(--orange);color:#fff;padding:.6rem 1.5rem;font-family:var(--font-body);font-size:.85rem;font-weight:700;letter-spacing:.05em;border:none;cursor:pointer;transition:all .3s;text-transform:uppercase}
+.nav-cta:hover{background:var(--orange-lt)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:26px;height:2px;background:var(--orange-lt)}
+
+/* HERO */
+.hero{min-height:95vh;display:flex;align-items:center;background:var(--dark2);position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='40' cy='40' r='1' fill='rgba(230,81,0,0.15)'/%3E%3C/svg%3E") repeat,linear-gradient(160deg,rgba(230,81,0,0.06) 0%,transparent 50%,rgba(26,58,92,0.2) 100%);pointer-events:none}
+.hero-inner{width:90%;max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1}
+.hero-kpi-strip{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.kpi-chip{background:rgba(230,81,0,0.15);border:1px solid rgba(230,81,0,0.3);padding:.3rem .9rem;font-size:.75rem;font-weight:700;color:var(--orange-lt);letter-spacing:.08em;text-transform:uppercase}
+.hero h1{font-family:var(--font-head);font-size:clamp(2.5rem,5vw,4.5rem);font-weight:900;line-height:1.0;color:var(--white);margin-bottom:1.2rem;text-transform:uppercase;letter-spacing:.02em}
+.hero h1 em{font-style:normal;color:var(--orange-lt);display:block}
+.hero-sub{font-size:1rem;color:var(--white);opacity:.75;margin-bottom:2rem;line-height:1.8;max-width:520px;font-weight:400}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-orange{background:var(--orange);color:#fff;padding:.9rem 2.2rem;font-family:var(--font-body);font-size:.95rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block}
+.btn-orange:hover{background:var(--orange-lt);transform:translateY(-2px)}
+.btn-border{border:2px solid rgba(230,81,0,0.5);color:var(--orange-lt);padding:.9rem 2.2rem;font-family:var(--font-body);font-size:.95rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:transparent;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block}
+.btn-border:hover{background:rgba(230,81,0,0.1)}
+.hero-visual{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.hero-stat{background:var(--dark3);border:1px solid rgba(230,81,0,0.15);padding:1.8rem;border-left:3px solid var(--orange);position:relative}
+.hero-stat-num{font-family:var(--font-head);font-size:2.5rem;font-weight:900;color:var(--orange-lt);display:block;line-height:1}
+.hero-stat-label{font-size:.8rem;color:var(--gray);text-transform:uppercase;letter-spacing:.1em;margin-top:.3rem;display:block}
+.hero-stat-icon{position:absolute;top:1.2rem;right:1.2rem;font-size:1.5rem;opacity:.3}
+
+/* SECTION */
+section{padding:5.5rem 5%}
+.section-inner{max-width:1200px;margin:0 auto}
+.section-label{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:var(--orange-lt);margin-bottom:.6rem;display:block;font-weight:600}
+.section-title{font-family:var(--font-head);font-size:clamp(1.8rem,3vw,3rem);font-weight:800;color:var(--white);margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.03em;line-height:1.1}
+.section-title em{font-style:normal;color:var(--orange-lt)}
+.section-line{width:50px;height:3px;background:var(--orange);margin-bottom:2.5rem}
+
+/* SERVICES */
+.services{background:var(--dark)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem}
+.service-card{background:var(--dark2);border:1px solid rgba(230,81,0,0.1);padding:2.5rem;position:relative;overflow:hidden;transition:all .4s;cursor:default}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--orange),var(--amber));transform:scaleX(0);transition:transform .4s}
+.service-card:hover{border-color:rgba(230,81,0,0.25);transform:translateY(-4px)}
+.service-card:hover::before{transform:scaleX(1)}
+.service-icon{font-size:2.8rem;display:block;margin-bottom:1.2rem}
+.service-card h3{font-family:var(--font-head);font-size:1.3rem;font-weight:800;color:var(--white);margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.04em}
+.service-card p{font-size:.9rem;color:var(--gray);line-height:1.7}
+.service-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.2rem}
+.stag{background:rgba(230,81,0,0.1);border:1px solid rgba(230,81,0,0.2);padding:.2rem .7rem;font-size:.7rem;color:var(--orange-lt);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+
+/* CHIFFRES */
+.chiffres{background:var(--dark2)}
+.chiffres-inner{display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:center}
+.chiffres-content p{color:var(--white);opacity:.8;line-height:1.8;margin-bottom:1.5rem;font-size:.95rem}
+.chiffres-list{list-style:none;display:flex;flex-direction:column;gap:.8rem}
+.chiffres-list li{display:flex;align-items:center;gap:.8rem;font-size:.9rem;color:var(--white);opacity:.85}
+.chiffres-list li::before{content:'▶';color:var(--orange);font-size:.6rem}
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+.stat-box{background:var(--dark3);border:1px solid rgba(230,81,0,0.15);padding:2rem;text-align:center;position:relative;overflow:hidden}
+.stat-box::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--orange),var(--amber))}
+.stat-num{font-family:var(--font-head);font-size:3rem;font-weight:900;color:var(--orange-lt);display:block;line-height:1}
+.stat-label{font-size:.8rem;color:var(--gray);text-transform:uppercase;letter-spacing:.12em;margin-top:.4rem;display:block}
+.stat-desc{font-size:.8rem;color:var(--white);opacity:.5;margin-top:.3rem;line-height:1.4}
+
+/* ZONES */
+.zones{background:var(--dark)}
+.zones-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem}
+.zone-card{background:var(--dark2);border:1px solid rgba(230,81,0,0.1);padding:2rem 1.5rem;text-align:center;transition:all .3s}
+.zone-card:hover{border-color:rgba(230,81,0,0.3);background:var(--dark3)}
+.zone-flag{font-size:2.5rem;display:block;margin-bottom:.8rem}
+.zone-card h3{font-family:var(--font-head);font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:.4rem;text-transform:uppercase}
+.zone-card p{font-size:.8rem;color:var(--gray);line-height:1.5}
+.zone-tag{display:inline-block;margin-top:.6rem;padding:.2rem .7rem;background:rgba(230,81,0,0.12);font-size:.7rem;color:var(--orange-lt);font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+
+/* PROCESS */
+.process{background:var(--dark2)}
+.process-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-top:3rem}
+.pstep{text-align:center;padding:1.5rem 1rem;position:relative}
+.pstep:not(:last-child)::after{content:'→';position:absolute;right:-10px;top:35px;color:var(--orange);font-size:1.2rem;font-weight:700}
+.pstep-num{width:70px;height:70px;background:rgba(230,81,0,0.12);border:2px solid var(--orange);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:1.4rem;font-weight:900;color:var(--orange-lt);margin:0 auto 1rem}
+.pstep h4{font-family:var(--font-head);font-size:.95rem;font-weight:700;color:var(--white);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.4rem}
+.pstep p{font-size:.78rem;color:var(--gray);line-height:1.5}
+
+/* CLIENTS */
+.clients{background:var(--dark)}
+.clients-logos{display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;margin-top:3rem}
+.client-logo{background:var(--dark2);border:1px solid rgba(230,81,0,0.1);padding:1.2rem 2.5rem;font-family:var(--font-head);font-size:1.1rem;font-weight:700;color:var(--gray);letter-spacing:.08em;text-transform:uppercase;transition:all .3s}
+.client-logo:hover{border-color:rgba(230,81,0,0.3);color:var(--white)}
+
+/* TEMOIGNAGES */
+.testimonials{background:var(--dark2)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem}
+.testi-card{background:var(--dark3);border:1px solid rgba(230,81,0,0.1);padding:2rem;border-left:3px solid var(--orange)}
+.testi-stars{color:var(--amber);font-size:.9rem;margin-bottom:1rem;display:block}
+.testi-text{font-size:.9rem;color:var(--white);opacity:.85;line-height:1.7;margin-bottom:1.5rem;font-style:italic}
+.testi-author{display:flex;align-items:center;gap.8rem}
+.testi-avatar{width:44px;height:44px;background:linear-gradient(135deg,var(--orange),var(--amber));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:900;color:#fff;margin-right:.8rem;flex-shrink:0}
+.testi-info strong{color:var(--white);font-size:.9rem;display:block;font-family:var(--font-head);text-transform:uppercase;letter-spacing:.04em}
+.testi-info span{font-size:.75rem;color:var(--orange-lt)}
+
+/* CONTACT */
+.contact{background:var(--dark)}
+.contact-inner{display:grid;grid-template-columns:1fr 1.3fr;gap:5rem;align-items:start}
+.contact-info h2{font-family:var(--font-head);font-size:2rem;font-weight:800;color:var(--white);text-transform:uppercase;letter-spacing:.04em;margin-bottom:1rem}
+.contact-info>p{color:var(--white);opacity:.75;margin-bottom:2rem;line-height:1.8}
+.contact-items{display:flex;flex-direction:column;gap:1.2rem}
+.c-item{display:flex;gap:1rem;align-items:flex-start}
+.c-icon-box{width:44px;height:44px;background:rgba(230,81,0,0.12);border:1px solid rgba(230,81,0,0.3);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.c-item strong{display:block;color:var(--orange-lt);font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:.2rem}
+.c-item span{color:var(--gray);font-size:.85rem;line-height:1.5}
+.contact-form{background:var(--dark2);border:1px solid rgba(230,81,0,0.15);padding:2.5rem;border-top:3px solid var(--orange)}
+.contact-form h3{font-family:var(--font-head);color:var(--orange-lt);font-size:1.3rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin-bottom:1.5rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-group{margin-bottom:1.2rem}
+.form-group label{display:block;font-size:.75rem;color:var(--orange-lt);letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin-bottom:.5rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--dark3);border:1px solid rgba(230,81,0,0.2);color:var(--white);padding:.8rem 1rem;font-family:var(--font-body);font-size:.9rem;outline:none;transition:border-color .3s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--orange-lt)}
+.form-group textarea{resize:vertical;min-height:110px}
+.form-group select option{background:var(--dark2)}
+.form-submit{background:var(--orange);color:#fff;padding:.9rem 2rem;font-family:var(--font-body);font-size:.9rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;transition:all .3s;width:100%}
+.form-submit:hover{background:var(--orange-lt)}
+
+/* FOOTER */
+footer{background:var(--dark2);border-top:1px solid rgba(230,81,0,0.12);padding:3rem 5% 1.5rem}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:2rem;border-bottom:1px solid rgba(230,81,0,0.08)}
+.footer-logo-block{display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem}
+.footer-icon{width:40px;height:40px;background:linear-gradient(135deg,var(--orange),var(--amber));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:1.2rem;font-weight:900;color:#fff}
+.footer-name{font-family:var(--font-head);font-size:1.3rem;font-weight:800;color:var(--white);text-transform:uppercase}
+.footer-brand p{font-size:.85rem;color:var(--gray);line-height:1.7;max-width:270px}
+.footer-col h4{font-family:var(--font-head);color:var(--orange-lt);font-size:.95rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:1.2rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.footer-col ul li a{color:var(--gray);text-decoration:none;font-size:.85rem;transition:color .3s}
+.footer-col ul li a:hover{color:var(--orange-lt)}
+.footer-bottom{max-width:1200px;margin:1.5rem auto 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-bottom p{font-size:.8rem;color:var(--gray)}
+.ZELKTRIS-credit a{color:var(--orange-lt);text-decoration:none}
+
+@media(max-width:1024px){
+  .services-grid{grid-template-columns:repeat(2,1fr)}
+  .zones-grid{grid-template-columns:repeat(2,1fr)}
+  .process-steps{grid-template-columns:repeat(3,1fr)}
+  .footer-inner{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .hero-inner,.chiffres-inner,.contact-inner{grid-template-columns:1fr}
+  .hero-visual{grid-template-columns:1fr 1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .services-grid,.testi-grid{grid-template-columns:1fr}
+  .zones-grid{grid-template-columns:1fr 1fr}
+  .process-steps{grid-template-columns:1fr 1fr}
+  .pstep:not(:last-child)::after{display:none}
+  .form-row{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- RIBBON -->
+<div class="ribbon">🚚 Livraisons sur tout le Cameroun — Douala · Yaoundé · Bafoussam · Garoua · Ngaoundéré — <strong>Devis gratuit en 2h</strong></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">CL</div>
+    <div class="nav-logo-text">CamLogis<span>Logistique & Transport · Douala</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#zones">Zones</a></li>
+    <li><a href="#process">Notre Méthode</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Demander un Devis</button>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-kpi-strip">
+        <span class="kpi-chip">ISO 9001:2015</span>
+        <span class="kpi-chip">15 ans d'expertise</span>
+        <span class="kpi-chip">+12 villes couvertes</span>
+      </div>
+      <h1>La Logistique <em>au Rythme de l'Afrique</em></h1>
+      <p class="hero-sub">Transport de marchandises, entreposage et supply chain management pour les entreprises du Cameroun et d'Afrique centrale. Fiabilité et ponctualité garanties.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-orange">Demander un Devis</a>
+        <a href="#services" class="btn-border">Nos Services</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-stat"><span class="hero-stat-num">500+</span><span class="hero-stat-label">Clients actifs</span><span class="hero-stat-icon">🏢</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">150+</span><span class="hero-stat-label">Véhicules</span><span class="hero-stat-icon">🚛</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">15</span><span class="hero-stat-label">Ans d'expertise</span><span class="hero-stat-icon">📅</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">99%</span><span class="hero-stat-label">Taux de ponctualité</span><span class="hero-stat-icon">⏱️</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-inner">
+    <span class="section-label">Ce Que Nous Faisons</span>
+    <h2 class="section-title">Nos <em>Services</em> Logistiques</h2>
+    <div class="section-line"></div>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-icon">🚛</span>
+        <h3>Transport Routier</h3>
+        <p>Flotte de camions poids lourds, semi-remorques et véhicules légers pour tous types de marchandises sur tout le réseau routier camerounais et sous-régional.</p>
+        <div class="service-tags"><span class="stag">Groupage</span><span class="stag">Affrètement</span><span class="stag">Express</span></div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🏭</span>
+        <h3>Entreposage & Stockage</h3>
+        <p>Entrepôts sécurisés à Douala (15 000 m²) et Yaoundé (8 000 m²). Gestion des stocks, préparation de commandes et distribution cross-docking.</p>
+        <div class="service-tags"><span class="stag">Frigorifique</span><span class="stag">Sécurisé</span><span class="stag">WMS</span></div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🚢</span>
+        <h3>Transit & Douane</h3>
+        <p>Commissionnaire agréé en douane. Dédouanement import/export au Port de Douala, assistance administrative complète et suivi en temps réel.</p>
+        <div class="service-tags"><span class="stag">Import</span><span class="stag">Export</span><span class="stag">OEA</span></div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">✈️</span>
+        <h3>Fret Aérien</h3>
+        <p>Expéditions urgentes via les aéroports de Douala et Yaoundé. Partenariats avec les principales compagnies cargo pour vos colis sensibles et délicats.</p>
+        <div class="service-tags"><span class="stag">Urgent</span><span class="stag">Précieux</span><span class="stag">Fragile</span></div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🔗</span>
+        <h3>Supply Chain</h3>
+        <p>Optimisation complète de votre chaîne d'approvisionnement. Conseil, mise en place et pilotage de solutions logistiques sur mesure pour PME et grandes entreprises.</p>
+        <div class="service-tags"><span class="stag">Conseil</span><span class="stag">Optimisation</span><span class="stag">KPI</span></div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">📦</span>
+        <h3>Livraison Last Mile</h3>
+        <p>Distribution finale de colis B2B et B2C à Douala et Yaoundé. Tracking en temps réel, preuve de livraison et retours gérés efficacement.</p>
+        <div class="service-tags"><span class="stag">B2C</span><span class="stag">Tracking</span><span class="stag">J+1</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHIFFRES -->
+<section class="chiffres">
+  <div class="section-inner chiffres-inner">
+    <div class="chiffres-content">
+      <span class="section-label">Notre Force</span>
+      <h2 class="section-title">Leader <em>Logistique</em> au Cameroun</h2>
+      <div class="section-line"></div>
+      <p>Depuis 2009, CamLogis s'est imposé comme l'acteur logistique de référence en Afrique centrale. Notre infrastructure moderne et notre expertise du terrain camerounais nous permettent de garantir des prestations fiables et compétitives.</p>
+      <ul class="chiffres-list">
+        <li>Flotte propre de 150+ véhicules en GPS temps réel</li>
+        <li>Entrepôts certifiés normes européennes</li>
+        <li>Agrément commissionnaire en douane N° DLA-2010-0154</li>
+        <li>Certifié ISO 9001:2015 – Management de la Qualité</li>
+      </ul>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <span class="stat-num">50 000+</span>
+        <span class="stat-label">Livraisons / an</span>
+        <span class="stat-desc">Marchandises livrées à l'heure</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">23 000 m²</span>
+        <span class="stat-label">Surface d'entrepôts</span>
+        <span class="stat-desc">DLA + YAO combinés</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">12+</span>
+        <span class="stat-label">Villes desservies</span>
+        <span class="stat-desc">Réseau national complet</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">300+</span>
+        <span class="stat-label">Collaborateurs</span>
+        <span class="stat-desc">Équipes formées & certifiées</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ZONES -->
+<section class="zones" id="zones">
+  <div class="section-inner">
+    <span class="section-label">Couverture Géographique</span>
+    <h2 class="section-title">Zones <em>Desservies</em></h2>
+    <div class="section-line"></div>
+    <div class="zones-grid">
+      <div class="zone-card">
+        <span class="zone-flag">🏙️</span>
+        <h3>Douala & Littoral</h3>
+        <p>Hub principal, Port autonome, Zone industrielle de Bonabéri, Bassa</p>
+        <span class="zone-tag">Hub Principal</span>
+      </div>
+      <div class="zone-card">
+        <span class="zone-flag">🏛️</span>
+        <h3>Yaoundé & Centre</h3>
+        <p>Capitale politique, Mfoundi, Mbalmayo, Obala, Nanga-Eboko</p>
+        <span class="zone-tag">Hub Secondaire</span>
+      </div>
+      <div class="zone-card">
+        <span class="zone-flag">⛰️</span>
+        <h3>Ouest & Littoral</h3>
+        <p>Bafoussam, Bafia, Foumban, Dschang, Mbouda</p>
+        <span class="zone-tag">Desserte Régulière</span>
+      </div>
+      <div class="zone-card">
+        <span class="zone-flag">🌍</span>
+        <h3>Nord & Extrême-Nord</h3>
+        <p>Garoua, Ngaoundéré, Maroua, Kousseri, Figuil</p>
+        <span class="zone-tag">Transit & Douane</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="section-inner">
+    <span class="section-label">Notre Méthode</span>
+    <h2 class="section-title">De la <em>Commande</em> à la Livraison</h2>
+    <div class="section-line"></div>
+    <div class="process-steps">
+      <div class="pstep">
+        <div class="pstep-num">1</div>
+        <h4>Demande de Devis</h4>
+        <p>Analyse de votre besoin et chiffrage personnalisé sous 2h ouvrées.</p>
+      </div>
+      <div class="pstep">
+        <div class="pstep-num">2</div>
+        <h4>Enlèvement</h4>
+        <p>Prise en charge de votre marchandise avec documents de transport.</p>
+      </div>
+      <div class="pstep">
+        <div class="pstep-num">3</div>
+        <h4>Traitement</h4>
+        <p>Tri, conditionnement et préparation dans nos entrepôts certifiés.</p>
+      </div>
+      <div class="pstep">
+        <div class="pstep-num">4</div>
+        <h4>Transit/Transport</h4>
+        <p>Acheminement par la voie la plus optimale avec tracking GPS live.</p>
+      </div>
+      <div class="pstep">
+        <div class="pstep-num">5</div>
+        <h4>Livraison + Preuve</h4>
+        <p>Remise au destinataire et émission du bon de livraison électronique.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section class="clients">
+  <div class="section-inner">
+    <span class="section-label">Ils Nous Font Confiance</span>
+    <h2 class="section-title">Nos <em>Partenaires</em></h2>
+    <div class="section-line"></div>
+    <div class="clients-logos">
+      <div class="client-logo">SCDP Cameroun</div>
+      <div class="client-logo">Total Energies CM</div>
+      <div class="client-logo">Groupe Noutchom</div>
+      <div class="client-logo">BGFI Bank</div>
+      <div class="client-logo">Socapalm</div>
+      <div class="client-logo">Guinness Cameroun</div>
+    </div>
+  </div>
+</section>
+
+<!-- TEMOIGNAGES -->
+<section class="testimonials">
+  <div class="section-inner">
+    <span class="section-label">Témoignages</span>
+    <h2 class="section-title">Ce Que Disent <em>Nos Clients</em></h2>
+    <div class="section-line"></div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <span class="testi-stars">★★★★★</span>
+        <p class="testi-text">« CamLogis assure notre distribution sur tout le Cameroun depuis 5 ans. Ponctualité impeccable et traçabilité parfaite de chaque expédition. »</p>
+        <div class="testi-author">
+          <div class="testi-avatar">DE</div>
+          <div class="testi-info"><strong>Directeur Ekani</strong><span>Responsable Supply Chain, Groupe Noutchom</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <span class="testi-stars">★★★★★</span>
+        <p class="testi-text">« Leur expertise douanière au Port de Douala nous a fait économiser temps et argent. Des commissionnaires professionnels qui maîtrisent les procédures à la perfection. »</p>
+        <div class="testi-author">
+          <div class="testi-avatar">MB</div>
+          <div class="testi-info"><strong>M. Bilounga</strong><span>Import Manager, Société Camerounaise des Plastiques</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <span class="testi-stars">★★★★★</span>
+        <p class="testi-text">« L'entrepôt frigorifique de Douala est parfait pour nos produits agroalimentaires. Températures maîtrisées et accès 24h/24 pour nos besoins urgents. »</p>
+        <div class="testi-author">
+          <div class="testi-avatar">SF</div>
+          <div class="testi-info"><strong>S. Fotso</strong><span>PDG, Cameroon Fresh Foods</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-inner contact-inner">
+    <div class="contact-info">
+      <span class="section-label">Nous Contacter</span>
+      <h2>Demandez un Devis</h2>
+      <p>Réponse garantie sous 2 heures ouvrées. Notre équipe commerciale analyse votre besoin et vous propose la solution optimale.</p>
+      <div class="contact-items">
+        <div class="c-item"><div class="c-icon-box">📍</div><div><strong>Siège Social</strong><span>Zone Industrielle de Bassa, Rue des Entrepôts<br>BP 4521, Douala, Cameroun</span></div></div>
+        <div class="c-item"><div class="c-icon-box">📞</div><div><strong>Commercial</strong><span>+237 233 50 00 11<br>+237 699 50 00 22 (WhatsApp)</span></div></div>
+        <div class="c-item"><div class="c-icon-box">✉️</div><div><strong>Email</strong><span>devis@camlogis.cm<br>ops@camlogis.cm</span></div></div>
+        <div class="c-item"><div class="c-icon-box">⏰</div><div><strong>Disponibilité</strong><span>Lun–Ven : 07h30–18h00<br>Sam : 08h00–13h00 · Urgences 24h/7j</span></div></div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <h3>Formulaire de Devis</h3>
+      <div class="form-row">
+        <div class="form-group"><label>Société / Nom</label><input type="text" placeholder="Groupe Mbarga SARL"></div>
+        <div class="form-group"><label>Contact</label><input type="text" placeholder="Prénom Nom"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Téléphone</label><input type="tel" placeholder="+237 6XX XX XX XX"></div>
+        <div class="form-group"><label>Email</label><input type="email" placeholder="contact@societe.cm"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Service Souhaité</label>
+          <select>
+            <option>-- Type de service --</option>
+            <option>Transport routier national</option>
+            <option>Transit & dédouanement</option>
+            <option>Entreposage & stockage</option>
+            <option>Fret aérien</option>
+            <option>Supply chain management</option>
+            <option>Last mile delivery</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Volume Estimé</label>
+          <select>
+            <option>-- Volume/Poids --</option>
+            <option>Moins de 500 kg</option>
+            <option>500 kg – 5 tonnes</option>
+            <option>5 – 20 tonnes</option>
+            <option>Plus de 20 tonnes</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"><label>Description du Besoin</label><textarea placeholder="Décrivez votre marchandise, l'origine et la destination, les délais souhaités..."></textarea></div>
+      <button class="form-submit" onclick="this.textContent='Demande envoyée ✓';this.style.background='#4CAF50'">Envoyer ma Demande de Devis</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo-block"><div class="footer-icon">CL</div><div class="footer-name">CamLogis</div></div>
+      <p>Votre partenaire logistique de confiance au Cameroun depuis 2009. Transport, entreposage et supply chain pour les entreprises exigeantes.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">Transport Routier</a></li>
+        <li><a href="#">Entreposage</a></li>
+        <li><a href="#">Transit & Douane</a></li>
+        <li><a href="#">Fret Aérien</a></li>
+        <li><a href="#">Last Mile</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Entreprise</h4>
+      <ul>
+        <li><a href="#">À Propos</a></li>
+        <li><a href="#">Certifications</a></li>
+        <li><a href="#">Notre Flotte</a></li>
+        <li><a href="#">Carrières</a></li>
+        <li><a href="#">Actualités</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="#">Bassa, Douala</a></li>
+        <li><a href="#">+237 233 50 00 11</a></li>
+        <li><a href="#">devis@camlogis.cm</a></li>
+        <li><a href="#">Demander un devis</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 CamLogis SARL. Tous droits réservés. · RCCM Douala N° DLA-2009-B-0892 · Agrément Douanier N° DLA-2010-0154</p>
+    <p class="ZELKTRIS-credit">Site réalisé par <a href="#">Zelktris Agency</a></p>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){
+  const links=document.querySelector('.nav-links');
+  if(links) links.style.display=links.style.display==='flex'?'none':'flex';
+}
+</script>
+</body>
+</html>

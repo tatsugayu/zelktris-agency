@@ -1,0 +1,686 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Zelktris Agency — Contactez-nous pour un devis gratuit, une démo ou une consultation avec nos experts digitaux.">
+  <title>Contact — Zelktris Agency</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .contact-section { padding: 60px 5% 100px; }
+    .contact-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 60px;
+      align-items: start;
+    }
+    /* Left panel */
+    .contact-left {}
+    .contact-left h2 {
+      font-family: var(--font-head);
+      font-size: 2.4rem;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--white), var(--blue-lt));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .contact-left p {
+      font-size: 0.95rem;
+      color: rgba(240,240,255,0.6);
+      line-height: 1.75;
+      margin-bottom: 36px;
+    }
+    .contact-details { display: flex; flex-direction: column; gap: 16px; margin-bottom: 36px; }
+    .c-detail {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      padding: 18px 20px;
+    }
+    .c-detail-icon {
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .c-detail-icon.blue   { background: rgba(0,102,255,0.12); border: 1px solid rgba(0,102,255,0.2); }
+    .c-detail-icon.violet { background: rgba(139,0,255,0.12); border: 1px solid rgba(139,0,255,0.2); }
+    .c-detail-icon.gold   { background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.15); }
+    .c-detail-text h4 { font-size: 0.82rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(240,240,255,0.5); margin-bottom: 3px; }
+    .c-detail-text p  { font-size: 0.95rem; color: var(--white); font-weight: 500; }
+    .c-detail-text a  { font-size: 0.95rem; color: var(--blue-lt); font-weight: 500; text-decoration: none; transition: color 0.3s; }
+    .c-detail-text a:hover { color: var(--white); }
+
+    .contact-socials-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+    .contact-social-btn {
+      padding: 10px 20px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: rgba(240,240,255,0.6);
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .contact-social-btn:hover { border-color: var(--blue); color: var(--blue-lt); background: rgba(0,102,255,0.08); }
+
+    /* Map placeholder */
+    .map-placeholder {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--glass-border);
+      background: linear-gradient(135deg, rgba(0,102,255,0.06), rgba(139,0,255,0.08));
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-align: center;
+      padding: 24px;
+    }
+    .map-placeholder span { font-size: 2.5rem; }
+    .map-placeholder p { font-size: 0.85rem; color: rgba(240,240,255,0.5); }
+    .map-placeholder strong { color: var(--gold); }
+
+    /* Right — Form */
+    .form-box {
+      padding: 48px 44px;
+    }
+    .form-header { margin-bottom: 36px; }
+    .form-header h3 {
+      font-family: var(--font-head);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .form-header p { font-size: 0.9rem; color: rgba(240,240,255,0.55); }
+
+    .project-type-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+    .type-btn {
+      padding: 12px 8px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: rgba(240,240,255,0.55);
+      cursor: pointer;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .type-btn:hover, .type-btn.selected {
+      background: rgba(0,102,255,0.12);
+      border-color: rgba(0,102,255,0.35);
+      color: var(--blue-lt);
+    }
+    .type-btn .type-icon { display: block; font-size: 1.3rem; margin-bottom: 5px; }
+
+    .budget-slider-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .budget-chip {
+      padding: 8px 16px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: rgba(240,240,255,0.5);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .budget-chip:hover, .budget-chip.selected {
+      background: rgba(255,215,0,0.08);
+      border-color: rgba(255,215,0,0.3);
+      color: var(--gold);
+    }
+
+    .form-submit-area { margin-top: 8px; }
+    .form-submit-area .btn { width: 100%; justify-content: center; padding: 16px; font-size: 1rem; }
+    .form-consent {
+      margin-top: 14px;
+      font-size: 0.78rem;
+      color: rgba(240,240,255,0.35);
+      text-align: center;
+      line-height: 1.6;
+    }
+    .form-consent a { color: var(--blue-lt); text-decoration: none; }
+
+    /* Success message (hidden by default) */
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 60px 40px;
+    }
+    .form-success.visible { display: block; }
+    .success-icon { font-size: 4rem; margin-bottom: 20px; }
+    .success-title {
+      font-family: var(--font-head);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .success-msg { font-size: 0.95rem; color: rgba(240,240,255,0.6); line-height: 1.7; }
+
+    /* Office hours card */
+    .hours-card { padding: 24px; margin-top: 20px; }
+    .hours-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--glass-border); font-size: 0.88rem; }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-day { color: rgba(240,240,255,0.55); }
+    .hours-time { color: var(--white); font-weight: 600; }
+    .hours-time.closed { color: rgba(240,240,255,0.3); }
+
+    @media (max-width: 900px) {
+      .contact-wrapper { grid-template-columns: 1fr; }
+      .form-box { padding: 32px 24px; }
+      .project-type-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+<canvas id="galaxy-canvas"></canvas>
+<div class="page-wrapper">
+
+  <header class="navbar">
+    <a href="index.html" class="nav-logo">ZEL<span>KTRIS</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="about.html">Agence</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="blog.html">Insights</a></li>
+      <li><a href="contact.html" class="nav-cta">Devis Gratuit</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </header>
+  <div class="mobile-menu">
+    <nav>
+      <a href="index.html">Accueil</a><a href="about.html">Agence</a>
+      <a href="services.html">Services</a><a href="portfolio.html">Portfolio</a>
+      <a href="blog.html">Insights</a><a href="contact.html">Devis Gratuit →</a>
+    </nav>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="hero-orb hero-orb-1" style="opacity:0.4;"></div>
+    <div class="hero-orb hero-orb-2" style="opacity:0.3;"></div>
+    <div class="breadcrumb reveal"><a href="index.html">Accueil</a> <span>/</span> Contact</div>
+    <h1 class="page-header-title reveal reveal-delay-1">Parlons de votre projet</h1>
+    <p class="page-header-sub reveal reveal-delay-2">Réponse garantie en moins de 24h. Consultation initiale gratuite et sans engagement.</p>
+  </div>
+
+  <!-- CONTACT SECTION -->
+  <section class="contact-section">
+    <div class="contact-wrapper">
+
+      <!-- LEFT -->
+      <div class="contact-left reveal">
+        <div class="section-tag" style="margin-bottom:16px;">Nous joindre</div>
+        <h2>Construisons quelque chose d'<span style="-webkit-text-fill-color:var(--gold);background:none;">exceptionnel</span></h2>
+        <p>Que vous ayez un projet précis ou simplement envie d'explorer les possibilités, notre équipe est disponible pour une consultation gratuite de 30 minutes.</p>
+
+        <div class="contact-details">
+          <div class="glass-card c-detail">
+            <div class="c-detail-icon blue">📍</div>
+            <div class="c-detail-text">
+              <h4>Adresse</h4>
+              <p>Bastos, Yaoundé — Cameroun<br><small style="color:rgba(240,240,255,0.4)">+ Antenne à Douala & Paris</small></p>
+            </div>
+          </div>
+          <div class="glass-card c-detail">
+            <div class="c-detail-icon violet">📞</div>
+            <div class="c-detail-text">
+              <h4>Téléphone / WhatsApp</h4>
+              <a href="tel:+237690123456">+237 690 12 34 56</a>
+            </div>
+          </div>
+          <div class="glass-card c-detail">
+            <div class="c-detail-icon gold">✉️</div>
+            <div class="c-detail-text">
+              <h4>Email</h4>
+              <a href="mailto:hello@zelktris.agency">hello@zelktris.agency</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-socials-row">
+          <a href="#" class="contact-social-btn">in LinkedIn</a>
+          <a href="#" class="contact-social-btn">𝕏 Twitter</a>
+          <a href="#" class="contact-social-btn">◉ Instagram</a>
+        </div>
+
+        <!-- Hours -->
+        <div class="glass-card hours-card">
+          <div style="font-family:var(--font-head);font-size:0.82rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--white);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--glass-border);">🕐 Horaires</div>
+          <div class="hours-row"><span class="hours-day">Lundi — Vendredi</span><span class="hours-time">9h00 — 18h30</span></div>
+          <div class="hours-row"><span class="hours-day">Samedi</span><span class="hours-time">Sur RDV</span></div>
+          <div class="hours-row"><span class="hours-day">Dimanche</span><span class="hours-time closed">Fermé</span></div>
+        </div>
+
+        <!-- Map -->
+        <div class="map-placeholder" style="margin-top:20px;">
+          <span>🌍</span>
+          <p><strong>Zelktris Agency</strong><br>Bastos, Yaoundé, Cameroun<br><span style="color:var(--gold);font-size:0.8rem;">Clients dans 15+ pays africains</span></p>
+          <a href="https://wa.me/237690123456" target="_blank" rel="noopener" class="btn btn-glass" style="font-size:0.82rem;padding:8px 18px;">💬 WhatsApp Rapide →</a>
+        </div>
+
+        <!-- Estimateur de prix -->
+        <div class="glass-card" style="padding:24px;margin-top:20px;">
+          <div style="font-family:var(--font-head);font-size:0.82rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">💰 Estimation rapide</div>
+          <div id="priceEstimate" style="font-size:1.5rem;font-weight:700;color:var(--white);margin-bottom:4px;">350 000 – 700 000 FCFA</div>
+          <div id="priceDesc" style="font-size:0.78rem;color:rgba(240,240,255,0.5);">Site Web · Complexité standard</div>
+          <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--glass-border);">
+            <div style="font-size:0.75rem;color:rgba(240,240,255,0.4);">Maintenance après livraison :</div>
+            <div id="maintenanceEstimate" style="font-size:0.9rem;color:var(--blue-lt);font-weight:600;margin-top:3px;">dès 35 000 FCFA/mois</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT — FORM -->
+      <div class="glass-card form-box reveal reveal-delay-2">
+        <div id="contactFormContainer">
+          <div class="form-header">
+            <h3>Décrivez votre projet</h3>
+            <p>Remplissez ce formulaire et recevez une proposition personnalisée sous 24h.</p>
+          </div>
+
+          <form id="contactForm" onsubmit="handleSubmit(event)" novalidate>
+            <!-- Type de projet -->
+            <div class="form-group">
+              <label>Type de projet</label>
+              <div class="project-type-grid">
+                <button type="button" class="type-btn selected" onclick="selectType(this)">
+                  <span class="type-icon">🌐</span>Site Web
+                </button>
+                <button type="button" class="type-btn" onclick="selectType(this)">
+                  <span class="type-icon">📱</span>Application Mobile
+                </button>
+                <button type="button" class="type-btn" onclick="selectType(this)">
+                  <span class="type-icon">🤖</span>IA / Automatisation
+                </button>
+                <button type="button" class="type-btn" onclick="selectType(this)">
+                  <span class="type-icon">🎨</span>Design UX/UI
+                </button>
+                <button type="button" class="type-btn" onclick="selectType(this)">
+                  <span class="type-icon">📈</span>Growth / SEO
+                </button>
+                <button type="button" class="type-btn" onclick="selectType(this)">
+                  <span class="type-icon">☁️</span>Cloud / DevOps
+                </button>
+              </div>
+            </div>
+
+            <!-- Nom & Société -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">Prénom & Nom *</label>
+                <input type="text" id="fname" name="fname" placeholder="Alexandre Martin" required>
+              </div>
+              <div class="form-group">
+                <label for="company">Société *</label>
+                <input type="text" id="company" name="company" placeholder="Votre entreprise" required>
+              </div>
+            </div>
+
+            <!-- Email & Téléphone avec sélecteur pays -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email professionnel *</label>
+                <input type="email" id="email" name="email" placeholder="vous@societe.cm" required>
+              </div>
+              <div class="form-group">
+                <label>Téléphone / WhatsApp</label>
+                <div style="display:flex;gap:6px;">
+                  <select id="phoneCountry" name="phoneCountry" style="width:130px;flex-shrink:0;font-size:0.82rem;padding-right:4px;">
+                    <option value="+237">🇨🇲 +237</option>
+                    <option value="+221">🇸🇳 +221</option>
+                    <option value="+225">🇨🇮 +225</option>
+                    <option value="+233">🇬🇭 +233</option>
+                    <option value="+234">🇳🇬 +234</option>
+                    <option value="+241">🇬🇦 +241</option>
+                    <option value="+242">🇨🇬 +242</option>
+                    <option value="+243">🇨🇩 +243</option>
+                    <option value="+229">🇧🇯 +229</option>
+                    <option value="+228">🇹🇬 +228</option>
+                    <option value="+226">🇧🇫 +226</option>
+                    <option value="+223">🇲🇱 +223</option>
+                    <option value="+224">🇬🇳 +224</option>
+                    <option value="+250">🇷🇼 +250</option>
+                    <option value="+254">🇰🇪 +254</option>
+                    <option value="+256">🇺🇬 +256</option>
+                    <option value="+255">🇹🇿 +255</option>
+                    <option value="+27">🇿🇦 +27</option>
+                    <option value="+212">🇲🇦 +212</option>
+                    <option value="+213">🇩🇿 +213</option>
+                    <option value="+216">🇹🇳 +216</option>
+                    <option value="+20">🇪🇬 +20</option>
+                    <option value="+33">🇫🇷 +33</option>
+                    <option value="+32">🇧🇪 +32</option>
+                    <option value="+41">🇨🇭 +41</option>
+                  </select>
+                  <input type="tel" id="phone" name="phone" placeholder="6XX XX XX XX" style="flex:1;">
+                </div>
+              </div>
+            </div>
+
+            <!-- Budget en FCFA -->
+            <div class="form-group">
+              <label>Budget estimé (FCFA)</label>
+              <div class="budget-slider-row">
+                <span class="budget-chip" onclick="selectBudget(this)" data-budget="micro">< 200K</span>
+                <span class="budget-chip selected" onclick="selectBudget(this)" data-budget="small">200K – 600K</span>
+                <span class="budget-chip" onclick="selectBudget(this)" data-budget="medium">600K – 2M</span>
+                <span class="budget-chip" onclick="selectBudget(this)" data-budget="large">2M – 8M</span>
+                <span class="budget-chip" onclick="selectBudget(this)" data-budget="enterprise">8M+</span>
+                <span class="budget-chip" onclick="selectBudget(this)" data-budget="quote">Sur devis</span>
+              </div>
+            </div>
+
+            <!-- Maintenance après livraison -->
+            <div class="form-group">
+              <label>Maintenance après livraison</label>
+              <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;" id="maintenanceGrid">
+                <div class="maintenance-card" data-plan="none" onclick="selectMaintenance(this)" style="padding:12px;border:1px solid var(--glass-border);border-radius:var(--radius);cursor:pointer;transition:var(--transition);">
+                  <div style="font-size:0.82rem;font-weight:700;color:rgba(240,240,255,0.7);">Pas de maintenance</div>
+                  <div style="font-size:0.75rem;color:rgba(240,240,255,0.4);">Je gère en interne</div>
+                </div>
+                <div class="maintenance-card selected-maintenance" data-plan="starter" onclick="selectMaintenance(this)" style="padding:12px;border:1px solid rgba(0,102,255,0.35);background:rgba(0,102,255,0.08);border-radius:var(--radius);cursor:pointer;transition:var(--transition);">
+                  <div style="font-size:0.82rem;font-weight:700;color:var(--blue-lt);">Starter — 35K FCFA/mois</div>
+                  <div style="font-size:0.75rem;color:rgba(240,240,255,0.4);">Hébergement + SSL + monitoring</div>
+                </div>
+                <div class="maintenance-card" data-plan="standard" onclick="selectMaintenance(this)" style="padding:12px;border:1px solid var(--glass-border);border-radius:var(--radius);cursor:pointer;transition:var(--transition);">
+                  <div style="font-size:0.82rem;font-weight:700;color:rgba(240,240,255,0.7);">Standard — 85K FCFA/mois</div>
+                  <div style="font-size:0.75rem;color:rgba(240,240,255,0.4);">+ Mises à jour + 2h support</div>
+                </div>
+                <div class="maintenance-card" data-plan="premium" onclick="selectMaintenance(this)" style="padding:12px;border:1px solid var(--glass-border);border-radius:var(--radius);cursor:pointer;transition:var(--transition);">
+                  <div style="font-size:0.82rem;font-weight:700;color:rgba(240,240,255,0.7);">Premium — 180K FCFA/mois</div>
+                  <div style="font-size:0.75rem;color:rgba(240,240,255,0.4);">+ SEO + rapport + 5h support</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Délai -->
+            <div class="form-group">
+              <label for="deadline">Délai souhaité</label>
+              <select id="deadline" name="deadline">
+                <option value="">Sélectionner...</option>
+                <option>Urgent (< 1 mois)</option>
+                <option>Court terme (1 – 3 mois)</option>
+                <option>Moyen terme (3 – 6 mois)</option>
+                <option>Long terme (6 mois+)</option>
+                <option>Pas encore défini</option>
+              </select>
+            </div>
+
+            <!-- Message -->
+            <div class="form-group">
+              <label for="message">Décrivez votre projet *</label>
+              <textarea id="message" name="message" placeholder="Décrivez vos objectifs, votre cible, vos contraintes techniques... Plus vous êtes précis, meilleure sera notre proposition !" required></textarea>
+            </div>
+
+            <!-- Comment nous avez-vous trouvé -->
+            <div class="form-group">
+              <label for="source">Comment nous avez-vous trouvé ?</label>
+              <select id="source" name="source">
+                <option value="">Sélectionner...</option>
+                <option>Google / Recherche web</option>
+                <option>LinkedIn</option>
+                <option>Recommandation</option>
+                <option>Réseaux sociaux</option>
+                <option>Appel d'offres</option>
+                <option>Autre</option>
+              </select>
+            </div>
+
+            <div class="form-submit-area">
+              <button type="submit" class="btn btn-primary">
+                🚀 Envoyer ma demande — Réponse en 24h
+              </button>
+            </div>
+            <p class="form-consent">
+              En soumettant ce formulaire, vous acceptez notre <a href="#">politique de confidentialité</a>. Vos données sont traitées conformément au RGPD et ne sont jamais revendues.
+            </p>
+          </form>
+        </div>
+
+        <!-- SUCCESS STATE -->
+        <div class="form-success" id="formSuccess">
+          <div class="success-icon">🎉</div>
+          <h3 class="success-title">Message envoyé !</h3>
+          <p class="success-msg">Merci pour votre confiance. Notre équipe reviendra vers vous dans les <strong style="color:var(--gold);">24 heures</strong> avec une proposition personnalisée.<br><br>En attendant, découvrez nos dernières réalisations.</p>
+          <div style="margin-top:32px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+            <a href="portfolio.html" class="btn btn-primary">Voir le portfolio</a>
+            <a href="blog.html" class="btn btn-glass">Lire nos insights</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAND -->
+  <div class="clients-strip">
+    <p class="clients-label">Certifications & partenaires officiels</p>
+    <div class="logos-track">
+      <div class="client-logo">🏆 GOOGLE PARTNER</div>
+      <div class="client-logo">🛡️ ISO 27001</div>
+      <div class="client-logo">☁️ AWS PARTNER</div>
+      <div class="client-logo">✨ AWWWARDS</div>
+      <div class="client-logo">🌍 RGPD COMPLIANT</div>
+    </div>
+  </div>
+
+  <!-- FAQ MINI -->
+  <section style="padding:80px 5%;max-width:860px;margin:0 auto;">
+    <div class="text-center" style="margin-bottom:40px;">
+      <div class="section-tag reveal">Avant de nous écrire</div>
+      <h2 class="section-title reveal reveal-delay-1">Questions <span class="accent">rapides</span></h2>
+    </div>
+    <div class="glass-card faq-item reveal">
+      <div class="faq-question">Combien coûte un projet en FCFA ? <span class="faq-icon">+</span></div>
+      <div class="faq-answer">Nos tarifs en FCFA : Site vitrine simple dès <strong style="color:var(--gold)">200 000 FCFA</strong> · Site vitrine premium dès <strong style="color:var(--gold)">450 000 FCFA</strong> · E-commerce dès <strong style="color:var(--gold)">900 000 FCFA</strong> · Application mobile dès <strong style="color:var(--gold)">1 500 000 FCFA</strong>. Chaque projet est unique — nous établissons un devis personnalisé après votre demande.</div>
+    </div>
+    <div class="glass-card faq-item reveal reveal-delay-1">
+      <div class="faq-question">Quels sont vos délais de livraison ? <span class="faq-icon">+</span></div>
+      <div class="faq-answer">Site vitrine : 3 à 6 semaines · Application mobile : 2 à 4 mois · Plateforme e-commerce : 6 à 12 semaines · Logiciel sur mesure : 3 à 8 mois. Nous vous donnons un planning précis lors du kick-off et respectons nos délais.</div>
+    </div>
+    <div class="glass-card faq-item reveal reveal-delay-2">
+      <div class="faq-question">Travaillez-vous dans toute l'Afrique ? <span class="faq-icon">+</span></div>
+      <div class="faq-answer">Oui. Nous travaillons avec des clients au Cameroun, Sénégal, Côte d'Ivoire, Gabon, Congo, RDC, Bénin, Togo, Mali, Guinée et bien d'autres. Nos projets sont conduits 100% en remote. Paiement possible par Mobile Money (Orange/MTN), virement, ou par tranches.</div>
+    </div>
+    <div class="glass-card faq-item reveal reveal-delay-3">
+      <div class="faq-question">Que comprend la maintenance mensuelle ? <span class="faq-icon">+</span></div>
+      <div class="faq-answer"><strong>Starter (35K/mois)</strong> : hébergement, SSL, monitoring 24/7, sauvegardes automatiques. <strong>Standard (85K/mois)</strong> : + mises à jour contenu, 2h support, rapport mensuel. <strong>Premium (180K/mois)</strong> : + SEO, 5h support, interventions urgentes sous 4h, rapport détaillé.</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">ZELKTRIS</div>
+        <p class="footer-desc">L'agence digitale premium qui transforme les ambitions en réalités numériques.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn">in</a><a href="#" class="social-btn">𝕏</a>
+          <a href="#" class="social-btn">◉</a><a href="#" class="social-btn">●</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Services</h4><ul>
+        <li><a href="services.html">Web & Applications</a></li>
+        <li><a href="services.html">Mobile iOS & Android</a></li>
+        <li><a href="services.html">Intelligence Artificielle</a></li>
+        <li><a href="services.html">UI/UX Design</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Agence</h4><ul>
+        <li><a href="about.html">Notre histoire</a></li>
+        <li><a href="about.html">L'équipe</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul>
+        <li><a href="#">📍 Paris, France</a></li>
+        <li><a href="#">📞 +33 1 23 45 67 89</a></li>
+        <li><a href="#">✉️ hello@zelktris.agency</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Zelktris Agency. Tous droits réservés.</span>
+      <div class="footer-legal"><a href="#">Mentions légales</a><a href="#">Confidentialité</a><a href="#">RGPD</a></div>
+    </div>
+  </footer>
+</div>
+
+<script src="galaxy.js"></script>
+<script>
+  // ── Tarifs FCFA par type de projet ──
+  const PRICING = {
+    'Site Web':              { min: 200000,  max: 800000,  maint: 35000  },
+    'Application Mobile':    { min: 1500000, max: 5000000, maint: 85000  },
+    'IA / Automatisation':   { min: 1000000, max: 8000000, maint: 120000 },
+    'Design UX/UI':          { min: 250000,  max: 1000000, maint: 45000  },
+    'Growth / SEO':          { min: 150000,  max: 600000,  maint: 85000  },
+    'Cloud / DevOps':        { min: 500000,  max: 3000000, maint: 150000 }
+  };
+  const BUDGET_MULT = { micro:0.7, small:1, medium:1.5, large:2.5, enterprise:4, quote:1 };
+  const MAINT_PRICES = { none:0, starter:35000, standard:85000, premium:180000 };
+
+  function fmt(n){ return new Intl.NumberFormat('fr-FR').format(Math.round(n/1000)*1000)+' FCFA'; }
+
+  function updateEstimate(){
+    const typeTxt = document.querySelector('.type-btn.selected')?.textContent.trim().replace(/[\u{1F300}-\u{1FAFF}]/gu,'').trim() || 'Site Web';
+    const budgetKey = document.querySelector('.budget-chip.selected')?.dataset.budget || 'small';
+    const p = PRICING[typeTxt] || PRICING['Site Web'];
+    const mult = BUDGET_MULT[budgetKey] || 1;
+    const lo = fmt(p.min * mult), hi = fmt(p.max * mult);
+    document.getElementById('priceEstimate').textContent = lo + ' – ' + hi;
+    document.getElementById('priceDesc').textContent = typeTxt + ' · Délai 3–10 semaines';
+    const maintPlan = document.querySelector('.selected-maintenance')?.dataset.plan || 'starter';
+    const maintAmt = MAINT_PRICES[maintPlan];
+    document.getElementById('maintenanceEstimate').textContent = maintAmt ? fmt(maintAmt)+'/mois' : 'Pas de maintenance';
+  }
+
+  function selectType(btn) {
+    document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    updateEstimate();
+  }
+  function selectBudget(chip) {
+    document.querySelectorAll('.budget-chip').forEach(c => c.classList.remove('selected'));
+    chip.classList.add('selected');
+    updateEstimate();
+  }
+  function selectMaintenance(card) {
+    document.querySelectorAll('.maintenance-card').forEach(c => {
+      c.classList.remove('selected-maintenance');
+      c.style.border = '1px solid var(--glass-border)';
+      c.style.background = 'transparent';
+      c.querySelector('div').style.color = 'rgba(240,240,255,0.7)';
+    });
+    card.classList.add('selected-maintenance');
+    card.style.border = '1px solid rgba(0,102,255,0.4)';
+    card.style.background = 'rgba(0,102,255,0.08)';
+    card.querySelector('div').style.color = 'var(--blue-lt)';
+    updateEstimate();
+  }
+
+  // Init
+  updateEstimate();
+
+  const API_URL = window.location.hostname === 'localhost' ? 'http://localhost:4000' : 'https://zelktris-api.onrender.com';
+
+  function showFieldError(el) {
+    el.style.borderColor = '#ff4466';
+    el.style.boxShadow = '0 0 0 3px rgba(255,68,102,0.15)';
+    el.addEventListener('input', () => { el.style.borderColor = ''; el.style.boxShadow = ''; }, { once: true });
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('contactForm');
+    const btn  = form.querySelector('button[type="submit"]');
+
+    const fname   = document.getElementById('fname').value.trim();
+    const company = document.getElementById('company').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    let valid = true;
+    if (!fname)   { showFieldError(document.getElementById('fname'));   valid = false; }
+    if (!company) { showFieldError(document.getElementById('company')); valid = false; }
+    if (!email)   { showFieldError(document.getElementById('email'));   valid = false; }
+    if (!message) { showFieldError(document.getElementById('message')); valid = false; }
+    if (!valid) return;
+
+    const countryCode = document.getElementById('phoneCountry').value;
+    const phoneNum    = document.getElementById('phone').value.trim();
+    const phone       = phoneNum ? countryCode + ' ' + phoneNum : '';
+    const projectType = document.querySelector('.type-btn.selected')?.textContent.trim().replace(/[\u{1F300}-\u{1FAFF}]/gu,'').trim() || '';
+    const budget      = document.querySelector('.budget-chip.selected')?.textContent.trim() + ' FCFA' || '';
+    const maintenance = document.querySelector('.selected-maintenance')?.dataset.plan || 'none';
+    const deadline    = document.getElementById('deadline').value;
+    const source      = document.getElementById('source').value;
+    const estimate    = document.getElementById('priceEstimate').textContent;
+
+    btn.innerHTML = '⏳ Envoi en cours...';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(`${API_URL}/api/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name:fname, company, email, phone, message, projectType, budget, maintenance, deadline, source, estimate }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        document.getElementById('contactFormContainer').style.display = 'none';
+        document.getElementById('formSuccess').classList.add('visible');
+      } else {
+        const msgs = data.errors?.map(e => e.message).join(' · ') || data.message || 'Erreur inconnue.';
+        btn.innerHTML = `⚠️ ${msgs}`;
+        btn.style.background = 'linear-gradient(135deg,#cc0022,#880011)';
+        setTimeout(() => { btn.innerHTML = '🚀 Envoyer ma demande — Réponse en 24h'; btn.style.background=''; btn.disabled=false; }, 4000);
+      }
+    } catch (err) {
+      btn.innerHTML = '⚠️ Erreur réseau — Réessayez ou écrivez-nous sur WhatsApp';
+      btn.style.background = 'linear-gradient(135deg,#cc0022,#880011)';
+      setTimeout(() => { btn.innerHTML = '🚀 Envoyer ma demande — Réponse en 24h'; btn.style.background=''; btn.disabled=false; }, 4000);
+    }
+  }
+</script>
+  <script src="chatbot.js"></script>
+</body>
+</html>
+
+

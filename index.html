@@ -1,0 +1,425 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Zelktris Agency — Agence digitale premium. Web, mobile, IA, stratégie. Nous transformons votre vision en expériences digitales immersives.">
+  <title>Zelktris Agency — Agence Digitale Premium</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="galaxy-canvas"></canvas>
+<div class="page-wrapper">
+
+  <!-- NAVBAR -->
+  <header class="navbar" role="banner">
+    <a href="index.html" class="nav-logo">ZEL<span>KTRIS</span></a>
+    <ul class="nav-links" role="navigation" aria-label="Navigation principale">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="about.html">Agence</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="blog.html">Insights</a></li>
+      <li><a href="contact.html" class="nav-cta">Devis Gratuit</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <div class="mobile-menu">
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="about.html">Agence</a>
+      <a href="services.html">Services</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="blog.html">Insights</a>
+      <a href="contact.html">Devis Gratuit →</a>
+    </nav>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Présentation principale">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+    <div>
+      <div class="hero-badge">✦ Agence Digitale #1 en Innovation</div>
+      <h1 class="hero-title">
+        <span class="line-1">L'Excellence</span>
+        <span class="line-2">Digitale Réinventée</span>
+      </h1>
+      <p class="hero-subtitle">
+        Nous concevons des expériences numériques premium qui propulsent les marques ambitieuses vers de nouveaux sommets — web, mobile, IA &amp; stratégie digitale.
+      </p>
+      <div class="hero-actions">
+        <a href="contact.html" class="btn btn-primary">
+          🚀 Démarrer un projet
+        </a>
+        <a href="portfolio.html" class="btn btn-glass">
+          ◈ Voir nos réalisations
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num" data-count="250" data-suffix="+">0+</div>
+          <div class="stat-label">Projets livrés</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-num" data-count="98" data-suffix="%">0%</div>
+          <div class="stat-label">Taux de satisfaction</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-num" data-count="12" data-suffix="ans">0ans</div>
+          <div class="stat-label">D'expertise</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-num" data-count="40" data-suffix="+">0+</div>
+          <div class="stat-label">Experts dédiés</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENTS STRIP -->
+  <div class="clients-strip">
+    <p class="clients-label">Ils nous font confiance</p>
+    <div class="logos-track">
+      <div class="client-logo">MINISTÈRE</div>
+      <div class="client-logo">ORANGE</div>
+      <div class="client-logo">TOTAL ENERGIES</div>
+      <div class="client-logo">BNP PARIBAS</div>
+      <div class="client-logo">AIRBUS</div>
+      <div class="client-logo">SOCIÉTÉ GÉNÉRALE</div>
+      <div class="client-logo">DANONE</div>
+    </div>
+  </div>
+
+  <!-- SERVICES SECTION -->
+  <section class="services-section">
+    <div class="text-center" style="margin-bottom:60px;">
+      <div class="section-tag reveal">Nos expertises</div>
+      <h2 class="section-title reveal reveal-delay-1">
+        Des solutions digitales<br><span class="accent">à 360°</span>
+      </h2>
+      <div class="divider center reveal reveal-delay-2"></div>
+      <p class="section-sub reveal reveal-delay-2">
+        De la stratégie à l'exécution, nous couvrons l'ensemble du spectre digital pour transformer vos ambitions en résultats mesurables.
+      </p>
+    </div>
+
+    <div class="grid-3">
+      <div class="glass-card service-card reveal">
+        <div class="service-icon blue">🌐</div>
+        <h3>Web & Applications</h3>
+        <p>Sites institutionnels, plateformes SaaS, applications web haute performance — conçus pour convertir et scalables à l'infini.</p>
+        <a href="services.html" class="service-link">Découvrir →</a>
+      </div>
+      <div class="glass-card service-card reveal reveal-delay-1">
+        <div class="service-icon violet">📱</div>
+        <h3>Mobile iOS & Android</h3>
+        <p>Applications natives et cross-platform ultra-fluides, avec des UX pensées pour l'engagement et la rétention utilisateur.</p>
+        <a href="services.html" class="service-link">Découvrir →</a>
+      </div>
+      <div class="glass-card service-card reveal reveal-delay-2">
+        <div class="service-icon gold">🤖</div>
+        <h3>Intelligence Artificielle</h3>
+        <p>Intégration IA, chatbots intelligents, automatisation des processus, LLM personnalisés et data analytics avancée.</p>
+        <a href="services.html" class="service-link">Découvrir →</a>
+      </div>
+      <div class="glass-card service-card reveal reveal-delay-1">
+        <div class="service-icon violet">🎨</div>
+        <h3>UI/UX Design</h3>
+        <p>Identités visuelles mémorables, design systems cohérents et expériences utilisateur qui convertissent et fidélisent.</p>
+        <a href="services.html" class="service-link">Découvrir →</a>
+      </div>
+      <div class="glass-card service-card reveal reveal-delay-2">
+        <div class="service-icon blue">📈</div>
+        <h3>Stratégie & Growth</h3>
+        <p>SEO technique, publicité digitale, marketing automation et stratégie de contenu pour maximiser votre ROI.</p>
+        <a href="services.html" class="service-link">Découvrir →</a>
+      </div>
+      <div class="glass-card service-card reveal reveal-delay-3">
+        <div class="service-icon gold">☁️</div>
+        <h3>Cloud & DevOps</h3>
+        <p>Architecture cloud scalable, CI/CD, sécurité renforcée et monitoring 24/7 pour des performances maximales.</p>
+        <a href="services.html" class="service-link">Découvrir →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section style="padding:80px 5%;">
+    <div class="text-center" style="margin-bottom:60px;">
+      <div class="section-tag reveal">Notre méthode</div>
+      <h2 class="section-title reveal reveal-delay-1">Un processus <span class="accent-gold">éprouvé</span></h2>
+    </div>
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="step-num">01</div>
+        <h3 class="step-title">Découverte</h3>
+        <p class="step-desc">Immersion profonde dans vos objectifs, contraintes et vision pour poser des fondations solides.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-1">
+        <div class="step-num">02</div>
+        <h3 class="step-title">Stratégie</h3>
+        <p class="step-desc">Conception du plan d'action, architecture technique et design system avant chaque ligne de code.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="step-num">03</div>
+        <h3 class="step-title">Création</h3>
+        <p class="step-desc">Développement agile en sprints courts, avec livraisons régulières et feedback loops intégrés.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <div class="step-num">04</div>
+        <h3 class="step-title">Croissance</h3>
+        <p class="step-desc">Lancement, optimisation continue, suivi des KPIs et accompagnement post-livraison.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO PREVIEW -->
+  <section>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:20px;">
+      <div>
+        <div class="section-tag reveal">Portfolio</div>
+        <h2 class="section-title reveal reveal-delay-1">Nos dernières <span class="accent">réalisations</span></h2>
+      </div>
+      <a href="portfolio.html" class="btn btn-outline reveal">Voir tout →</a>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-item reveal">
+        <div class="portfolio-img">
+          <div class="p-shape p-shape-1"></div>
+          <div class="p-shape p-shape-2"></div>
+          <div class="p-shape p-shape-3"></div>
+          <div style="font-size:4rem;position:relative;z-index:1;">🏛️</div>
+        </div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-label">Gouvernement</div>
+          <div class="portfolio-name">Portail Ministère de l'Économie</div>
+          <a href="portfolio.html" class="btn btn-glass" style="width:fit-content;padding:8px 18px;font-size:0.82rem;">Voir →</a>
+        </div>
+      </div>
+      <div class="portfolio-item reveal reveal-delay-1">
+        <div class="portfolio-img" style="background:linear-gradient(135deg,#8B00FF,#0066FF);">
+          <div class="p-shape p-shape-1"></div>
+          <div class="p-shape p-shape-2"></div>
+          <div style="font-size:4rem;position:relative;z-index:1;">🏦</div>
+        </div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-label">Finance</div>
+          <div class="portfolio-name">Plateforme FinTech BankPro</div>
+          <a href="portfolio.html" class="btn btn-glass" style="width:fit-content;padding:8px 18px;font-size:0.82rem;">Voir →</a>
+        </div>
+      </div>
+      <div class="portfolio-item reveal reveal-delay-2">
+        <div class="portfolio-img" style="background:linear-gradient(135deg,#FFD700 0%,#8B00FF 100%);">
+          <div class="p-shape p-shape-1"></div>
+          <div class="p-shape p-shape-3"></div>
+          <div style="font-size:4rem;position:relative;z-index:1;">🛒</div>
+        </div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-label">E-Commerce</div>
+          <div class="portfolio-name">SuperStore — +340% de conversions</div>
+          <a href="portfolio.html" class="btn btn-glass" style="width:fit-content;padding:8px 18px;font-size:0.82rem;">Voir →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NUMBERS -->
+  <section class="numbers-section">
+    <div class="numbers-grid">
+      <div class="glass-card number-card reveal">
+        <div class="number-val" data-count="250" data-suffix="+">0</div>
+        <div class="number-label">Projets livrés</div>
+      </div>
+      <div class="glass-card number-card gold-val reveal reveal-delay-1">
+        <div class="number-val" data-count="98" data-suffix="%">0</div>
+        <div class="number-label">Clients satisfaits</div>
+      </div>
+      <div class="glass-card number-card reveal reveal-delay-2">
+        <div class="number-val" data-count="12" data-suffix="M€">0</div>
+        <div class="number-label">De ROI généré</div>
+      </div>
+      <div class="glass-card number-card gold-val reveal reveal-delay-3">
+        <div class="number-val" data-count="40" data-suffix="+">0</div>
+        <div class="number-label">Experts dédiés</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section">
+    <div class="text-center" style="margin-bottom:48px;">
+      <div class="section-tag">Témoignages</div>
+      <h2 class="section-title">Ce que disent <span class="accent">nos clients</span></h2>
+    </div>
+    <div class="testimonials-track">
+      <div class="glass-card testimonial-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">« ZELKTRIS a complètement transformé notre présence en ligne. Le site livré dépasse de loin nos attentes — immersif, rapide, et qui convertit vraiment. »</p>
+        <div class="testi-author">
+          <div class="testi-avatar">SD</div>
+          <div>
+            <div class="testi-name">Sophie Dubois</div>
+            <div class="testi-company">Directrice Marketing, Orange France</div>
+          </div>
+        </div>
+      </div>
+      <div class="glass-card testimonial-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">« Une équipe d'exception. Leur expertise technique combinée à leur sens créatif est rare. Notre application mobile a été téléchargée 500K fois en 3 mois. »</p>
+        <div class="testi-author">
+          <div class="testi-avatar">KM</div>
+          <div>
+            <div class="testi-name">Karim Mansouri</div>
+            <div class="testi-company">CEO, FinTech Labs</div>
+          </div>
+        </div>
+      </div>
+      <div class="glass-card testimonial-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">« Professionnalisme, rigueur et créativité au rendez-vous. ZELKTRIS a livré notre portail gouvernemental dans les délais avec une qualité irréprochable. »</p>
+        <div class="testi-author">
+          <div class="testi-avatar">AL</div>
+          <div>
+            <div class="testi-name">Adama Ly</div>
+            <div class="testi-company">DSI, Ministère du Numérique</div>
+          </div>
+        </div>
+      </div>
+      <div class="glass-card testimonial-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">« Notre chiffre d'affaires en ligne a augmenté de 340% après la refonte de notre e-commerce par ZELKTRIS. ROI atteint en 6 semaines seulement. »</p>
+        <div class="testi-author">
+          <div class="testi-avatar">MF</div>
+          <div>
+            <div class="testi-name">Marie Fontaine</div>
+            <div class="testi-company">E-Commerce Director, SuperStore</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <div class="newsletter-band">
+    <div class="newsletter-inner">
+      <h3>Restez à la pointe du digital</h3>
+      <p>Rejoignez 12 000+ professionnels et recevez nos insights exclusifs, tendances et études de cas chaque semaine.</p>
+      <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+        <input type="email" id="nlEmail" placeholder="votre@email.com" aria-label="Email newsletter" required>
+        <button type="submit" id="nlBtn" class="btn btn-primary" style="white-space:nowrap;">S'abonner</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-box reveal">
+      <h2 class="section-title">Prêt à passer au<br><span class="accent-gold">niveau supérieur ?</span></h2>
+      <p class="section-sub">Discutons de votre projet lors d'une consultation gratuite de 30 minutes avec nos experts.</p>
+      <div class="cta-actions">
+        <a href="contact.html" class="btn btn-gold">📞 Réserver une démo gratuite</a>
+        <a href="contact.html" class="btn btn-glass">✉️ Demander un devis</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">ZELKTRIS</div>
+        <p class="footer-desc">L'agence digitale premium qui transforme les ambitions en réalités numériques. Innovation, excellence et résultats mesurables.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn" aria-label="LinkedIn">in</a>
+          <a href="#" class="social-btn" aria-label="Twitter">𝕏</a>
+          <a href="#" class="social-btn" aria-label="Instagram">◉</a>
+          <a href="#" class="social-btn" aria-label="Dribbble">●</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Web & Applications</a></li>
+          <li><a href="services.html">Mobile iOS & Android</a></li>
+          <li><a href="services.html">Intelligence Artificielle</a></li>
+          <li><a href="services.html">UI/UX Design</a></li>
+          <li><a href="services.html">Growth Marketing</a></li>
+          <li><a href="services.html">Cloud & DevOps</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Agence</h4>
+        <ul>
+          <li><a href="about.html">Notre histoire</a></li>
+          <li><a href="about.html">L'équipe</a></li>
+          <li><a href="about.html">Nos valeurs</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="blog.html">Blog & Insights</a></li>
+          <li><a href="contact.html">Rejoindre l'équipe</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#">📍 Paris, France</a></li>
+          <li><a href="#">📞 +33 1 23 45 67 89</a></li>
+          <li><a href="#">✉️ hello@zelktris.agency</a></li>
+          <li><a href="#">🕐 Lun–Ven 9h–18h</a></li>
+          <li><a href="contact.html">→ Nous contacter</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Zelktris Agency. Tous droits réservés.</span>
+      <div class="footer-legal">
+        <a href="#">Mentions légales</a>
+        <a href="#">Politique de confidentialité</a>
+        <a href="#">RGPD</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script src="galaxy.js"></script>
+<script>
+async function handleNewsletter(e) {
+  e.preventDefault();
+  const email = document.getElementById('nlEmail').value.trim();
+  const btn   = document.getElementById('nlBtn');
+  if (!email) return;
+  btn.textContent = '⏳ Inscription...';
+  btn.disabled = true;
+  try {
+    const apiBase = window.location.hostname === 'localhost' ? 'http://localhost:4000' : 'https://zelktris-api.onrender.com';
+    const res  = await fetch(apiBase + '/api/newsletter', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+    const data = await res.json();
+    btn.textContent = data.success ? '✅ Confirmé !' : '⚠️ Erreur';
+    btn.style.background = data.success ? 'linear-gradient(135deg,#00aa44,#007733)' : 'linear-gradient(135deg,#cc0022,#880011)';
+    setTimeout(() => { btn.textContent = 'S\'abonner'; btn.style.background = ''; btn.disabled = false; }, 3000);
+  } catch {
+    btn.textContent = '⚠️ Erreur réseau';
+    setTimeout(() => { btn.textContent = 'S\'abonner'; btn.style.background = ''; btn.disabled = false; }, 3000);
+  }
+}
+</script>
+  <script src="chatbot.js"></script>
+</body>
+</html>
+
+

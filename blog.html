@@ -1,0 +1,459 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Zelktris Agency — Blog & Insights : tendances digitales, études de cas, conseils stratégiques pour accélérer votre transformation numérique.">
+  <title>Insights — Zelktris Agency</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .featured-article {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 48px;
+      align-items: center;
+      padding: 48px 40px;
+      margin-bottom: 60px;
+    }
+    .feat-thumb {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 16/10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .feat-emoji { font-size: 7rem; position: relative; z-index: 1; filter: drop-shadow(0 0 30px rgba(0,102,255,0.5)); }
+    .feat-badge {
+      position: absolute;
+      top: 16px; left: 16px;
+      padding: 5px 14px;
+      background: linear-gradient(135deg, var(--gold), #FF8C00);
+      border-radius: 50px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #0a0010;
+    }
+    .feat-content .section-tag { margin-bottom: 12px; }
+    .feat-title {
+      font-family: var(--font-head);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+    .feat-excerpt {
+      font-size: 0.95rem;
+      color: rgba(240,240,255,0.6);
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+    .feat-meta {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .feat-meta-author {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .author-avatar-sm {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--violet));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+    .author-name-sm { font-size: 0.85rem; font-weight: 600; color: var(--white); }
+    .meta-sep { width: 1px; height: 20px; background: var(--glass-border); }
+    .meta-date { font-size: 0.82rem; color: rgba(240,240,255,0.45); }
+    .meta-read { font-size: 0.82rem; color: rgba(240,240,255,0.45); }
+    .blog-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+    .tag-chip {
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .tag-chip.blue { background: rgba(0,102,255,0.1); border: 1px solid rgba(0,102,255,0.2); color: var(--blue-lt); }
+    .tag-chip.violet { background: rgba(139,0,255,0.1); border: 1px solid rgba(139,0,255,0.2); color: var(--violet-lt); }
+    .tag-chip.gold { background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.2); color: var(--gold); }
+    .sidebar-card { padding: 28px; margin-bottom: 24px; }
+    .sidebar-title {
+      font-family: var(--font-head);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .blog-layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 48px;
+      align-items: start;
+    }
+    .trending-item {
+      display: flex;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--glass-border);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .trending-item:last-child { border-bottom: none; }
+    .trending-item:hover .trending-title { color: var(--blue-lt); }
+    .trending-num {
+      font-family: var(--font-head);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: rgba(139,0,255,0.4);
+      flex-shrink: 0;
+      width: 28px;
+    }
+    .trending-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.4;
+      transition: color 0.3s;
+    }
+    .trending-meta { font-size: 0.75rem; color: rgba(240,240,255,0.4); margin-top: 4px; }
+    .newsletter-sidebar {
+      background: linear-gradient(135deg, rgba(0,102,255,0.08), rgba(139,0,255,0.12));
+      border: 1px solid rgba(139,0,255,0.2);
+    }
+    .newsletter-sidebar p { font-size: 0.85rem; color: rgba(240,240,255,0.6); margin-bottom: 16px; line-height: 1.6; }
+    .newsletter-sidebar input {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      outline: none;
+      margin-bottom: 12px;
+      transition: border-color 0.3s;
+    }
+    .newsletter-sidebar input:focus { border-color: var(--blue); }
+    .newsletter-sidebar input::placeholder { color: rgba(240,240,255,0.3); }
+    .categories-list { list-style: none; }
+    .categories-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--glass-border);
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: color 0.3s;
+      color: rgba(240,240,255,0.6);
+    }
+    .categories-list li:last-child { border-bottom: none; }
+    .categories-list li:hover { color: var(--blue-lt); }
+    .cat-count {
+      padding: 2px 10px;
+      background: rgba(0,102,255,0.1);
+      border-radius: 50px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--blue-lt);
+    }
+    @media (max-width: 900px) {
+      .featured-article { grid-template-columns: 1fr; }
+      .blog-layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<canvas id="galaxy-canvas"></canvas>
+<div class="page-wrapper">
+
+  <header class="navbar">
+    <a href="index.html" class="nav-logo">ZEL<span>KTRIS</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="about.html">Agence</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="blog.html">Insights</a></li>
+      <li><a href="contact.html" class="nav-cta">Devis Gratuit</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </header>
+  <div class="mobile-menu">
+    <nav>
+      <a href="index.html">Accueil</a><a href="about.html">Agence</a>
+      <a href="services.html">Services</a><a href="portfolio.html">Portfolio</a>
+      <a href="blog.html">Insights</a><a href="contact.html">Devis Gratuit →</a>
+    </nav>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="hero-orb hero-orb-1" style="opacity:0.4;"></div>
+    <div class="hero-orb hero-orb-2" style="opacity:0.3;"></div>
+    <div class="breadcrumb reveal"><a href="index.html">Accueil</a> <span>/</span> Insights</div>
+    <h1 class="page-header-title reveal reveal-delay-1">Blog & Insights</h1>
+    <p class="page-header-sub reveal reveal-delay-2">Stratégie, innovation et tendances digitales — les perspectives de nos experts pour guider vos décisions.</p>
+  </div>
+
+  <!-- FEATURED ARTICLE -->
+  <section style="padding-top:20px;">
+    <div class="glass-card featured-article reveal">
+      <div class="feat-thumb" style="background:linear-gradient(135deg,rgba(0,102,255,0.15),rgba(139,0,255,0.2));">
+        <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 40%,rgba(0,170,255,0.15),transparent);"></div>
+        <div class="feat-badge">✦ À la une</div>
+        <div class="feat-emoji">🤖</div>
+      </div>
+      <div class="feat-content">
+        <div class="section-tag">Intelligence Artificielle</div>
+        <h2 class="feat-title">IA Générative & Transformation Digitale : Ce qui change vraiment en 2026</h2>
+        <div class="feat-meta">
+          <div class="feat-meta-author">
+            <div class="author-avatar-sm">FN</div>
+            <span class="author-name-sm">Fatima Ndiaye</span>
+          </div>
+          <div class="meta-sep"></div>
+          <span class="meta-date">📅 15 mai 2026</span>
+          <div class="meta-sep"></div>
+          <span class="meta-read">⏱ 8 min de lecture</span>
+        </div>
+        <p class="feat-excerpt">L'IA générative n'est plus un sujet de R&D — elle reconfigure les modèles économiques en temps réel. Voici notre analyse des impacts concrets pour les DSI et dirigeants...</p>
+        <div class="blog-tags">
+          <span class="tag-chip gold">IA</span>
+          <span class="tag-chip blue">Stratégie</span>
+          <span class="tag-chip violet">Innovation</span>
+        </div>
+        <a href="#" class="btn btn-primary">Lire l'article complet →</a>
+      </div>
+    </div>
+
+    <!-- LAYOUT WITH SIDEBAR -->
+    <div class="blog-layout">
+      <!-- ARTICLES -->
+      <div>
+        <div class="text-center" style="margin-bottom:36px;">
+          <div class="section-tag reveal">Derniers articles</div>
+        </div>
+        <div class="grid-2">
+          <div class="glass-card blog-card reveal">
+            <div class="blog-thumb">
+              <div class="blog-thumb-img" style="background:linear-gradient(135deg,#8B00FF,#0066FF);">🌐</div>
+              <div class="blog-cat">Web Performance</div>
+            </div>
+            <div class="blog-body">
+              <div class="blog-meta">📅 10 mai 2026 · ⏱ 6 min</div>
+              <h3 class="blog-title">Core Web Vitals 2026 : Le guide complet pour atteindre un PageSpeed > 95</h3>
+              <p class="blog-excerpt">Google a mis à jour ses critères. Voici les optimisations concrètes qui feront passer votre score de 70 à 98 en moins de 2 semaines.</p>
+              <a href="#" class="blog-read">Lire l'article →</a>
+            </div>
+          </div>
+
+          <div class="glass-card blog-card reveal reveal-delay-1">
+            <div class="blog-thumb">
+              <div class="blog-thumb-img" style="background:linear-gradient(135deg,#FFD700 0%,#8B00FF 100%);">📱</div>
+              <div class="blog-cat">Mobile UX</div>
+            </div>
+            <div class="blog-body">
+              <div class="blog-meta">📅 5 mai 2026 · ⏱ 5 min</div>
+              <h3 class="blog-title">Pourquoi 87% des apps mobiles échouent dans leur 1ère année (et comment éviter ça)</h3>
+              <p class="blog-excerpt">Onboarding, rétention, monétisation — les 7 erreurs fatales que nous observons systématiquement et comment les corriger.</p>
+              <a href="#" class="blog-read">Lire l'article →</a>
+            </div>
+          </div>
+
+          <div class="glass-card blog-card reveal">
+            <div class="blog-thumb">
+              <div class="blog-thumb-img" style="background:linear-gradient(135deg,#001040,#0066FF);">📈</div>
+              <div class="blog-cat">Growth Marketing</div>
+            </div>
+            <div class="blog-body">
+              <div class="blog-meta">📅 28 avril 2026 · ⏱ 7 min</div>
+              <h3 class="blog-title">SEO Sémantique & IA : Nouvelle stratégie pour dominer Google en 2026</h3>
+              <p class="blog-excerpt">L'ère du SEO technique seul est révolue. Découvrez comment combiner contenu, autorité et IA pour multiplier votre trafic organique par 3.</p>
+              <a href="#" class="blog-read">Lire l'article →</a>
+            </div>
+          </div>
+
+          <div class="glass-card blog-card reveal reveal-delay-1">
+            <div class="blog-thumb">
+              <div class="blog-thumb-img" style="background:linear-gradient(135deg,#0A0010,#B44FFF);">☁️</div>
+              <div class="blog-cat">Cloud & DevOps</div>
+            </div>
+            <div class="blog-body">
+              <div class="blog-meta">📅 20 avril 2026 · ⏱ 9 min</div>
+              <h3 class="blog-title">Architecture Serverless vs Containers : Quel choix pour votre startup en 2026 ?</h3>
+              <p class="blog-excerpt">Analyse comparative des deux approches, avec chiffres de coût réels et retours d'expérience de 3 migrations récentes chez nos clients.</p>
+              <a href="#" class="blog-read">Lire l'article →</a>
+            </div>
+          </div>
+
+          <div class="glass-card blog-card reveal">
+            <div class="blog-thumb">
+              <div class="blog-thumb-img" style="background:linear-gradient(135deg,#002200,#00AA44);">🛡️</div>
+              <div class="blog-cat">Cybersécurité</div>
+            </div>
+            <div class="blog-body">
+              <div class="blog-meta">📅 12 avril 2026 · ⏱ 8 min</div>
+              <h3 class="blog-title">RGPD 2.0 : Ce qui change pour les DSI et les agences digitales</h3>
+              <p class="blog-excerpt">Le nouveau règlement européen entre en vigueur en juillet. Voici le checklist complet de conformité que nous appliquons chez ZELKTRIS.</p>
+              <a href="#" class="blog-read">Lire l'article →</a>
+            </div>
+          </div>
+
+          <div class="glass-card blog-card reveal reveal-delay-1">
+            <div class="blog-thumb">
+              <div class="blog-thumb-img" style="background:linear-gradient(135deg,#1a0010,#FF4466);">🎨</div>
+              <div class="blog-cat">Design Trends</div>
+            </div>
+            <div class="blog-body">
+              <div class="blog-meta">📅 5 avril 2026 · ⏱ 5 min</div>
+              <h3 class="blog-title">Glassmorphism, 3D & IA Générative : les tendances design qui dominent 2026</h3>
+              <p class="blog-excerpt">Notre équipe design décrypte les mouvements esthétiques qui redéfinissent l'identité visuelle des marques tech en 2026.</p>
+              <a href="#" class="blog-read">Lire l'article →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- PAGINATION -->
+        <div style="display:flex;gap:8px;justify-content:center;margin-top:48px;" class="reveal">
+          <button style="width:40px;height:40px;border-radius:50%;background:rgba(0,102,255,0.2);border:1px solid rgba(0,102,255,0.4);color:var(--blue-lt);cursor:pointer;font-weight:700;">1</button>
+          <button style="width:40px;height:40px;border-radius:50%;background:var(--glass-bg);border:1px solid var(--glass-border);color:rgba(240,240,255,0.5);cursor:pointer;">2</button>
+          <button style="width:40px;height:40px;border-radius:50%;background:var(--glass-bg);border:1px solid var(--glass-border);color:rgba(240,240,255,0.5);cursor:pointer;">3</button>
+          <button style="width:40px;height:40px;border-radius:50%;background:var(--glass-bg);border:1px solid var(--glass-border);color:rgba(240,240,255,0.5);cursor:pointer;">→</button>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside>
+        <!-- Newsletter -->
+        <div class="glass-card sidebar-card newsletter-sidebar reveal">
+          <div class="sidebar-title">📬 Newsletter</div>
+          <p>12 000+ professionnels reçoivent nos insights chaque semaine. Rejoignez-les.</p>
+          <form onsubmit="return false;">
+            <input type="email" placeholder="votre@email.com">
+            <button class="btn btn-primary" style="width:100%;justify-content:center;">S'abonner gratuitement</button>
+          </form>
+        </div>
+
+        <!-- Trending -->
+        <div class="glass-card sidebar-card reveal reveal-delay-1">
+          <div class="sidebar-title">🔥 Tendances</div>
+          <div class="trending-item">
+            <div class="trending-num">01</div>
+            <div>
+              <div class="trending-title">L'IA dans le marketing : ROI réel en 2026</div>
+              <div class="trending-meta">2.1K lectures · IA</div>
+            </div>
+          </div>
+          <div class="trending-item">
+            <div class="trending-num">02</div>
+            <div>
+              <div class="trending-title">Comment obtenir un PageSpeed de 99</div>
+              <div class="trending-meta">1.8K lectures · Performance</div>
+            </div>
+          </div>
+          <div class="trending-item">
+            <div class="trending-num">03</div>
+            <div>
+              <div class="trending-title">Migrer vers Next.js 15 : guide complet</div>
+              <div class="trending-meta">1.5K lectures · Dev</div>
+            </div>
+          </div>
+          <div class="trending-item">
+            <div class="trending-num">04</div>
+            <div>
+              <div class="trending-title">Design System 2026 : les nouvelles règles</div>
+              <div class="trending-meta">1.2K lectures · Design</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categories -->
+        <div class="glass-card sidebar-card reveal reveal-delay-2">
+          <div class="sidebar-title">📂 Catégories</div>
+          <ul class="categories-list">
+            <li>Intelligence Artificielle <span class="cat-count">14</span></li>
+            <li>Web & Performance <span class="cat-count">11</span></li>
+            <li>Mobile UX <span class="cat-count">9</span></li>
+            <li>Growth Marketing <span class="cat-count">8</span></li>
+            <li>Design Trends <span class="cat-count">7</span></li>
+            <li>Cloud & DevOps <span class="cat-count">6</span></li>
+            <li>Cybersécurité <span class="cat-count">5</span></li>
+          </ul>
+        </div>
+
+        <!-- CTA Sidebar -->
+        <div class="glass-card sidebar-card reveal reveal-delay-3" style="background:linear-gradient(135deg,rgba(255,215,0,0.06),rgba(139,0,255,0.08));border-color:rgba(255,215,0,0.15);text-align:center;">
+          <div style="font-size:2.5rem;margin-bottom:12px;">💡</div>
+          <h4 style="font-family:var(--font-head);font-size:1rem;font-weight:700;color:var(--white);margin-bottom:10px;">Audit digital gratuit</h4>
+          <p style="font-size:0.82rem;color:rgba(240,240,255,0.55);margin-bottom:16px;line-height:1.6;">Recevez une analyse complète de votre présence digitale en 48h.</p>
+          <a href="contact.html" class="btn btn-gold" style="width:100%;justify-content:center;font-size:0.85rem;">Demander mon audit</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">ZELKTRIS</div>
+        <p class="footer-desc">L'agence digitale premium qui transforme les ambitions en réalités numériques.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn">in</a><a href="#" class="social-btn">𝕏</a>
+          <a href="#" class="social-btn">◉</a><a href="#" class="social-btn">●</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Services</h4><ul>
+        <li><a href="services.html">Web & Applications</a></li>
+        <li><a href="services.html">Mobile iOS & Android</a></li>
+        <li><a href="services.html">Intelligence Artificielle</a></li>
+        <li><a href="services.html">UI/UX Design</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Agence</h4><ul>
+        <li><a href="about.html">Notre histoire</a></li>
+        <li><a href="about.html">L'équipe</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul>
+        <li><a href="#">📍 Paris, France</a></li>
+        <li><a href="#">📞 +33 1 23 45 67 89</a></li>
+        <li><a href="#">✉️ hello@zelktris.agency</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Zelktris Agency. Tous droits réservés.</span>
+      <div class="footer-legal"><a href="#">Mentions légales</a><a href="#">Confidentialité</a><a href="#">RGPD</a></div>
+    </div>
+  </footer>
+</div>
+<script src="galaxy.js"></script>
+  <script src="chatbot.js"></script>
+</body>
+</html>
+
+
