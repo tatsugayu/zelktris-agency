@@ -29,7 +29,7 @@
         alpha: randomBetween(0.3, 1),
         speed: randomBetween(0.0002, 0.001),
         offset: Math.random() * Math.PI * 2,
-        color: tier < 0.5 ? '#ffffff' : tier < 0.75 ? '#a0aaff' : tier < 0.9 ? '#FFD700' : '#ff88ff',
+        color: tier < 0.5 ? '#ffffff' : tier < 0.75 ? '#a0ffd8' : tier < 0.9 ? '#FFD700' : '#FFD700',
       });
     }
 
@@ -40,7 +40,7 @@
         y: Math.random() * H,
         rx: randomBetween(200, 500),
         ry: randomBetween(100, 300),
-        color: i % 2 === 0 ? '0,102,255' : '139,0,255',
+        color: i % 2 === 0 ? '0,200,150' : '0,122,94',
         alpha: randomBetween(0.04, 0.1),
         angle: Math.random() * Math.PI * 2,
       });
@@ -54,9 +54,9 @@
 
     // background gradient
     const bg = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, Math.max(W,H));
-    bg.addColorStop(0, 'rgba(20,0,40,1)');
-    bg.addColorStop(0.5, 'rgba(8,0,20,1)');
-    bg.addColorStop(1, 'rgba(4,0,10,1)');
+    bg.addColorStop(0, 'rgba(0,15,10,1)');
+    bg.addColorStop(0.5, 'rgba(0,7,5,1)');
+    bg.addColorStop(1, 'rgba(0,4,2,1)');
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, W, H);
 
@@ -218,7 +218,7 @@
   const glow = document.createElement('div');
   glow.style.cssText = `
     position:fixed;width:400px;height:400px;border-radius:50%;pointer-events:none;
-    background:radial-gradient(circle,rgba(139,0,255,0.06),transparent 70%);
+    background:radial-gradient(circle,rgba(0,122,94,0.06),transparent 70%);
     transform:translate(-50%,-50%);transition:left 0.15s,top 0.15s;z-index:0;
   `;
   document.body.appendChild(glow);

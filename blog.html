@@ -28,7 +28,7 @@
       justify-content: center;
       position: relative;
     }
-    .feat-emoji { font-size: 7rem; position: relative; z-index: 1; filter: drop-shadow(0 0 30px rgba(0,102,255,0.5)); }
+    .feat-emoji { font-size: 7rem; position: relative; z-index: 1; filter: drop-shadow(0 0 30px rgba(0,200,150,0.5)); }
     .feat-badge {
       position: absolute;
       top: 16px; left: 16px;
@@ -39,7 +39,7 @@
       font-weight: 700;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      color: #0a0010;
+      color: #020D0A;
     }
     .feat-content .section-tag { margin-bottom: 12px; }
     .feat-title {
@@ -91,8 +91,8 @@
       cursor: pointer;
       transition: var(--transition);
     }
-    .tag-chip.blue { background: rgba(0,102,255,0.1); border: 1px solid rgba(0,102,255,0.2); color: var(--blue-lt); }
-    .tag-chip.violet { background: rgba(139,0,255,0.1); border: 1px solid rgba(139,0,255,0.2); color: var(--violet-lt); }
+    .tag-chip.blue { background: rgba(0,200,150,0.1); border: 1px solid rgba(0,200,150,0.2); color: var(--blue-lt); }
+    .tag-chip.violet { background: rgba(0,122,94,0.1); border: 1px solid rgba(0,122,94,0.2); color: var(--violet-lt); }
     .tag-chip.gold { background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.2); color: var(--gold); }
     .sidebar-card { padding: 28px; margin-bottom: 24px; }
     .sidebar-title {
@@ -126,7 +126,7 @@
       font-family: var(--font-head);
       font-size: 1.4rem;
       font-weight: 700;
-      color: rgba(139,0,255,0.4);
+      color: rgba(0,122,94,0.4);
       flex-shrink: 0;
       width: 28px;
     }
@@ -139,8 +139,8 @@
     }
     .trending-meta { font-size: 0.75rem; color: rgba(240,240,255,0.4); margin-top: 4px; }
     .newsletter-sidebar {
-      background: linear-gradient(135deg, rgba(0,102,255,0.08), rgba(139,0,255,0.12));
-      border: 1px solid rgba(139,0,255,0.2);
+      background: linear-gradient(135deg, rgba(0,200,150,0.08), rgba(0,122,94,0.12));
+      border: 1px solid rgba(0,122,94,0.2);
     }
     .newsletter-sidebar p { font-size: 0.85rem; color: rgba(240,240,255,0.6); margin-bottom: 16px; line-height: 1.6; }
     .newsletter-sidebar input {
@@ -174,7 +174,7 @@
     .categories-list li:hover { color: var(--blue-lt); }
     .cat-count {
       padding: 2px 10px;
-      background: rgba(0,102,255,0.1);
+      background: rgba(0,200,150,0.1);
       border-radius: 50px;
       font-size: 0.72rem;
       font-weight: 600;
@@ -222,8 +222,8 @@
   <!-- FEATURED ARTICLE -->
   <section style="padding-top:20px;">
     <div class="glass-card featured-article reveal">
-      <div class="feat-thumb" style="background:linear-gradient(135deg,rgba(0,102,255,0.15),rgba(139,0,255,0.2));">
-        <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 40%,rgba(0,170,255,0.15),transparent);"></div>
+      <div class="feat-thumb" style="background:linear-gradient(135deg,rgba(0,200,150,0.15),rgba(0,122,94,0.2));">
+        <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 40%,rgba(77,255,199,0.15),transparent);"></div>
         <div class="feat-badge">✦ À la une</div>
         <div class="feat-emoji">🤖</div>
       </div>
@@ -260,7 +260,7 @@
         <div class="grid-2">
           <div class="glass-card blog-card reveal">
             <div class="blog-thumb">
-              <div class="blog-thumb-img" style="background:linear-gradient(135deg,#8B00FF,#0066FF);">🌐</div>
+              <div class="blog-thumb-img" style="background:linear-gradient(135deg,#007A5E,#00C896);">🌐</div>
               <div class="blog-cat">Web Performance</div>
             </div>
             <div class="blog-body">
@@ -273,7 +273,7 @@
 
           <div class="glass-card blog-card reveal reveal-delay-1">
             <div class="blog-thumb">
-              <div class="blog-thumb-img" style="background:linear-gradient(135deg,#FFD700 0%,#8B00FF 100%);">📱</div>
+              <div class="blog-thumb-img" style="background:linear-gradient(135deg,#FFD700 0%,#007A5E 100%);">📱</div>
               <div class="blog-cat">Mobile UX</div>
             </div>
             <div class="blog-body">
@@ -286,7 +286,7 @@
 
           <div class="glass-card blog-card reveal">
             <div class="blog-thumb">
-              <div class="blog-thumb-img" style="background:linear-gradient(135deg,#001040,#0066FF);">📈</div>
+              <div class="blog-thumb-img" style="background:linear-gradient(135deg,#001040,#00C896);">📈</div>
               <div class="blog-cat">Growth Marketing</div>
             </div>
             <div class="blog-body">
@@ -299,7 +299,7 @@
 
           <div class="glass-card blog-card reveal reveal-delay-1">
             <div class="blog-thumb">
-              <div class="blog-thumb-img" style="background:linear-gradient(135deg,#0A0010,#B44FFF);">☁️</div>
+              <div class="blog-thumb-img" style="background:linear-gradient(135deg,#020D0A,#00A87D);">☁️</div>
               <div class="blog-cat">Cloud & DevOps</div>
             </div>
             <div class="blog-body">
@@ -339,7 +339,7 @@
 
         <!-- PAGINATION -->
         <div style="display:flex;gap:8px;justify-content:center;margin-top:48px;" class="reveal">
-          <button style="width:40px;height:40px;border-radius:50%;background:rgba(0,102,255,0.2);border:1px solid rgba(0,102,255,0.4);color:var(--blue-lt);cursor:pointer;font-weight:700;">1</button>
+          <button style="width:40px;height:40px;border-radius:50%;background:rgba(0,200,150,0.2);border:1px solid rgba(0,200,150,0.4);color:var(--blue-lt);cursor:pointer;font-weight:700;">1</button>
           <button style="width:40px;height:40px;border-radius:50%;background:var(--glass-bg);border:1px solid var(--glass-border);color:rgba(240,240,255,0.5);cursor:pointer;">2</button>
           <button style="width:40px;height:40px;border-radius:50%;background:var(--glass-bg);border:1px solid var(--glass-border);color:rgba(240,240,255,0.5);cursor:pointer;">3</button>
           <button style="width:40px;height:40px;border-radius:50%;background:var(--glass-bg);border:1px solid var(--glass-border);color:rgba(240,240,255,0.5);cursor:pointer;">→</button>
@@ -406,7 +406,7 @@
         </div>
 
         <!-- CTA Sidebar -->
-        <div class="glass-card sidebar-card reveal reveal-delay-3" style="background:linear-gradient(135deg,rgba(255,215,0,0.06),rgba(139,0,255,0.08));border-color:rgba(255,215,0,0.15);text-align:center;">
+        <div class="glass-card sidebar-card reveal reveal-delay-3" style="background:linear-gradient(135deg,rgba(255,215,0,0.06),rgba(0,122,94,0.08));border-color:rgba(255,215,0,0.15);text-align:center;">
           <div style="font-size:2.5rem;margin-bottom:12px;">💡</div>
           <h4 style="font-family:var(--font-head);font-size:1rem;font-weight:700;color:var(--white);margin-bottom:10px;">Audit digital gratuit</h4>
           <p style="font-size:0.82rem;color:rgba(240,240,255,0.55);margin-bottom:16px;line-height:1.6;">Recevez une analyse complète de votre présence digitale en 48h.</p>

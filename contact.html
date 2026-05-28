@@ -55,8 +55,8 @@
       font-size: 1.2rem;
       flex-shrink: 0;
     }
-    .c-detail-icon.blue   { background: rgba(0,102,255,0.12); border: 1px solid rgba(0,102,255,0.2); }
-    .c-detail-icon.violet { background: rgba(139,0,255,0.12); border: 1px solid rgba(139,0,255,0.2); }
+    .c-detail-icon.blue   { background: rgba(0,200,150,0.12); border: 1px solid rgba(0,200,150,0.2); }
+    .c-detail-icon.violet { background: rgba(0,122,94,0.12); border: 1px solid rgba(0,122,94,0.2); }
     .c-detail-icon.gold   { background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.15); }
     .c-detail-text h4 { font-size: 0.82rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(240,240,255,0.5); margin-bottom: 3px; }
     .c-detail-text p  { font-size: 0.95rem; color: var(--white); font-weight: 500; }
@@ -83,14 +83,14 @@
       align-items: center;
       gap: 8px;
     }
-    .contact-social-btn:hover { border-color: var(--blue); color: var(--blue-lt); background: rgba(0,102,255,0.08); }
+    .contact-social-btn:hover { border-color: var(--blue); color: var(--blue-lt); background: rgba(0,200,150,0.08); }
 
     /* Map placeholder */
     .map-placeholder {
       border-radius: var(--radius-lg);
       overflow: hidden;
       border: 1px solid var(--glass-border);
-      background: linear-gradient(135deg, rgba(0,102,255,0.06), rgba(139,0,255,0.08));
+      background: linear-gradient(135deg, rgba(0,200,150,0.06), rgba(0,122,94,0.08));
       min-height: 180px;
       display: flex;
       flex-direction: column;
@@ -138,8 +138,8 @@
       transition: var(--transition);
     }
     .type-btn:hover, .type-btn.selected {
-      background: rgba(0,102,255,0.12);
-      border-color: rgba(0,102,255,0.35);
+      background: rgba(0,200,150,0.12);
+      border-color: rgba(0,200,150,0.35);
       color: var(--blue-lt);
     }
     .type-btn .type-icon { display: block; font-size: 1.3rem; margin-bottom: 5px; }
@@ -417,7 +417,7 @@
                   <div style="font-size:0.82rem;font-weight:700;color:rgba(240,240,255,0.7);">Pas de maintenance</div>
                   <div style="font-size:0.75rem;color:rgba(240,240,255,0.4);">Je gère en interne</div>
                 </div>
-                <div class="maintenance-card selected-maintenance" data-plan="starter" onclick="selectMaintenance(this)" style="padding:12px;border:1px solid rgba(0,102,255,0.35);background:rgba(0,102,255,0.08);border-radius:var(--radius);cursor:pointer;transition:var(--transition);">
+                <div class="maintenance-card selected-maintenance" data-plan="starter" onclick="selectMaintenance(this)" style="padding:12px;border:1px solid rgba(0,200,150,0.35);background:rgba(0,200,150,0.08);border-radius:var(--radius);cursor:pointer;transition:var(--transition);">
                   <div style="font-size:0.82rem;font-weight:700;color:var(--blue-lt);">Starter — 35K FCFA/mois</div>
                   <div style="font-size:0.75rem;color:rgba(240,240,255,0.4);">Hébergement + SSL + monitoring</div>
                 </div>
@@ -609,8 +609,8 @@
       c.querySelector('div').style.color = 'rgba(240,240,255,0.7)';
     });
     card.classList.add('selected-maintenance');
-    card.style.border = '1px solid rgba(0,102,255,0.4)';
-    card.style.background = 'rgba(0,102,255,0.08)';
+    card.style.border = '1px solid rgba(0,200,150,0.4)';
+    card.style.background = 'rgba(0,200,150,0.08)';
     card.querySelector('div').style.color = 'var(--blue-lt)';
     updateEstimate();
   }

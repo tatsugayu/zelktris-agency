@@ -176,14 +176,14 @@ function buildPriceMessage(type, complexity, lang) {
 
 // ── STYLES ─────────────────────────────────────────────────────
 const CSS = `
-#zbot-btn{position:fixed;bottom:24px;right:24px;width:62px;height:62px;border-radius:50%;background:linear-gradient(135deg,#0066FF,#8B00FF);border:none;cursor:pointer;box-shadow:0 8px 30px rgba(0,102,255,0.4);z-index:9990;display:flex;align-items:center;justify-content:center;font-size:1.6rem;transition:transform .3s,box-shadow .3s;animation:zbotPulse 3s infinite}
-#zbot-btn:hover{transform:scale(1.1);box-shadow:0 12px 40px rgba(0,102,255,0.6)}
+#zbot-btn{position:fixed;bottom:24px;right:24px;width:62px;height:62px;border-radius:50%;background:linear-gradient(135deg,#00C896,#007A5E);border:none;cursor:pointer;box-shadow:0 8px 30px rgba(0,200,150,0.4);z-index:9990;display:flex;align-items:center;justify-content:center;font-size:1.6rem;transition:transform .3s,box-shadow .3s;animation:zbotPulse 3s infinite}
+#zbot-btn:hover{transform:scale(1.1);box-shadow:0 12px 40px rgba(0,200,150,0.6)}
 #zbot-btn .zbot-notif{position:absolute;top:-4px;right:-4px;width:18px;height:18px;background:#FF3366;border-radius:50%;font-size:.65rem;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;display:none}
-@keyframes zbotPulse{0%,100%{box-shadow:0 8px 30px rgba(0,102,255,0.4)}50%{box-shadow:0 8px 50px rgba(139,0,255,0.6)}}
-#zbot-window{position:fixed;bottom:100px;right:24px;width:380px;max-height:85vh;background:rgba(10,0,24,0.97);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(20px);border-radius:16px;display:flex;flex-direction:column;z-index:9991;box-shadow:0 20px 60px rgba(0,0,0,0.5);transform:scale(0) translateY(20px);transform-origin:bottom right;transition:transform .3s cubic-bezier(.34,1.56,.64,1),opacity .3s;opacity:0;pointer-events:none}
+@keyframes zbotPulse{0%,100%{box-shadow:0 8px 30px rgba(0,200,150,0.4)}50%{box-shadow:0 8px 50px rgba(0,122,94,0.6)}}
+#zbot-window{position:fixed;bottom:100px;right:24px;width:380px;max-height:85vh;background:rgba(0,10,7,0.97);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(20px);border-radius:16px;display:flex;flex-direction:column;z-index:9991;box-shadow:0 20px 60px rgba(0,0,0,0.5);transform:scale(0) translateY(20px);transform-origin:bottom right;transition:transform .3s cubic-bezier(.34,1.56,.64,1),opacity .3s;opacity:0;pointer-events:none}
 #zbot-window.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
-.zbot-header{background:linear-gradient(135deg,rgba(0,102,255,0.15),rgba(139,0,255,0.15));border-bottom:1px solid rgba(255,255,255,0.08);padding:14px 16px;border-radius:16px 16px 0 0;display:flex;align-items:center;gap:10px;flex-shrink:0}
-.zbot-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#0066FF,#8B00FF);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;box-shadow:0 0 20px rgba(0,102,255,0.4)}
+.zbot-header{background:linear-gradient(135deg,rgba(0,200,150,0.15),rgba(0,122,94,0.15));border-bottom:1px solid rgba(255,255,255,0.08);padding:14px 16px;border-radius:16px 16px 0 0;display:flex;align-items:center;gap:10px;flex-shrink:0}
+.zbot-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#00C896,#007A5E);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;box-shadow:0 0 20px rgba(0,200,150,0.4)}
 .zbot-info{flex:1}
 .zbot-name{font-weight:700;font-size:.95rem;color:#F0F0FF;font-family:'Orbitron',sans-serif,monospace}
 .zbot-status{font-size:.72rem;color:#00C853;display:flex;align-items:center;gap:4px}
@@ -194,7 +194,7 @@ const CSS = `
 .zbot-hbtn:hover{background:rgba(255,255,255,0.12);color:#F0F0FF}
 .zbot-lang-bar{padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0}
 .zbot-lang-btn{padding:4px 10px;border-radius:50px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:rgba(240,240,255,.6);font-size:.72rem;cursor:pointer;transition:all .2s}
-.zbot-lang-btn:hover,.zbot-lang-btn.active{background:rgba(0,102,255,0.15);border-color:rgba(0,102,255,.4);color:#00AAFF}
+.zbot-lang-btn:hover,.zbot-lang-btn.active{background:rgba(0,200,150,0.15);border-color:rgba(0,200,150,.4);color:#4DFFC7}
 .zbot-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;min-height:200px;max-height:50vh;scroll-behavior:smooth}
 .zbot-messages::-webkit-scrollbar{width:4px}
 .zbot-messages::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:2px}
@@ -204,28 +204,28 @@ const CSS = `
 .zbot-msg.user{align-self:flex-end}
 .zbot-bubble{padding:10px 14px;border-radius:14px;font-size:.875rem;line-height:1.55;word-break:break-word}
 .zbot-msg.bot .zbot-bubble{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.08);color:#E8E8FF;border-radius:4px 14px 14px 14px}
-.zbot-msg.user .zbot-bubble{background:linear-gradient(135deg,rgba(0,102,255,0.25),rgba(139,0,255,0.2));border:1px solid rgba(139,0,255,0.25);color:#F0F0FF;border-radius:14px 14px 4px 14px}
+.zbot-msg.user .zbot-bubble{background:linear-gradient(135deg,rgba(0,200,150,0.25),rgba(0,122,94,0.2));border:1px solid rgba(0,122,94,0.25);color:#F0F0FF;border-radius:14px 14px 4px 14px}
 .zbot-bubble strong{color:#FFD700;font-weight:700}
-.zbot-bubble em{color:#00AAFF;font-style:normal}
+.zbot-bubble em{color:#4DFFC7;font-style:normal}
 .zbot-typing{display:flex;gap:4px;padding:12px 16px}
 .zbot-typing span{width:7px;height:7px;background:rgba(255,255,255,.3);border-radius:50%;animation:typing 1.2s infinite}
 .zbot-typing span:nth-child(2){animation-delay:.2s}
 .zbot-typing span:nth-child(3){animation-delay:.4s}
 @keyframes typing{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
 .zbot-quick{padding:8px 12px 0;display:flex;flex-wrap:wrap;gap:6px}
-.zbot-quick-btn{padding:6px 12px;border-radius:50px;border:1px solid rgba(0,102,255,0.35);background:rgba(0,102,255,0.08);color:#00AAFF;font-size:.78rem;cursor:pointer;transition:all .2s;white-space:nowrap;max-width:100%;text-overflow:ellipsis;overflow:hidden}
-.zbot-quick-btn:hover{background:rgba(0,102,255,0.2);border-color:rgba(0,102,255,.6)}
+.zbot-quick-btn{padding:6px 12px;border-radius:50px;border:1px solid rgba(0,200,150,0.35);background:rgba(0,200,150,0.08);color:#4DFFC7;font-size:.78rem;cursor:pointer;transition:all .2s;white-space:nowrap;max-width:100%;text-overflow:ellipsis;overflow:hidden}
+.zbot-quick-btn:hover{background:rgba(0,200,150,0.2);border-color:rgba(0,200,150,.6)}
 .zbot-quick-btn.gold{border-color:rgba(255,215,0,.4);background:rgba(255,215,0,.06);color:#FFD700}
 .zbot-quick-btn.green{border-color:rgba(0,200,83,.4);background:rgba(0,200,83,.07);color:#00C853}
 .zbot-quick-btn.red{border-color:rgba(255,51,102,.35);background:rgba(255,51,102,.07);color:#FF6699}
 .zbot-footer{padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);display:flex;gap:8px;align-items:center;flex-shrink:0}
 #zbot-input{flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#F0F0FF;padding:9px 14px;border-radius:50px;font-size:.88rem;outline:none;transition:border-color .3s;font-family:inherit}
-#zbot-input:focus{border-color:rgba(0,102,255,.5)}
+#zbot-input:focus{border-color:rgba(0,200,150,.5)}
 #zbot-input::placeholder{color:rgba(240,240,255,.3)}
-#zbot-send{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#0066FF,#8B00FF);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;transition:transform .2s}
+#zbot-send{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#00C896,#007A5E);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;transition:transform .2s}
 #zbot-send:hover{transform:scale(1.1)}
 .zbot-progress{height:3px;background:rgba(255,255,255,0.05);flex-shrink:0}
-.zbot-progress-bar{height:100%;background:linear-gradient(90deg,#0066FF,#8B00FF);border-radius:0;transition:width .5s ease}
+.zbot-progress-bar{height:100%;background:linear-gradient(90deg,#00C896,#007A5E);border-radius:0;transition:width .5s ease}
 @media(max-width:440px){#zbot-window{width:calc(100vw - 16px);right:8px;bottom:90px}}
 `;
 
@@ -342,7 +342,7 @@ function zbotBotMsg(text, quickReplies) {
     if (el) el.remove();
     const formatted = text
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/→/g, '<span style="color:#00AAFF">→</span>')
+      .replace(/→/g, '<span style="color:#4DFFC7">→</span>')
       .replace(/✅/g, '<span style="color:#00C853">✅</span>')
       .replace(/🔴/g, '<span>🔴</span>')
       .replace(/\n/g, '<br>');

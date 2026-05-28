@@ -12,10 +12,10 @@
   --bg3:#110020;
   --card:rgba(255,255,255,0.04);
   --border:rgba(255,255,255,0.08);
-  --blue:#0066FF;
-  --blue-lt:#00AAFF;
-  --violet:#8B00FF;
-  --violet-lt:#B44FFF;
+  --blue:#00C896;
+  --blue-lt:#4DFFC7;
+  --violet:#007A5E;
+  --violet-lt:#00A87D;
   --gold:#FFD700;
   --green:#00C853;
   --red:#FF3366;
@@ -27,7 +27,7 @@ html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.6;min-height:100vh}
 
 /* LOGIN */
-#loginScreen{position:fixed;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(139,0,255,0.1),transparent 60%),radial-gradient(ellipse at 70% 60%,rgba(0,102,255,0.08),transparent 60%),var(--bg);display:flex;align-items:center;justify-content:center;z-index:1000}
+#loginScreen{position:fixed;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(0,122,94,0.1),transparent 60%),radial-gradient(ellipse at 70% 60%,rgba(0,200,150,0.08),transparent 60%),var(--bg);display:flex;align-items:center;justify-content:center;z-index:1000}
 .login-box{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(20px);padding:3rem 2.5rem;width:100%;max-width:420px;text-align:center}
 .login-logo{font-size:2rem;font-weight:900;letter-spacing:.1em;background:linear-gradient(135deg,var(--white),var(--blue-lt));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.3rem}
 .login-sub{font-size:.8rem;color:var(--gray);letter-spacing:.2em;text-transform:uppercase;margin-bottom:2.5rem}
@@ -53,7 +53,7 @@ body{background:var(--bg);color:var(--white);font-family:'Segoe UI',system-ui,sa
 .nav-section{padding:.5rem 1.2rem .3rem;font-size:.65rem;color:rgba(240,240,255,0.3);letter-spacing:.15em;text-transform:uppercase;font-weight:700}
 .nav-item{display:flex;align-items:center;gap:.8rem;padding:.7rem 1.5rem;color:var(--gray);text-decoration:none;font-size:.88rem;font-weight:500;cursor:pointer;transition:all .2s;border-left:3px solid transparent;user-select:none}
 .nav-item:hover{color:var(--white);background:rgba(255,255,255,0.04)}
-.nav-item.active{color:var(--white);background:rgba(0,102,255,0.1);border-left-color:var(--blue)}
+.nav-item.active{color:var(--white);background:rgba(0,200,150,0.1);border-left-color:var(--blue)}
 .nav-item .nav-icon{font-size:1rem;min-width:20px;text-align:center}
 .nav-badge{margin-left:auto;background:var(--red);color:#fff;font-size:.65rem;font-weight:700;padding:.15rem .5rem;border-radius:50px;min-width:20px;text-align:center}
 .nav-badge.green{background:var(--green)}
@@ -107,7 +107,7 @@ td{padding:.85rem 1.5rem;font-size:.85rem;color:var(--white);border-bottom:1px s
 tr:last-child td{border-bottom:none}
 tr:hover td{background:rgba(255,255,255,0.02)}
 .status-badge{padding:.2rem .7rem;border-radius:50px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
-.status-badge.new{background:rgba(0,102,255,0.15);color:var(--blue-lt);border:1px solid rgba(0,102,255,0.3)}
+.status-badge.new{background:rgba(0,200,150,0.15);color:var(--blue-lt);border:1px solid rgba(0,200,150,0.3)}
 .status-badge.read{background:rgba(240,240,255,0.05);color:var(--gray);border:1px solid var(--border)}
 .status-badge.replied{background:rgba(0,200,83,0.12);color:var(--green);border:1px solid rgba(0,200,83,0.3)}
 .action-icon{background:none;border:none;color:var(--gray);cursor:pointer;font-size:1rem;padding:.2rem .4rem;transition:color .2s;border-radius:4px}
