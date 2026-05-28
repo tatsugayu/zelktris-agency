@@ -1,4 +1,4 @@
-/* ================================================================
+﻿/* ================================================================
    ZELKTRIS AGENCY — Chatbot IA Multilingue
    Langues : Français · English · Pidgin · Ewondo · Bassa · Fulfulde
    ================================================================ */
@@ -513,7 +513,7 @@ async function zbotSendEmail() {
   };
 
   try {
-    const API = window.location.hostname === 'localhost' ? 'http://localhost:4000' : 'https://zelktris-api.onrender.com';
+    const API = window.location.hostname === 'localhost' ? 'http://localhost:4000' : 'https://zelktris-agency.onrender.com';
     const res = await fetch(`${API}/api/contact`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

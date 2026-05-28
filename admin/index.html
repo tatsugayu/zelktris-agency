@@ -611,7 +611,7 @@ function refreshData(){ fetchFromAPI(); renderDashboard(); }
 // ── API FETCH ─────────────────────────────────────────────────
 async function fetchFromAPI(){
   try {
-    const apiBase = window.location.hostname === 'localhost' ? 'http://localhost:4000' : 'https://zelktris-api.onrender.com';
+    const apiBase = window.location.hostname === 'localhost' ? 'http://localhost:4000' : 'https://zelktris-agency.onrender.com';
     const res = await fetch(apiBase + '/api/admin/data', {
       headers: { 'X-Admin-Token': btoa(JSON.stringify(STORAGE.get('creds'))) }
     });
