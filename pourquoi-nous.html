@@ -1,0 +1,575 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Zelktris Agency — Pourquoi nous choisir ? Transparence totale, prix en FCFA, code source livré, équipe locale. Découvrez ce qui nous rend différents.">
+  <title>Pourquoi Zelktris ? — L'Agence Qui Vous Dit La Vérité</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600&display=swap"></noscript>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Why Us specific styles ── */
+    .truth-section {
+      padding: 100px 6%;
+      position: relative;
+      z-index: 2;
+    }
+    .truth-banner {
+      background: linear-gradient(135deg, rgba(0,200,150,0.08), rgba(255,215,0,0.05));
+      border: 1px solid rgba(0,200,150,0.2);
+      border-radius: var(--radius-lg);
+      padding: 48px 56px;
+      margin-bottom: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .truth-banner::before {
+      content: '"';
+      position: absolute;
+      top: -20px; left: 32px;
+      font-size: 15rem;
+      font-family: var(--font-head);
+      color: var(--blue);
+      opacity: 0.05;
+      line-height: 1;
+    }
+    .truth-banner p {
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      line-height: 1.7;
+      color: rgba(240,240,255,0.85);
+      max-width: 800px;
+      position: relative;
+      z-index: 1;
+    }
+    .truth-banner p strong {
+      color: var(--white);
+    }
+    .truth-banner .truth-sig {
+      margin-top: 24px;
+      font-size: 0.82rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    /* ── Comparison table ── */
+    .compare-section {
+      padding: 80px 6%;
+      position: relative;
+      z-index: 2;
+    }
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-top: 56px;
+    }
+    .compare-col {
+      padding: 40px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+    }
+    .compare-col.our-col {
+      background: rgba(0,200,150,0.05);
+      border-color: rgba(0,200,150,0.25);
+    }
+    .compare-col-label {
+      font-size: 0.72rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .compare-col-label.them { color: rgba(240,240,255,0.35); }
+    .compare-col-label.us   { color: var(--blue); }
+    .compare-col-label.us::after {
+      content: '✦ ZELKTRIS';
+      font-weight: 700;
+    }
+    .compare-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .compare-item:last-child { border-bottom: none; }
+    .compare-icon {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .compare-icon.bad  { background: rgba(255,80,80,0.1); color: #ff5050; font-size: 0.75rem; }
+    .compare-icon.good { background: rgba(0,200,150,0.1); color: var(--blue); font-size: 0.75rem; }
+    .compare-text {
+      font-size: 0.9rem;
+      color: rgba(240,240,255,0.7);
+      line-height: 1.5;
+    }
+    .compare-text strong { color: var(--white); }
+    @media (max-width: 700px) {
+      .compare-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── Pillars ── */
+    .pillars-section {
+      padding: 80px 6%;
+      position: relative;
+      z-index: 2;
+    }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .pillar-card {
+      padding: 40px 32px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      transition: border-color 0.3s, background 0.3s;
+      cursor: default;
+    }
+    .pillar-card:hover {
+      border-color: rgba(0,200,150,0.35);
+      background: rgba(0,200,150,0.04);
+    }
+    .pillar-num {
+      font-family: var(--font-head);
+      font-size: 3rem;
+      font-weight: 900;
+      color: rgba(0,200,150,0.12);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .pillar-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: rgba(0,200,150,0.1);
+      border: 1px solid rgba(0,200,150,0.2);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+    }
+    .pillar-icon svg {
+      width: 22px; height: 22px;
+      stroke: var(--blue); fill: none; stroke-width: 1.5;
+    }
+    .pillar-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .pillar-desc {
+      font-size: 0.87rem;
+      color: rgba(240,240,255,0.55);
+      line-height: 1.7;
+    }
+    @media (max-width: 900px) { .pillars-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .pillars-grid { grid-template-columns: 1fr; } }
+
+    /* ── Promise cards ── */
+    .promises-section {
+      padding: 80px 6%;
+      position: relative;
+      z-index: 2;
+    }
+    .promise-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-top: 56px;
+    }
+    .promise-item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      align-items: center;
+      gap: 32px;
+      padding: 28px 36px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .promise-item:first-child { border-radius: var(--radius) var(--radius) 0 0; }
+    .promise-item:last-child  { border-radius: 0 0 var(--radius) var(--radius); }
+    .promise-item:hover {
+      background: rgba(0,200,150,0.04);
+      border-color: rgba(0,200,150,0.25);
+    }
+    .promise-num {
+      font-family: var(--font-head);
+      font-size: 2rem;
+      font-weight: 900;
+      color: rgba(0,200,150,0.2);
+    }
+    .promise-body h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .promise-body p {
+      font-size: 0.85rem;
+      color: rgba(240,240,255,0.5);
+      line-height: 1.6;
+    }
+    .promise-tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--blue);
+      white-space: nowrap;
+      padding: 6px 14px;
+      border: 1px solid rgba(0,200,150,0.25);
+      border-radius: 50px;
+    }
+    @media (max-width: 700px) {
+      .promise-item { grid-template-columns: 1fr; gap: 12px; padding: 24px; }
+      .promise-num  { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div id="preloader" aria-hidden="true">
+  <div class="pre-logo">ZEL<span>KTRIS</span></div>
+  <div class="pre-line"></div>
+</div>
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+<div class="grain-overlay" aria-hidden="true"></div>
+<canvas id="galaxy-canvas" aria-hidden="true"></canvas>
+
+<div class="page-wrapper">
+
+  <!-- NAVBAR -->
+  <header class="navbar" role="banner">
+    <a href="index.html" class="nav-logo" aria-label="Zelktris Agency">ZEL<span>KTRIS</span></a>
+    <ul class="nav-links" role="navigation" aria-label="Navigation principale">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="about.html">Agence</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="pourquoi-nous.html" class="active">Pourquoi Nous</a></li>
+      <li><a href="contrat.html">Comment on Travaille</a></li>
+      <li><a href="contact.html" class="nav-cta btn-magnetic">Devis Gratuit</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+  <div class="mobile-menu" aria-hidden="true">
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="about.html">Agence</a>
+      <a href="services.html">Services</a>
+      <a href="pourquoi-nous.html">Pourquoi Nous</a>
+      <a href="contrat.html">Comment on Travaille</a>
+      <a href="contact.html">Devis Gratuit →</a>
+    </nav>
+  </div>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="page-hero-cin" aria-label="Pourquoi choisir Zelktris Agency">
+    <div class="cin-orb cin-orb-1" aria-hidden="true"></div>
+    <div class="cin-orb cin-orb-2" aria-hidden="true"></div>
+    <div class="page-breadcrumb">
+      <a href="index.html">Accueil</a><span>/</span>Pourquoi Nous
+    </div>
+    <h1 class="page-hero-title">
+      Pourquoi<br><span class="accent">Zelktris</span><br><span class="gold">?</span>
+    </h1>
+    <div class="page-hero-line" aria-hidden="true"></div>
+    <p class="page-hero-sub">
+      Pas de discours creux. Pas de faux chiffres. Voici la vérité nue sur ce que nous sommes, ce que nous faisons — et pourquoi ça change tout pour votre projet.
+    </p>
+  </section>
+
+  <!-- ═══ LA VÉRITÉ ═══ -->
+  <section class="truth-section" aria-label="Notre vérité">
+    <div class="truth-banner reveal">
+      <p>
+        Nous sommes une <strong>agence nouvelle</strong>, et nous l'assumons fièrement. Nous n'avons pas 10 ans d'existence, pas 500 projets au compteur — nous avons quelque chose de plus rare : une <strong>obsession pour l'excellence</strong>, les meilleurs outils du moment (IA, GSAP, frameworks modernes), et une promesse que les grandes agences ne peuvent pas tenir : <strong>vous, votre projet, est notre priorité absolue.</strong> Pas un dossier parmi 200.
+      </p>
+      <div class="truth-sig">— La Fondation Zelktris Agency · Bonapriso, Douala</div>
+    </div>
+  </section>
+
+  <!-- ═══ COMPARAISON ═══ -->
+  <section class="compare-section" aria-label="Zelktris vs autres agences">
+    <div class="section-header">
+      <span class="section-eyebrow">Comparaison honnête</span>
+      <h2 class="reveal-title">Eux vs <span class="accent">Nous</span></h2>
+      <p style="margin-top:12px;color:rgba(240,240,255,0.5);font-size:0.9rem;max-width:520px;">
+        Ce que les autres agences ne vous diront jamais — et ce que nous nous engageons à faire différemment.
+      </p>
+    </div>
+    <div class="compare-grid reveal">
+      <div class="compare-col">
+        <div class="compare-col-label them">Les autres agences</div>
+        <div class="compare-item">
+          <div class="compare-icon bad">✕</div>
+          <div class="compare-text"><strong>Devis en euros ou dollars</strong> — inaccessible pour beaucoup d'entreprises camerounaises</div>
+        </div>
+        <div class="compare-item">
+          <div class="compare-icon bad">✕</div>
+          <div class="compare-text"><strong>Code source retenu</strong> — vous êtes leur otage, impossible de changer de prestataire</div>
+        </div>
+        <div class="compare-item">
+          <div class="compare-icon bad">✕</div>
+          <div class="compare-text"><strong>Délais non respectés</strong> — votre projet file en basse priorité quand un grand client arrive</div>
+        </div>
+        <div class="compare-item">
+          <div class="compare-icon bad">✕</div>
+          <div class="compare-text"><strong>Maintenance payante sur tout</strong> — moindre changement de texte = facture</div>
+        </div>
+        <div class="compare-item">
+          <div class="compare-icon bad">✕</div>
+          <div class="compare-text"><strong>Inaccessibles après livraison</strong> — le service après-vente ? Introuvable</div>
+        </div>
+        <div class="compare-item">
+          <div class="compare-icon bad">✕</div>
+          <div class="compare-text"><strong>Site non optimisé mobile</strong> — conçu pour desktop, l'Afrique utilise son téléphone</div>
+        </div>
+        <div class="compare-item">
+          <div class="compare-icon bad">✕</div>
+          <div class="compare-text"><strong>Prix gonflés par des intermédiaires</strong> — vous payez la hiérarchie, pas la qualité</div>
+        </div>
+      </div>
+      <div class="compare-col our-col">
+        <div class="compare-col-label us"></div>
+        <div class="compare-item">
+          <div class="compare-icon good">✓</div>
+          <div class="compare-text"><strong>Paiement 100% en FCFA</strong> — prix adaptés à la réalité économique locale, zéro frais de change</div>
+        </div>
+        <div class="compare-item">
+          <div class="compare-icon good">✓</div>
+          <div class="compare-text"><strong>Code source livré à la fin</strong> — le projet vous appartient entièrement, sans exception</div>
+        </div>
+        <div class="compare-item">
+          <div class="compare-icon good">✓</div>
+          <div class="compare-text"><strong>Délais contractuels respectés</strong> — pénalité prévue si nous dépassons, inscrite dans le contrat</div>
+        </div>
+        <div class="compare-item">
+          <div class="compare-icon good">✓</div>
+          <div class="compare-text"><strong>Formation incluse</strong> — vous apprenez à gérer votre site/app en autonomie</div>
+        </div>
+        <div class="compare-item">
+          <div class="compare-icon good">✓</div>
+          <div class="compare-text"><strong>Support 7j/7 post-livraison</strong> — nous répondons en moins de 24h, WhatsApp inclus</div>
+        </div>
+        <div class="compare-item">
+          <div class="compare-icon good">✓</div>
+          <div class="compare-text"><strong>Mobile First par défaut</strong> — conçu d'abord pour smartphone, parfait sur les réseaux africains</div>
+        </div>
+        <div class="compare-item">
+          <div class="compare-icon good">✓</div>
+          <div class="compare-text"><strong>Prix justes, 0 intermédiaire</strong> — vous travaillez directement avec les créateurs de votre projet</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ NOS PILIERS ═══ -->
+  <section class="pillars-section" aria-label="Nos piliers fondamentaux">
+    <div class="section-header">
+      <span class="section-eyebrow">Ce qui nous définit</span>
+      <h2 class="reveal-title">Nos <span class="accent">6 piliers</span></h2>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar-card reveal">
+        <div class="pillar-num">01</div>
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        </div>
+        <h3 class="pillar-title">Transparence Totale</h3>
+        <p class="pillar-desc">Devis détaillé ligne par ligne. Pas de frais cachés, pas de mauvaises surprises. Vous savez exactement ce que vous payez et pourquoi.</p>
+      </div>
+      <div class="pillar-card reveal">
+        <div class="pillar-num">02</div>
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3 class="pillar-title">Rapidité d'Exécution</h3>
+        <p class="pillar-desc">Nous utilisons les meilleurs outils IA et frameworks modernes pour livrer en 2 à 4 fois moins de temps que les méthodes traditionnelles, sans sacrifier la qualité.</p>
+      </div>
+      <div class="pillar-card reveal">
+        <div class="pillar-num">03</div>
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h3 class="pillar-title">Relation Directe</h3>
+        <p class="pillar-desc">Vous parlez directement aux créateurs de votre projet. Pas de commercial intermédiaire, pas de perte d'information. Une relation humaine et directe à Douala.</p>
+      </div>
+      <div class="pillar-card reveal">
+        <div class="pillar-num">04</div>
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3 class="pillar-title">Standards Mondiaux</h3>
+        <p class="pillar-desc">Technologies de pointe utilisées par les plus grandes entreprises mondiales — React, Next.js, Flutter, Node.js, IA — appliquées aux réalités africaines.</p>
+      </div>
+      <div class="pillar-card reveal">
+        <div class="pillar-num">05</div>
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 class="pillar-title">Propriété Garantie</h3>
+        <p class="pillar-desc">Code source, maquettes, contenus, domaine — tout vous appartient à 100% à la livraison finale. Inscrit contractuellement, sans ambiguïté.</p>
+      </div>
+      <div class="pillar-card reveal">
+        <div class="pillar-num">06</div>
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+        </div>
+        <h3 class="pillar-title">Passion du Détail</h3>
+        <p class="pillar-desc">Nous ne livrons pas "quelque chose qui fonctionne". Nous livrons quelque chose dont vous serez fier — chaque pixel, chaque interaction, chaque ligne de code.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ NOS PROMESSES ═══ -->
+  <section class="promises-section" aria-label="Nos engagements contractuels">
+    <div class="section-header">
+      <span class="section-eyebrow">Inscrit dans le contrat</span>
+      <h2 class="reveal-title">Nos <span class="gold">engagements</span> écrits</h2>
+      <p style="margin-top:12px;color:rgba(240,240,255,0.5);font-size:0.9rem;max-width:520px;">
+        Ces engagements ne sont pas des promesses verbales. Ils sont dans chaque contrat que nous signons.
+      </p>
+    </div>
+    <div class="promise-list reveal">
+      <div class="promise-item">
+        <div class="promise-num">01</div>
+        <div class="promise-body">
+          <h3>Livraison dans les délais</h3>
+          <p>Si nous dépassons le délai contractuel sans raison valable de votre côté, nous vous accordons une remise de 10% sur la facture finale. Automatiquement.</p>
+        </div>
+        <div class="promise-tag">Délai Garanti</div>
+      </div>
+      <div class="promise-item">
+        <div class="promise-num">02</div>
+        <div class="promise-body">
+          <h3>Code source remis à la livraison</h3>
+          <p>Fichiers complets, documentés, hébergés sur un dépôt Git privé à votre nom. Vous êtes propriétaire dès le paiement final.</p>
+        </div>
+        <div class="promise-tag">Propriété Totale</div>
+      </div>
+      <div class="promise-item">
+        <div class="promise-num">03</div>
+        <div class="promise-body">
+          <h3>30 jours de corrections gratuites</h3>
+          <p>Après la livraison, tout bug ou comportement non conforme au cahier des charges est corrigé gratuitement pendant 30 jours, sans discussion.</p>
+        </div>
+        <div class="promise-tag">Post-Livraison</div>
+      </div>
+      <div class="promise-item">
+        <div class="promise-num">04</div>
+        <div class="promise-body">
+          <h3>Devis fixe, pas de surprise</h3>
+          <p>Le devis signé est le prix final. Aucune charge supplémentaire cachée dans le processus sauf si vous demandez des fonctionnalités nouvelles hors périmètre initial.</p>
+        </div>
+        <div class="promise-tag">Prix Fixe</div>
+      </div>
+      <div class="promise-item">
+        <div class="promise-num">05</div>
+        <div class="promise-body">
+          <h3>Formation à la prise en main</h3>
+          <p>Session de formation incluse : vous apprenez à mettre à jour votre site, gérer vos contenus, comprendre vos statistiques. Autonomie totale garantie.</p>
+        </div>
+        <div class="promise-tag">Formation Incluse</div>
+      </div>
+      <div class="promise-item">
+        <div class="promise-num">06</div>
+        <div class="promise-body">
+          <h3>Confidentialité absolue</h3>
+          <p>Vos données, votre concept, votre stratégie — protégés par un accord de confidentialité (NDA) signé dès le premier échange si vous le souhaitez.</p>
+        </div>
+        <div class="promise-tag">NDA Disponible</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="cta-cinematic" aria-label="Appel à l'action">
+    <h2 class="cta-headline">
+      Convaincu ?<br><em>Passons à l'action.</em>
+    </h2>
+    <p class="cta-sub">
+      Un échange de 30 minutes suffit pour comprendre votre projet et vous proposer un devis sur mesure. Gratuit, sans engagement.
+    </p>
+    <a href="contact.html" class="btn-cta-big btn-magnetic">Démarrer maintenant</a>
+    <p class="cta-details">+237 698 486 212 · contact@zelktrisagency.com · Bonapriso, Douala</p>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer-v2" role="contentinfo">
+    <div class="footer-v2-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="font-size:1.6rem;">ZEL<span>KTRIS</span></a>
+        <p>Agence digitale premium basée à Bonapriso, Douala. Transparence totale, résultats concrets.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="about.html">L'Agence</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="pourquoi-nous.html">Pourquoi Nous</a></li>
+          <li><a href="contrat.html">Comment on Travaille</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Nos engagements</h4>
+        <ul>
+          <li><a href="pourquoi-nous.html">Transparence totale</a></li>
+          <li><a href="pourquoi-nous.html">Code source livré</a></li>
+          <li><a href="pourquoi-nous.html">Paiement en FCFA</a></li>
+          <li><a href="pourquoi-nous.html">Support 7j/7</a></li>
+          <li><a href="contrat.html">Contrat clair</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          <span>+237 698 486 212</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          <span>contact@zelktrisagency.com</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          <span>Bonapriso, Douala, Cameroun</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-v2-bottom">
+      <p>&copy; 2025 <a href="index.html">Zelktris Agency</a>. Tous droits réservés.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social-btn" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://wa.me/237698486212" class="footer-social-btn" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script src="chatbot.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="galaxy.js" defer></script>
+<script src="animations.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Zelktris Agency — Comment on travaille. Notre processus transparent étape par étape, de la prise de contact à la livraison finale. Contrat clair, zéro surprise.">
+  <title>Comment on Travaille — Zelktris Agency</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600&display=swap"></noscript>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Timeline ── */
+    .timeline-section { padding: 100px 6%; position: relative; z-index: 2; }
+    .timeline { position: relative; margin-top: 64px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 40px; top: 0; bottom: 0;
+      width: 1px; background: linear-gradient(180deg, var(--blue), rgba(0,200,150,0.05));
+    }
+    .timeline-step {
+      display: grid; grid-template-columns: 80px 1fr;
+      gap: 32px; margin-bottom: 40px; position: relative;
+    }
+    .timeline-marker { display: flex; flex-direction: column; align-items: center; z-index: 1; }
+    .timeline-dot {
+      width: 42px; height: 42px; border-radius: 50%;
+      border: 2px solid var(--blue); background: var(--deep);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-head); font-size: 0.72rem; font-weight: 700; color: var(--blue);
+      flex-shrink: 0; transition: background 0.3s, box-shadow 0.3s;
+    }
+    .timeline-step:hover .timeline-dot { background: rgba(0,200,150,0.12); box-shadow: 0 0 20px rgba(0,200,150,0.3); }
+    .timeline-content {
+      padding: 32px 36px; background: var(--glass-bg); border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg); backdrop-filter: var(--glass-blur);
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .timeline-step:hover .timeline-content { border-color: rgba(0,200,150,0.3); background: rgba(0,200,150,0.03); }
+    .timeline-phase { font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
+    .timeline-title { font-family: var(--font-head); font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; }
+    .timeline-desc { font-size: 0.88rem; color: rgba(240,240,255,0.58); line-height: 1.75; margin-bottom: 16px; }
+    .timeline-details { display: flex; flex-wrap: wrap; gap: 8px; }
+    .t-chip {
+      padding: 4px 12px; background: rgba(0,200,150,0.07); border: 1px solid rgba(0,200,150,0.15);
+      border-radius: 50px; font-size: 0.72rem; color: rgba(240,240,255,0.55);
+    }
+    .timeline-duration { margin-top: 12px; font-size: 0.78rem; color: var(--gold); display: flex; align-items: center; gap: 6px; }
+    .timeline-duration svg { width: 14px; height: 14px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+    @media (max-width: 600px) {
+      .timeline::before { left: 20px; }
+      .timeline-step { grid-template-columns: 44px 1fr; gap: 16px; }
+      .timeline-dot { width: 34px; height: 34px; font-size: 0.6rem; }
+      .timeline-content { padding: 22px 18px; }
+    }
+    /* ── Payment ── */
+    .payment-section { padding: 80px 6%; position: relative; z-index: 2; }
+    .payment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; }
+    .payment-card {
+      padding: 40px; border-radius: var(--radius-lg);
+      border: 1px solid var(--glass-border); background: var(--glass-bg);
+    }
+    .payment-card.hl { border-color: rgba(0,200,150,0.3); background: rgba(0,200,150,0.04); }
+    .payment-badge {
+      display: inline-block; padding: 5px 14px; border-radius: 50px;
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px;
+    }
+    .badge-green { background: rgba(0,200,150,0.12); color: var(--blue); }
+    .badge-gold  { background: rgba(255,215,0,0.1);  color: var(--gold); }
+    .payment-pct { font-family: var(--font-head); font-size: 3.5rem; font-weight: 900; color: var(--blue); line-height: 1; }
+    .payment-pct.gold { color: var(--gold); }
+    .payment-label { font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(240,240,255,0.4); margin-top: 8px; }
+    .payment-card p { font-size: 0.87rem; color: rgba(240,240,255,0.55); line-height: 1.7; margin-top: 20px; }
+    @media (max-width: 700px) { .payment-grid { grid-template-columns: 1fr; } }
+    /* ── Checklist ── */
+    .checklist-section { padding: 80px 6%; position: relative; z-index: 2; }
+    .checklist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; }
+    .checklist-card { padding: 36px; border-radius: var(--radius-lg); border: 1px solid var(--glass-border); background: var(--glass-bg); }
+    .checklist-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .checklist-card h3 svg { width: 20px; height: 20px; stroke: var(--blue); fill: none; stroke-width: 1.5; }
+    .checklist-item {
+      display: flex; align-items: flex-start; gap: 12px; padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.87rem; color: rgba(240,240,255,0.62); line-height: 1.55;
+    }
+    .checklist-item:last-child { border-bottom: none; }
+    .check-dot {
+      width: 18px; height: 18px; border-radius: 50%; background: rgba(0,200,150,0.1);
+      border: 1px solid rgba(0,200,150,0.25); display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px; font-size: 0.6rem; color: var(--blue);
+    }
+    @media (max-width: 700px) { .checklist-grid { grid-template-columns: 1fr; } }
+    /* ── FAQ ── */
+    .faq-section { padding: 80px 6%; position: relative; z-index: 2; }
+    .faq-list { margin-top: 56px; max-width: 820px; }
+    .faq-item { border-bottom: 1px solid var(--glass-border); }
+    .faq-q {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 24px 0; cursor: pointer; font-weight: 600; font-size: 0.95rem; gap: 20px; transition: color 0.3s;
+    }
+    .faq-q:hover { color: var(--blue); }
+    .faq-q svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; flex-shrink: 0; transition: transform 0.3s; }
+    .faq-item.open .faq-q { color: var(--blue); }
+    .faq-item.open .faq-q svg { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; font-size: 0.88rem; color: rgba(240,240,255,0.55); line-height: 1.75; transition: max-height 0.4s ease, padding 0.3s; }
+    .faq-item.open .faq-a { max-height: 300px; padding-bottom: 20px; }
+  </style>
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div id="preloader" aria-hidden="true">
+  <div class="pre-logo">ZEL<span>KTRIS</span></div>
+  <div class="pre-line"></div>
+</div>
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+<div class="grain-overlay" aria-hidden="true"></div>
+<canvas id="galaxy-canvas" aria-hidden="true"></canvas>
+
+<div class="page-wrapper">
+
+  <header class="navbar" role="banner">
+    <a href="index.html" class="nav-logo" aria-label="Zelktris Agency">ZEL<span>KTRIS</span></a>
+    <ul class="nav-links" role="navigation" aria-label="Navigation principale">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="about.html">Agence</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="pourquoi-nous.html">Pourquoi Nous</a></li>
+      <li><a href="contrat.html" class="active">Comment on Travaille</a></li>
+      <li><a href="contact.html" class="nav-cta btn-magnetic">Devis Gratuit</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+  <div class="mobile-menu" aria-hidden="true">
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="about.html">Agence</a>
+      <a href="services.html">Services</a>
+      <a href="pourquoi-nous.html">Pourquoi Nous</a>
+      <a href="contrat.html">Comment on Travaille</a>
+      <a href="contact.html">Devis Gratuit →</a>
+    </nav>
+  </div>
+
+  <!-- HERO -->
+  <section class="page-hero-cin" aria-label="Comment Zelktris Agency travaille">
+    <div class="cin-orb cin-orb-1" aria-hidden="true"></div>
+    <div class="cin-orb cin-orb-2" aria-hidden="true"></div>
+    <div class="page-breadcrumb"><a href="index.html">Accueil</a><span>/</span>Comment on Travaille</div>
+    <h1 class="page-hero-title">Comment on<br><span class="accent">travaille</span></h1>
+    <div class="page-hero-line" aria-hidden="true"></div>
+    <p class="page-hero-sub">
+      Zéro ambiguïté. De la première prise de contact à la livraison finale — voici exactement ce qui se passe, quand, et comment. Parce que vous méritez de savoir.
+    </p>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="timeline-section" aria-label="Processus étape par étape">
+    <div class="section-header">
+      <span class="section-eyebrow">Le processus</span>
+      <h2 class="reveal-title">De l'idée à la <span class="accent">mise en ligne</span></h2>
+    </div>
+    <div class="timeline">
+
+      <div class="timeline-step reveal">
+        <div class="timeline-marker"><div class="timeline-dot">01</div></div>
+        <div class="timeline-content">
+          <div class="timeline-phase">Phase 1 · Découverte</div>
+          <h3 class="timeline-title">Prise de contact &amp; Brief</h3>
+          <p class="timeline-desc">Vous nous contactez via le formulaire, WhatsApp ou email. Nous vous rappelons dans les 24h pour un premier échange de 30 minutes — gratuit et sans engagement — pour comprendre votre projet, vos objectifs, votre budget et vos délais.</p>
+          <div class="timeline-details">
+            <span class="t-chip">Appel ou rencontre physique à Douala</span>
+            <span class="t-chip">Document de brief fourni</span>
+            <span class="t-chip">100% gratuit</span>
+          </div>
+          <div class="timeline-duration"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Durée : 24 à 48h</div>
+        </div>
+      </div>
+
+      <div class="timeline-step reveal">
+        <div class="timeline-marker"><div class="timeline-dot">02</div></div>
+        <div class="timeline-content">
+          <div class="timeline-phase">Phase 2 · Proposition</div>
+          <h3 class="timeline-title">Devis détaillé &amp; Cahier des charges</h3>
+          <p class="timeline-desc">Nous rédigeons un devis complet ligne par ligne : fonctionnalités, pages, technologies, délais, prix en FCFA. Un cahier des charges clair liste exactement ce qui sera livré. Vous validez ou demandez des ajustements — sans frais.</p>
+          <div class="timeline-details">
+            <span class="t-chip">Devis PDF détaillé</span>
+            <span class="t-chip">Cahier des charges complet</span>
+            <span class="t-chip">Révisions illimitées</span>
+            <span class="t-chip">Prix fixe garanti</span>
+          </div>
+          <div class="timeline-duration"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Durée : 2 à 5 jours</div>
+        </div>
+      </div>
+
+      <div class="timeline-step reveal">
+        <div class="timeline-marker"><div class="timeline-dot">03</div></div>
+        <div class="timeline-content">
+          <div class="timeline-phase">Phase 3 · Contrat</div>
+          <h3 class="timeline-title">Signature du contrat &amp; Acompte 50%</h3>
+          <p class="timeline-desc">Un contrat simple et clair est signé par les deux parties. Il précise : le périmètre exact du projet, les délais, les modalités de paiement, la propriété du code source, et les 30 jours de corrections garanties. L'acompte de 50% confirme le démarrage.</p>
+          <div class="timeline-details">
+            <span class="t-chip">Contrat en français</span>
+            <span class="t-chip">Signature numérique ou physique</span>
+            <span class="t-chip">MTN / Orange / Virement</span>
+            <span class="t-chip">NDA disponible sur demande</span>
+          </div>
+          <div class="timeline-duration"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Durée : 1 jour</div>
+        </div>
+      </div>
+
+      <div class="timeline-step reveal">
+        <div class="timeline-marker"><div class="timeline-dot">04</div></div>
+        <div class="timeline-content">
+          <div class="timeline-phase">Phase 4 · Création</div>
+          <h3 class="timeline-title">Design &amp; Développement en sprints</h3>
+          <p class="timeline-desc">Nous travaillons en sprints de 1 semaine avec livraison d'un lien de prévisualisation à chaque sprint. Vous voyez l'avancement en temps réel, donnez vos retours, on ajuste. Deux cycles de révision complets sont inclus dans le prix.</p>
+          <div class="timeline-details">
+            <span class="t-chip">Maquettes Figma d'abord</span>
+            <span class="t-chip">Lien de démo hebdomadaire</span>
+            <span class="t-chip">WhatsApp quotidien</span>
+            <span class="t-chip">2 cycles de révision inclus</span>
+          </div>
+          <div class="timeline-duration"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Durée : 1 à 8 semaines selon complexité</div>
+        </div>
+      </div>
+
+      <div class="timeline-step reveal">
+        <div class="timeline-marker"><div class="timeline-dot">05</div></div>
+        <div class="timeline-content">
+          <div class="timeline-phase">Phase 5 · Validation</div>
+          <h3 class="timeline-title">Tests complets &amp; Recette client</h3>
+          <p class="timeline-desc">Tests sur 5 navigateurs, mobile Android et iOS, performance, sécurité, liens brisés, vitesse. Vous effectuez votre propre recette et signalez tout ce qui ne convient pas — corrigé sans surcoût avant le paiement final.</p>
+          <div class="timeline-details">
+            <span class="t-chip">5 navigateurs testés</span>
+            <span class="t-chip">Android &amp; iOS</span>
+            <span class="t-chip">Rapport PageSpeed fourni</span>
+            <span class="t-chip">Recette client formelle</span>
+          </div>
+          <div class="timeline-duration"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Durée : 3 à 7 jours</div>
+        </div>
+      </div>
+
+      <div class="timeline-step reveal">
+        <div class="timeline-marker"><div class="timeline-dot">06</div></div>
+        <div class="timeline-content">
+          <div class="timeline-phase">Phase 6 · Livraison</div>
+          <h3 class="timeline-title">Mise en ligne, code source &amp; Formation</h3>
+          <p class="timeline-desc">Le solde de 50% est réglé. Nous déployons sur votre hébergement, vous remettons le code source sur un dépôt Git privé à votre nom. Puis une session de formation (1h à 2h) vous rend 100% autonome sur la gestion de votre projet.</p>
+          <div class="timeline-details">
+            <span class="t-chip">Déploiement sur votre hébergement</span>
+            <span class="t-chip">Code source Git privé à votre nom</span>
+            <span class="t-chip">Formation 1h–2h incluse</span>
+            <span class="t-chip">Documentation technique fournie</span>
+          </div>
+          <div class="timeline-duration"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Durée : 1 à 2 jours</div>
+        </div>
+      </div>
+
+      <div class="timeline-step reveal">
+        <div class="timeline-marker"><div class="timeline-dot">07</div></div>
+        <div class="timeline-content">
+          <div class="timeline-phase">Phase 7 · Post-Livraison</div>
+          <h3 class="timeline-title">30 jours de support garanti</h3>
+          <p class="timeline-desc">Pendant 30 jours après la mise en ligne, tout bug ou comportement anormal est corrigé gratuitement. Support WhatsApp 7j/7. Après cette période, un plan de maintenance mensuel optionnel est disponible si vous souhaitez continuer l'accompagnement.</p>
+          <div class="timeline-details">
+            <span class="t-chip">Corrections gratuites 30 jours</span>
+            <span class="t-chip">Support WhatsApp 7j/7</span>
+            <span class="t-chip">Maintenance mensuelle optionnelle</span>
+          </div>
+          <div class="timeline-duration"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>30 jours inclus, puis sur abonnement</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PAYMENT -->
+  <section class="payment-section" aria-label="Modalités de paiement">
+    <div class="section-header">
+      <span class="section-eyebrow">Modalités financières</span>
+      <h2 class="reveal-title">Comment se passe le <span class="gold">paiement</span></h2>
+    </div>
+    <div class="payment-grid reveal">
+      <div class="payment-card hl">
+        <div class="payment-badge badge-green">Au démarrage</div>
+        <div class="payment-pct">50<span style="font-size:2rem;color:rgba(0,200,150,0.4)">%</span></div>
+        <div class="payment-label">Acompte — avant les premiers livrables</div>
+        <p>Versé après la signature du contrat. Il confirme votre engagement et nous permet de démarrer immédiatement. MTN Mobile Money, Orange Money, ou virement bancaire.</p>
+      </div>
+      <div class="payment-card" style="border-color:rgba(255,215,0,0.2);">
+        <div class="payment-badge badge-gold">À la livraison</div>
+        <div class="payment-pct gold">50<span style="font-size:2rem;color:rgba(255,215,0,0.35)">%</span></div>
+        <div class="payment-label">Solde — avant la mise en ligne officielle</div>
+        <p>Versé uniquement quand vous avez validé le projet final et êtes satisfait. La mise en ligne et la remise du code source interviennent après ce paiement.</p>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top:24px;padding:24px 32px;background:rgba(0,200,150,0.04);border:1px solid rgba(0,200,150,0.14);border-radius:var(--radius);font-size:0.87rem;color:rgba(240,240,255,0.55);line-height:1.7;">
+      <strong style="color:var(--blue);">Moyens acceptés :</strong> MTN Mobile Money · Orange Money · Virement UBA/Ecobank · Espèces (projets locaux Douala). Tout en FCFA, zéro frais de change.
+    </div>
+  </section>
+
+  <!-- CHECKLIST -->
+  <section class="checklist-section" aria-label="Ce dont nous avons besoin">
+    <div class="section-header">
+      <span class="section-eyebrow">Votre rôle</span>
+      <h2 class="reveal-title">Ce que vous devez <span class="accent">préparer</span></h2>
+      <p style="margin-top:12px;color:rgba(240,240,255,0.5);font-size:0.9rem;max-width:560px;">Pour que le projet démarre vite et bien — rien d'insurmontable.</p>
+    </div>
+    <div class="checklist-grid reveal">
+      <div class="checklist-card">
+        <h3>
+          <svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Pour tout projet
+        </h3>
+        <div class="checklist-item"><div class="check-dot">✓</div>Nom complet / nom de l'entreprise et coordonnées</div>
+        <div class="checklist-item"><div class="check-dot">✓</div>Description de votre activité et de votre cible</div>
+        <div class="checklist-item"><div class="check-dot">✓</div>Vos objectifs principaux (vendre, informer, recruter...)</div>
+        <div class="checklist-item"><div class="check-dot">✓</div>Budget estimé et délais souhaités</div>
+        <div class="checklist-item"><div class="check-dot">✓</div>Exemples de sites/apps que vous aimez</div>
+        <div class="checklist-item"><div class="check-dot">✓</div>Logo et charte graphique existants (si disponibles)</div>
+      </div>
+      <div class="checklist-card">
+        <h3>
+          <svg viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          Pour site web / app
+        </h3>
+        <div class="checklist-item"><div class="check-dot">✓</div>Vos textes (ou une idée — on peut aider à rédiger)</div>
+        <div class="checklist-item"><div class="check-dot">✓</div>Photos/images si vous en avez (sinon visuels libres)</div>
+        <div class="checklist-item"><div class="check-dot">✓</div>Nom de domaine (ou on vous aide à en choisir un)</div>
+        <div class="checklist-item"><div class="check-dot">✓</div>Accès hébergement actuel (si vous avez déjà un site)</div>
+        <div class="checklist-item"><div class="check-dot">✓</div>Fonctionnalités souhaitées : boutique, blog, réservation...</div>
+        <div class="checklist-item"><div class="check-dot">✓</div>Disponibilité pour 1-2 points de suivi par semaine (30 min)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" aria-label="Questions fréquentes">
+    <div class="section-header">
+      <span class="section-eyebrow">Questions fréquentes</span>
+      <h2 class="reveal-title">Vos questions, <span class="accent">nos réponses</span></h2>
+    </div>
+    <div class="faq-list reveal" id="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" tabindex="0" role="button" aria-expanded="false">
+          <span>Est-ce que je peux avoir un site sans connaissances techniques ?</span>
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="faq-a">Absolument. Nous gérons toute la technique. Après la livraison, nous vous formons sur les parties que vous aurez besoin de gérer seul (mettre à jour du texte, ajouter une photo, voir vos statistiques). La grande majorité de nos clients n'ont aucune connaissance technique au départ.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" tabindex="0" role="button" aria-expanded="false">
+          <span>Que se passe-t-il si le résultat ne me plaît pas ?</span>
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="faq-a">Nous travaillons en validation à chaque étape — vous voyez le projet progresser et pouvez demander des ajustements à tout moment. Deux cycles de révision complets sont inclus dans le prix. Si après tout cela une fonctionnalité prévue au cahier des charges ne correspond pas, nous la corrigeons sans frais. Nous ne livrons jamais un projet que le client n'a pas validé.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" tabindex="0" role="button" aria-expanded="false">
+          <span>Combien coûte un site web ou une application mobile ?</span>
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="faq-a">Cela dépend entièrement du projet. Un site vitrine simple démarre à 150 000 FCFA. Une plateforme e-commerce ou une application mobile représente un investissement plus important. Nous préférons discuter de votre projet d'abord et vous proposer un devis précis. Le devis est toujours gratuit.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" tabindex="0" role="button" aria-expanded="false">
+          <span>Combien de temps dure un projet en moyenne ?</span>
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="faq-a">Un site vitrine simple : 1 à 2 semaines. Un site avec fonctionnalités avancées (e-commerce, réservation, espace membre) : 3 à 6 semaines. Une application mobile : 6 à 12 semaines selon la complexité. Ces délais dépendent aussi de votre réactivité pour les validations et la fourniture des contenus.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" tabindex="0" role="button" aria-expanded="false">
+          <span>Je suis à l'extérieur de Douala, pouvez-vous travailler avec moi ?</span>
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="faq-a">Oui, sans problème. Nous travaillons avec des clients dans toute l'Afrique et à l'international via WhatsApp, email et appels vidéo. Toutes les étapes peuvent se faire à distance. Pour les clients de Douala, une rencontre physique à Bonapriso est possible si vous le souhaitez.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" tabindex="0" role="button" aria-expanded="false">
+          <span>Que se passe-t-il après les 30 jours de garantie ?</span>
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="faq-a">Après les 30 jours de corrections gratuites, les modifications sont facturées à un tarif horaire juste défini dans le contrat. Vous pouvez aussi opter pour notre plan de maintenance mensuel qui inclut un quota d'heures de modifications, des mises à jour de sécurité et un support prioritaire.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-cinematic" aria-label="Démarrer votre projet">
+    <h2 class="cta-headline">Prêt à <em>démarrer</em><br>votre projet ?</h2>
+    <p class="cta-sub">Un échange de 30 minutes suffit. Gratuit, rapide — et il pourrait tout changer.</p>
+    <a href="contact.html" class="btn-cta-big btn-magnetic">Nous contacter maintenant</a>
+    <p class="cta-details">+237 698 486 212 · WhatsApp disponible · Réponse sous 24h</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer-v2" role="contentinfo">
+    <div class="footer-v2-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="font-size:1.6rem;">ZEL<span>KTRIS</span></a>
+        <p>Agence digitale premium basée à Bonapriso, Douala. Transparence totale, résultats concrets.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="about.html">L'Agence</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="pourquoi-nous.html">Pourquoi Nous</a></li>
+          <li><a href="contrat.html">Comment on Travaille</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Le processus</h4>
+        <ul>
+          <li><a href="contrat.html">1. Brief gratuit</a></li>
+          <li><a href="contrat.html">2. Devis détaillé</a></li>
+          <li><a href="contrat.html">3. Contrat clair</a></li>
+          <li><a href="contrat.html">4. Développement</a></li>
+          <li><a href="contrat.html">5. Livraison + Formation</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          <span>+237 698 486 212</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          <span>contact@zelktrisagency.com</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          <span>Bonapriso, Douala, Cameroun</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-v2-bottom">
+      <p>&copy; 2025 <a href="index.html">Zelktris Agency</a>. Tous droits réservés.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social-btn" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://wa.me/237698486212" class="footer-social-btn" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(function(q) {
+    q.addEventListener('click', function() {
+      var item = this.closest('.faq-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(i) { i.classList.remove('open'); i.querySelector('.faq-q').setAttribute('aria-expanded','false'); });
+      if (!isOpen) { item.classList.add('open'); this.setAttribute('aria-expanded','true'); }
+    });
+    q.addEventListener('keydown', function(e) { if (e.key==='Enter'||e.key===' ') { e.preventDefault(); this.click(); } });
+  });
+</script>
+<script src="chatbot.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="galaxy.js" defer></script>
+<script src="animations.js" defer></script>
+</body>
+</html>
