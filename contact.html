@@ -211,6 +211,17 @@
 </head>
 <body>
 <canvas id="galaxy-canvas"></canvas>
+<!-- PRELOADER -->
+<div id="preloader" aria-hidden="true">
+  <div class="pre-logo">ZEL<span>KTRIS</span></div>
+  <div class="pre-line"></div>
+</div>
+<!-- CUSTOM CURSOR -->
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+<!-- GRAIN TEXTURE -->
+<div class="grain-overlay" aria-hidden="true"></div>
+
 <div class="page-wrapper">
 
   <header class="navbar">
@@ -233,14 +244,19 @@
     </nav>
   </div>
 
-  <!-- PAGE HEADER -->
-  <div class="page-header">
-    <div class="hero-orb hero-orb-1" style="opacity:0.4;"></div>
-    <div class="hero-orb hero-orb-2" style="opacity:0.3;"></div>
-    <div class="breadcrumb reveal"><a href="index.html">Accueil</a> <span>/</span> Contact</div>
-    <h1 class="page-header-title reveal reveal-delay-1">Parlons de votre projet</h1>
-    <p class="page-header-sub reveal reveal-delay-2">Réponse garantie en moins de 24h. Consultation initiale gratuite et sans engagement.</p>
-  </div>
+  <!-- PAGE HERO CINEMATIC -->
+  <section class="page-hero-cin" aria-label="Contactez Zelktris Agency">
+    <div class="cin-orb cin-orb-1" aria-hidden="true"></div>
+    <div class="cin-orb cin-orb-2" aria-hidden="true"></div>
+    <div class="page-breadcrumb">
+      <a href="index.html">Accueil</a><span>/</span>Contact
+    </div>
+    <h1 class="page-hero-title">
+      Parlons de<br><span class="accent">votre</span><br><span class="gold">projet</span>
+    </h1>
+    <div class="page-hero-line" aria-hidden="true"></div>
+    <p class="page-hero-sub">Réponse garantie en moins de 24h. Consultation initiale 100% gratuite et sans engagement. Basé à Bonapriso, Douala.</p>
+  </section>
 
   <!-- CONTACT SECTION -->
   <section class="contact-section">
@@ -561,8 +577,6 @@
     </div>
   </footer>
 </div>
-
-<script src="galaxy.js"></script>
 <script>
   // ── Tarifs FCFA par type de projet ──
   const PRICING = {
@@ -680,6 +694,12 @@
   }
 </script>
   <script src="chatbot.js"></script>
+<!-- GSAP + ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<!-- Galaxy + Animations -->
+<script src="galaxy.js" defer></script>
+<script src="animations.js" defer></script>
 </body>
 </html>
 

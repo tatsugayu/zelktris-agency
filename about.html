@@ -13,6 +13,17 @@
 </head>
 <body>
 <canvas id="galaxy-canvas"></canvas>
+<!-- PRELOADER -->
+<div id="preloader" aria-hidden="true">
+  <div class="pre-logo">ZEL<span>KTRIS</span></div>
+  <div class="pre-line"></div>
+</div>
+<!-- CUSTOM CURSOR -->
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+<!-- GRAIN TEXTURE -->
+<div class="grain-overlay" aria-hidden="true"></div>
+
 <div class="page-wrapper">
 
   <!-- NAVBAR -->
@@ -36,14 +47,23 @@
     </nav>
   </div>
 
-  <!-- PAGE HEADER -->
-  <div class="page-header">
-    <div class="hero-orb hero-orb-1" style="opacity:0.4;"></div>
-    <div class="hero-orb hero-orb-2" style="opacity:0.3;"></div>
-    <div class="breadcrumb reveal"><a href="index.html">Accueil</a> <span>/</span> Agence</div>
-    <h1 class="page-header-title reveal reveal-delay-1">Notre ADN Digital</h1>
-    <p class="page-header-sub reveal reveal-delay-2">Depuis 2012, nous construisons des expériences numériques qui marquent les esprits et transforment les marchés.</p>
-  </div>
+  <!-- PAGE HERO CINEMATIC -->
+  <section class="page-hero-cin" aria-label="À propos de Zelktris Agency">
+    <div class="cin-orb cin-orb-1" aria-hidden="true"></div>
+    <div class="cin-orb cin-orb-2" aria-hidden="true"></div>
+    <div class="page-breadcrumb">
+      <a href="index.html">Accueil</a>
+      <span>/</span>
+      L'Agence
+    </div>
+    <h1 class="page-hero-title">
+      Notre<br><span class="accent">ADN</span><br>Digital
+    </h1>
+    <div class="page-hero-line" aria-hidden="true"></div>
+    <p class="page-hero-sub">
+      Née à Douala, ambitieuse à l'échelle africaine. Nous créons des expériences numériques qui marquent les esprits et propulsent les marques vers leurs plus hauts objectifs.
+    </p>
+  </section>
 
   <!-- ABOUT SPLIT -->
   <section style="padding-top:40px;">
@@ -51,12 +71,12 @@
       <div class="about-visual reveal">
         <div class="about-mockup">
           <div class="about-glow"></div>
-          <div class="about-logo-large">NX</div>
+          <div class="about-logo-large">ZEL</div>
           <div class="about-floats">
-            <div class="float-badge b1">🏆 Google Partner</div>
-            <div class="float-badge b2">🌍 ISO 27001</div>
-            <div class="float-badge b3">⚡ PageSpeed 98</div>
-            <div class="float-badge b4">✦ 12 ans d'exp.</div>
+            <div class="float-badge b1">✦ 100% Satisfaction</div>
+            <div class="float-badge b2">🌍 Basé à Douala</div>
+            <div class="float-badge b3">⚡ Mobile First</div>
+            <div class="float-badge b4">🤖 IA Intégrée</div>
           </div>
         </div>
       </div>
@@ -65,10 +85,10 @@
         <h2 class="section-title">Bâtir l'avenir<br><span class="accent">pixel par pixel</span></h2>
         <div class="divider"></div>
         <p class="section-sub" style="margin-bottom:20px;">
-          ZELKTRIS est née d'une conviction simple : le digital devrait être beau, performant et générateur de valeur réelle. Fondée en 2012 par des ingénieurs et designers passionnés, l'agence est aujourd'hui un acteur de référence qui accompagne grands comptes, ministères et startups ambitieuses.
+          ZELKTRIS est née d'une conviction simple : le digital africain mérite des standards d'excellence mondiale. Fondée à Douala, notre agence accompagne les entreprises, institutions et startups ambitieuses dans leur transformation numérique.
         </p>
         <p style="font-size:0.92rem;color:rgba(240,240,255,0.55);line-height:1.75;margin-bottom:32px;">
-          Notre approche ? Fusionner stratégie, créativité et technologie de pointe pour livrer des solutions qui dépassent les attentes — et les KPIs. En 12 ans, nous avons livré plus de 250 projets dans 18 pays, générant en moyenne un ROI de 340% pour nos clients.
+          Notre approche ? Fusionner stratégie, créativité et technologie de pointe pour livrer des solutions qui dépassent les attentes. Nous travaillons en paiement local FCFA, avec un accompagnement 7j/7 et la livraison du code source — parce que votre projet vous appartient vraiment.
         </p>
         <div class="hero-actions" style="justify-content:flex-start;">
           <a href="contact.html" class="btn btn-primary">Travailler avec nous</a>
@@ -275,8 +295,13 @@
     </div>
   </footer>
 </div>
-<script src="galaxy.js"></script>
   <script src="chatbot.js"></script>
+<!-- GSAP + ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<!-- Galaxy + Animations -->
+<script src="galaxy.js" defer></script>
+<script src="animations.js" defer></script>
 </body>
 </html>
 

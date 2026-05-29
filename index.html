@@ -3,35 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Zelktris Agency — Agence digitale premium. Web, mobile, IA, stratégie. Nous transformons votre vision en expériences digitales immersives.">
-  <title>Zelktris Agency — Agence Digitale Premium</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <meta name="description" content="Zelktris Agency — Agence digitale premium basée à Bonapriso, Douala. Web, mobile, IA, design. Nous créons des expériences numériques immersives qui impressionnent.">
+  <title>Zelktris Agency — L'Excellence Digitale</title>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@600;700;800&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600&display=swap"></noscript>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<canvas id="galaxy-canvas"></canvas>
+
+<!-- PRELOADER -->
+<div id="preloader" aria-hidden="true">
+  <div class="pre-logo">ZEL<span>KTRIS</span></div>
+  <div class="pre-line"></div>
+</div>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+
+<!-- GRAIN TEXTURE -->
+<div class="grain-overlay" aria-hidden="true"></div>
+
+<!-- GALAXY CANVAS -->
+<canvas id="galaxy-canvas" aria-hidden="true"></canvas>
+
 <div class="page-wrapper">
 
-  <!-- NAVBAR -->
+  <!-- ═══════════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════════ -->
   <header class="navbar" role="banner">
-    <a href="index.html" class="nav-logo">ZEL<span>KTRIS</span></a>
+    <a href="index.html" class="nav-logo" aria-label="Zelktris Agency — Accueil">ZEL<span>KTRIS</span></a>
     <ul class="nav-links" role="navigation" aria-label="Navigation principale">
-      <li><a href="index.html">Accueil</a></li>
+      <li><a href="index.html" class="active">Accueil</a></li>
       <li><a href="about.html">Agence</a></li>
       <li><a href="services.html">Services</a></li>
       <li><a href="portfolio.html">Portfolio</a></li>
       <li><a href="blog.html">Insights</a></li>
-      <li><a href="contact.html" class="nav-cta">Devis Gratuit</a></li>
+      <li><a href="contact.html" class="nav-cta btn-magnetic">Devis Gratuit</a></li>
     </ul>
-    <button class="hamburger" aria-label="Menu" aria-expanded="false">
+    <button class="hamburger" aria-label="Ouvrir le menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </header>
 
-  <div class="mobile-menu">
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" aria-hidden="true">
     <nav>
       <a href="index.html">Accueil</a>
       <a href="about.html">Agence</a>
@@ -42,384 +62,335 @@
     </nav>
   </div>
 
-  <!-- HERO -->
-  <section class="hero" aria-label="Présentation principale">
-    <div class="hero-orb hero-orb-1"></div>
-    <div class="hero-orb hero-orb-2"></div>
-    <div class="hero-orb hero-orb-3"></div>
-    <div>
-      <div class="hero-badge">✦ Agence Digitale #1 en Innovation</div>
-      <h1 class="hero-title">
-        <span class="line-1">L'Excellence</span>
-        <span class="line-2">Digitale Réinventée</span>
-      </h1>
-      <p class="hero-subtitle">
-        Nous concevons des expériences numériques premium qui propulsent les marques ambitieuses vers de nouveaux sommets — web, mobile, IA &amp; stratégie digitale.
-      </p>
-      <div class="hero-actions">
-        <a href="contact.html" class="btn btn-primary">
-          🚀 Démarrer un projet
-        </a>
-        <a href="portfolio.html" class="btn btn-glass">
-          ◈ Voir nos réalisations
-        </a>
+  <!-- ═══════════════════════════════════════════
+       HERO CINÉMATIQUE
+  ═══════════════════════════════════════════ -->
+  <section class="hero-cinematic" aria-label="Présentation Zelktris Agency">
+
+    <!-- Orbs décoratifs -->
+    <div class="cin-orb cin-orb-1" aria-hidden="true"></div>
+    <div class="cin-orb cin-orb-2" aria-hidden="true"></div>
+    <div class="cin-orb cin-orb-3" aria-hidden="true"></div>
+
+    <!-- Eyebrow label -->
+    <span class="hero-eyebrow">Agence Digitale Premium · Bonapriso, Douala</span>
+
+    <!-- Display headline -->
+    <div class="hero-display" aria-label="Nous créons l'impossible">
+      <span class="display-line">NOUS</span>
+      <span class="display-line accent">CRÉONS</span>
+      <span class="display-line right">L'IMPOSSIBLE</span>
+    </div>
+
+    <!-- Subtitle -->
+    <p class="hero-cin-sub">
+      Expériences numériques qui impressionnent, convertissent et propulsent les marques ambitieuses vers de nouveaux sommets. Web · Mobile · IA · Design.
+    </p>
+
+    <!-- CTAs -->
+    <div class="hero-cin-cta">
+      <a href="contact.html" class="btn-primary-v2 btn-magnetic" aria-label="Démarrer un projet avec Zelktris">
+        Démarrer un projet
+      </a>
+      <a href="portfolio.html" class="btn-ghost-v2 btn-magnetic" aria-label="Voir nos réalisations">
+        Voir nos réalisations
+      </a>
+    </div>
+
+    <!-- Stats -->
+    <div class="hero-cin-stats">
+      <div class="cin-stat">
+        <div class="cin-stat-val"><span class="stat-counter" data-target="100" data-suffix="%">0%</span></div>
+        <div class="cin-stat-label">Satisfaction client</div>
       </div>
-      <div class="hero-stats">
-        <div class="stat-item">
-          <div class="stat-num">100%</div>
-          <div class="stat-label">Satisfaction garantie</div>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <div class="stat-num">FCFA</div>
-          <div class="stat-label">Paiement local</div>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <div class="stat-num">7j/7</div>
-          <div class="stat-label">Disponibilité</div>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <div class="stat-num">🌍</div>
-          <div class="stat-label">Basé en Afrique</div>
-        </div>
+      <div class="cin-stat">
+        <div class="cin-stat-val"><span>FCFA</span></div>
+        <div class="cin-stat-label">Paiement local</div>
       </div>
+      <div class="cin-stat">
+        <div class="cin-stat-val"><span>7j/7</span></div>
+        <div class="cin-stat-label">Disponibilité</div>
+      </div>
+      <div class="cin-stat">
+        <div class="cin-stat-val"><span style="color:var(--gold)">CMR</span></div>
+        <div class="cin-stat-label">Basé en Afrique</div>
+      </div>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <svg viewBox="0 0 24 24" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+      </svg>
+      <span>Défiler</span>
     </div>
   </section>
 
-  <!-- CLIENTS STRIP -->
-  <div class="clients-strip">
-    <p class="clients-label">Ce que nous vous promettons</p>
-    <div class="logos-track">
-      <div class="client-logo">✅ QUALITÉ PREMIUM</div>
-      <div class="client-logo">🚀 LIVRAISON RAPIDE</div>
-      <div class="client-logo">💰 PRIX EN FCFA</div>
-      <div class="client-logo">🤝 SUPPORT INCLUS</div>
-      <div class="client-logo">🔒 CODE SOURCE LIVRÉ</div>
-      <div class="client-logo">🌍 ÉQUIPE LOCALE</div>
-      <div class="client-logo">📱 MOBILE FIRST</div>
+  <!-- ═══════════════════════════════════════════
+       MARQUEE — Promesses
+  ═══════════════════════════════════════════ -->
+  <div class="marquee-section" aria-hidden="true">
+    <div class="marquee-track" data-speed="22">
+      <span class="marquee-item"><strong>QUALITÉ PREMIUM</strong><span class="marquee-sep">✦</span></span>
+      <span class="marquee-item"><strong>LIVRAISON RAPIDE</strong><span class="marquee-sep">✦</span></span>
+      <span class="marquee-item"><strong>PRIX EN FCFA</strong><span class="marquee-sep">✦</span></span>
+      <span class="marquee-item"><strong>SUPPORT INCLUS</strong><span class="marquee-sep">✦</span></span>
+      <span class="marquee-item"><strong>CODE SOURCE LIVRÉ</strong><span class="marquee-sep">✦</span></span>
+      <span class="marquee-item"><strong>ÉQUIPE LOCALE</strong><span class="marquee-sep">✦</span></span>
+      <span class="marquee-item"><strong>MOBILE FIRST</strong><span class="marquee-sep">✦</span></span>
+      <span class="marquee-item"><strong>100% SATISFACTION</strong><span class="marquee-sep">✦</span></span>
     </div>
   </div>
 
-  <!-- SERVICES SECTION -->
-  <section class="services-section">
-    <div class="text-center" style="margin-bottom:60px;">
-      <div class="section-tag reveal">Nos expertises</div>
-      <h2 class="section-title reveal reveal-delay-1">
-        Des solutions digitales<br><span class="accent">à 360°</span>
+  <!-- ═══════════════════════════════════════════
+       SERVICES — Horizontal Scroll Journey
+  ═══════════════════════════════════════════ -->
+  <section class="services-h-section" id="services" aria-label="Nos services">
+    <div class="services-h-header">
+      <span class="section-eyebrow">Nos expertises</span>
+      <h2 class="reveal-title" style="font-family:var(--font-head);font-size:clamp(1.8rem,4vw,3rem);font-weight:800;">
+        Solutions digitales <span class="accent">à 360°</span>
       </h2>
-      <div class="divider center reveal reveal-delay-2"></div>
-      <p class="section-sub reveal reveal-delay-2">
-        De la stratégie à l'exécution, nous couvrons l'ensemble du spectre digital pour transformer vos ambitions en résultats mesurables.
+      <p style="margin-top:12px;color:rgba(240,240,255,0.55);font-size:0.9rem;max-width:500px;">
+        Faites défiler pour explorer l'ensemble de nos domaines d'expertise.
       </p>
     </div>
 
-    <div class="grid-3">
-      <div class="glass-card service-card reveal">
-        <div class="service-icon blue">🌐</div>
-        <h3>Web & Applications</h3>
-        <p>Sites institutionnels, plateformes SaaS, applications web haute performance — conçus pour convertir et scalables à l'infini.</p>
-        <a href="services.html" class="service-link">Découvrir →</a>
-      </div>
-      <div class="glass-card service-card reveal reveal-delay-1">
-        <div class="service-icon violet">📱</div>
-        <h3>Mobile iOS & Android</h3>
-        <p>Applications natives et cross-platform ultra-fluides, avec des UX pensées pour l'engagement et la rétention utilisateur.</p>
-        <a href="services.html" class="service-link">Découvrir →</a>
-      </div>
-      <div class="glass-card service-card reveal reveal-delay-2">
-        <div class="service-icon gold">🤖</div>
-        <h3>Intelligence Artificielle</h3>
-        <p>Intégration IA, chatbots intelligents, automatisation des processus, LLM personnalisés et data analytics avancée.</p>
-        <a href="services.html" class="service-link">Découvrir →</a>
-      </div>
-      <div class="glass-card service-card reveal reveal-delay-1">
-        <div class="service-icon violet">🎨</div>
-        <h3>UI/UX Design</h3>
-        <p>Identités visuelles mémorables, design systems cohérents et expériences utilisateur qui convertissent et fidélisent.</p>
-        <a href="services.html" class="service-link">Découvrir →</a>
-      </div>
-      <div class="glass-card service-card reveal reveal-delay-2">
-        <div class="service-icon blue">📈</div>
-        <h3>Stratégie & Growth</h3>
-        <p>SEO technique, publicité digitale, marketing automation et stratégie de contenu pour maximiser votre ROI.</p>
-        <a href="services.html" class="service-link">Découvrir →</a>
-      </div>
-      <div class="glass-card service-card reveal reveal-delay-3">
-        <div class="service-icon gold">☁️</div>
-        <h3>Cloud & DevOps</h3>
-        <p>Architecture cloud scalable, CI/CD, sécurité renforcée et monitoring 24/7 pour des performances maximales.</p>
-        <a href="services.html" class="service-link">Découvrir →</a>
-      </div>
-    </div>
-  </section>
+    <div class="services-h-wrapper">
+      <div class="services-h-track">
 
-  <!-- PROCESS -->
-  <section style="padding:80px 5%;">
-    <div class="text-center" style="margin-bottom:60px;">
-      <div class="section-tag reveal">Notre méthode</div>
-      <h2 class="section-title reveal reveal-delay-1">Un processus <span class="accent-gold">éprouvé</span></h2>
-    </div>
-    <div class="process-steps">
-      <div class="process-step reveal">
-        <div class="step-num">01</div>
-        <h3 class="step-title">Découverte</h3>
-        <p class="step-desc">Immersion profonde dans vos objectifs, contraintes et vision pour poser des fondations solides.</p>
-      </div>
-      <div class="process-step reveal reveal-delay-1">
-        <div class="step-num">02</div>
-        <h3 class="step-title">Stratégie</h3>
-        <p class="step-desc">Conception du plan d'action, architecture technique et design system avant chaque ligne de code.</p>
-      </div>
-      <div class="process-step reveal reveal-delay-2">
-        <div class="step-num">03</div>
-        <h3 class="step-title">Création</h3>
-        <p class="step-desc">Développement agile en sprints courts, avec livraisons régulières et feedback loops intégrés.</p>
-      </div>
-      <div class="process-step reveal reveal-delay-3">
-        <div class="step-num">04</div>
-        <h3 class="step-title">Croissance</h3>
-        <p class="step-desc">Lancement, optimisation continue, suivi des KPIs et accompagnement post-livraison.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PORTFOLIO PREVIEW -->
-  <section>
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:20px;">
-      <div>
-        <div class="section-tag reveal">Portfolio</div>
-        <h2 class="section-title reveal reveal-delay-1">Nos dernières <span class="accent">réalisations</span></h2>
-      </div>
-      <a href="portfolio.html" class="btn btn-outline reveal">Voir tout →</a>
-    </div>
-    <div class="portfolio-grid">
-      <div class="portfolio-item reveal">
-        <div class="portfolio-img">
-          <div class="p-shape p-shape-1"></div>
-          <div class="p-shape p-shape-2"></div>
-          <div class="p-shape p-shape-3"></div>
-          <div style="font-size:4rem;position:relative;z-index:1;">🏛️</div>
-        </div>
-        <div class="portfolio-overlay">
-          <div class="portfolio-label">Gouvernement</div>
-          <div class="portfolio-name">Portail Ministère de l'Économie</div>
-          <a href="portfolio.html" class="btn btn-glass" style="width:fit-content;padding:8px 18px;font-size:0.82rem;">Voir →</a>
-        </div>
-      </div>
-      <div class="portfolio-item reveal reveal-delay-1">
-        <div class="portfolio-img" style="background:linear-gradient(135deg,#007A5E,#00C896);">
-          <div class="p-shape p-shape-1"></div>
-          <div class="p-shape p-shape-2"></div>
-          <div style="font-size:4rem;position:relative;z-index:1;">🏦</div>
-        </div>
-        <div class="portfolio-overlay">
-          <div class="portfolio-label">Finance</div>
-          <div class="portfolio-name">Plateforme FinTech BankPro</div>
-          <a href="portfolio.html" class="btn btn-glass" style="width:fit-content;padding:8px 18px;font-size:0.82rem;">Voir →</a>
-        </div>
-      </div>
-      <div class="portfolio-item reveal reveal-delay-2">
-        <div class="portfolio-img" style="background:linear-gradient(135deg,#FFD700 0%,#007A5E 100%);">
-          <div class="p-shape p-shape-1"></div>
-          <div class="p-shape p-shape-3"></div>
-          <div style="font-size:4rem;position:relative;z-index:1;">🛒</div>
-        </div>
-        <div class="portfolio-overlay">
-          <div class="portfolio-label">E-Commerce</div>
-          <div class="portfolio-name">SuperStore — +340% de conversions</div>
-          <a href="portfolio.html" class="btn btn-glass" style="width:fit-content;padding:8px 18px;font-size:0.82rem;">Voir →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- NUMBERS -->
-  <section class="numbers-section">
-    <div class="numbers-grid">
-      <div class="glass-card number-card reveal">
-        <div class="number-val" data-count="250" data-suffix="+">0</div>
-        <div class="number-label">Projets livrés</div>
-      </div>
-      <div class="glass-card number-card gold-val reveal reveal-delay-1">
-        <div class="number-val" data-count="98" data-suffix="%">0</div>
-        <div class="number-label">Clients satisfaits</div>
-      </div>
-      <div class="glass-card number-card reveal reveal-delay-2">
-        <div class="number-val" data-count="12" data-suffix="M€">0</div>
-        <div class="number-label">De ROI généré</div>
-      </div>
-      <div class="glass-card number-card gold-val reveal reveal-delay-3">
-        <div class="number-val" data-count="40" data-suffix="+">0</div>
-        <div class="number-label">Experts dédiés</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section class="testimonials-section">
-    <div class="text-center" style="margin-bottom:48px;">
-      <div class="section-tag">Témoignages</div>
-      <h2 class="section-title">Ce que disent <span class="accent">nos clients</span></h2>
-    </div>
-    <div class="testimonials-track">
-      <div class="glass-card testimonial-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">« ZELKTRIS a complètement transformé notre présence en ligne. Le site livré dépasse de loin nos attentes — immersif, rapide, et qui convertit vraiment. »</p>
-        <div class="testi-author">
-          <div class="testi-avatar">SD</div>
+        <!-- 1 — Web -->
+        <div class="service-panel" role="article" aria-label="Web et Applications">
           <div>
-            <div class="testi-name">Sophie Dubois</div>
-            <div class="testi-company">Directrice Marketing, Orange France</div>
+            <div class="sp-number">01 / 06</div>
+            <div class="sp-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            </div>
+            <h3 class="sp-title">Web &amp; Applications</h3>
+            <p class="sp-desc">Sites institutionnels haut de gamme, plateformes SaaS, applications web ultra-performantes — conçus pour convertir et scalables sans limite.</p>
           </div>
+          <a href="services.html" class="sp-tag">Découvrir</a>
         </div>
-      </div>
-      <div class="glass-card testimonial-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">« Une équipe d'exception. Leur expertise technique combinée à leur sens créatif est rare. Notre application mobile a été téléchargée 500K fois en 3 mois. »</p>
-        <div class="testi-author">
-          <div class="testi-avatar">KM</div>
+
+        <!-- 2 — Mobile -->
+        <div class="service-panel" role="article" aria-label="Applications mobiles">
           <div>
-            <div class="testi-name">Karim Mansouri</div>
-            <div class="testi-company">CEO, FinTech Labs</div>
+            <div class="sp-number">02 / 06</div>
+            <div class="sp-icon">
+              <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            </div>
+            <h3 class="sp-title">Mobile iOS &amp; Android</h3>
+            <p class="sp-desc">Applications natives et cross-platform ultra-fluides. UX pensées pour l'engagement, la rétention et les marchés africains connectés.</p>
           </div>
+          <a href="services.html" class="sp-tag">Découvrir</a>
         </div>
-      </div>
-      <div class="glass-card testimonial-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">« Professionnalisme, rigueur et créativité au rendez-vous. ZELKTRIS a livré notre portail gouvernemental dans les délais avec une qualité irréprochable. »</p>
-        <div class="testi-author">
-          <div class="testi-avatar">AL</div>
+
+        <!-- 3 — IA -->
+        <div class="service-panel" role="article" aria-label="Intelligence artificielle">
           <div>
-            <div class="testi-name">Adama Ly</div>
-            <div class="testi-company">DSI, Ministère du Numérique</div>
+            <div class="sp-number">03 / 06</div>
+            <div class="sp-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M12 8v4l3 3"/><path d="M8.5 8.5L12 12l3.5-3.5"/></svg>
+            </div>
+            <h3 class="sp-title">Intelligence Artificielle</h3>
+            <p class="sp-desc">Intégration LLM sur mesure, chatbots intelligents, automatisation des processus métiers, data analytics et solutions IA pour l'Afrique.</p>
           </div>
+          <a href="services.html" class="sp-tag">Découvrir</a>
         </div>
-      </div>
-      <div class="glass-card testimonial-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">« Notre chiffre d'affaires en ligne a augmenté de 340% après la refonte de notre e-commerce par ZELKTRIS. ROI atteint en 6 semaines seulement. »</p>
-        <div class="testi-author">
-          <div class="testi-avatar">MF</div>
+
+        <!-- 4 — Design -->
+        <div class="service-panel" role="article" aria-label="Design UI UX">
           <div>
-            <div class="testi-name">Marie Fontaine</div>
-            <div class="testi-company">E-Commerce Director, SuperStore</div>
+            <div class="sp-number">04 / 06</div>
+            <div class="sp-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </div>
+            <h3 class="sp-title">UI / UX Design</h3>
+            <p class="sp-desc">Identités visuelles inoubliables, design systems cohérents et expériences utilisateur qui transforment les visiteurs en clients fidèles.</p>
           </div>
+          <a href="services.html" class="sp-tag">Découvrir</a>
         </div>
+
+        <!-- 5 — Growth -->
+        <div class="service-panel" role="article" aria-label="Stratégie et Growth">
+          <div>
+            <div class="sp-number">05 / 06</div>
+            <div class="sp-icon">
+              <svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            </div>
+            <h3 class="sp-title">Stratégie &amp; Growth</h3>
+            <p class="sp-desc">SEO technique, publicité digitale ciblée, marketing automation et stratégie de contenu pour maximiser votre retour sur investissement.</p>
+          </div>
+          <a href="services.html" class="sp-tag">Découvrir</a>
+        </div>
+
+        <!-- 6 — Cloud -->
+        <div class="service-panel" role="article" aria-label="Cloud et DevOps">
+          <div>
+            <div class="sp-number">06 / 06</div>
+            <div class="sp-icon">
+              <svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
+            </div>
+            <h3 class="sp-title">Cloud &amp; DevOps</h3>
+            <p class="sp-desc">Architecture cloud évolutive, pipelines CI/CD, sécurité renforcée et monitoring 24/7 pour des performances maximales en production.</p>
+          </div>
+          <a href="services.html" class="sp-tag">Découvrir</a>
+        </div>
+
+      </div><!-- /services-h-track -->
+    </div><!-- /services-h-wrapper -->
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       PROCESSUS — 4 étapes
+  ═══════════════════════════════════════════ -->
+  <section class="process-section-v2" aria-label="Notre processus de travail">
+    <div class="section-header">
+      <span class="section-eyebrow">Notre méthode</span>
+      <h2 class="reveal-title">Un processus <span class="accent-gold">éprouvé</span></h2>
+    </div>
+    <div class="process-grid-v2">
+      <div class="process-step-v2">
+        <div class="ps-num">01</div>
+        <h3 class="ps-title">Découverte</h3>
+        <p class="ps-desc">Immersion profonde dans vos objectifs, contraintes et vision pour poser des fondations solides avant de coder la première ligne.</p>
+        <div class="ps-connector" aria-hidden="true"></div>
+      </div>
+      <div class="process-step-v2">
+        <div class="ps-num">02</div>
+        <h3 class="ps-title">Stratégie</h3>
+        <p class="ps-desc">Conception du plan d'action, architecture technique et design system complet avant chaque ligne de code.</p>
+        <div class="ps-connector" aria-hidden="true"></div>
+      </div>
+      <div class="process-step-v2">
+        <div class="ps-num">03</div>
+        <h3 class="ps-title">Création</h3>
+        <p class="ps-desc">Développement agile en sprints courts avec livraisons régulières, tests continus et boucles de feedback intégrées.</p>
+        <div class="ps-connector" aria-hidden="true"></div>
+      </div>
+      <div class="process-step-v2">
+        <div class="ps-num">04</div>
+        <h3 class="ps-title">Croissance</h3>
+        <p class="ps-desc">Lancement, optimisation continue, analyse des KPIs et accompagnement post-livraison pour maximiser l'impact.</p>
       </div>
     </div>
   </section>
 
-  <!-- NEWSLETTER -->
-  <div class="newsletter-band">
-    <div class="newsletter-inner">
-      <h3>Restez à la pointe du digital</h3>
-      <p>Rejoignez 100+ professionnels et recevez nos insights exclusifs, tendances et études de cas chaque semaine.</p>
-      <form class="newsletter-form" onsubmit="handleNewsletter(event)">
-        <input type="email" id="nlEmail" placeholder="votre@email.com" aria-label="Email newsletter" required>
-        <button type="submit" id="nlBtn" class="btn btn-primary" style="white-space:nowrap;">S'abonner</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- CTA -->
-  <section class="cta-section">
-    <div class="cta-box reveal">
-      <h2 class="section-title">Prêt à passer au<br><span class="accent-gold">niveau supérieur ?</span></h2>
-      <p class="section-sub">Discutons de votre projet lors d'une consultation gratuite de 30 minutes avec nos experts.</p>
-      <div class="cta-actions">
-        <a href="contact.html" class="btn btn-gold">📞 Réserver une démo gratuite</a>
-        <a href="contact.html" class="btn btn-glass">✉️ Demander un devis</a>
-      </div>
-    </div>
+  <!-- ═══════════════════════════════════════════
+       CTA CINÉMATIQUE
+  ═══════════════════════════════════════════ -->
+  <section class="cta-cinematic" aria-label="Appel à l'action">
+    <h2 class="cta-headline">
+      Votre prochain<br>chef-d'œuvre<br><em>commence ici.</em>
+    </h2>
+    <p class="cta-sub">
+      Parlons de votre projet. Un devis personnalisé, 100% gratuit, livré en 24h.
+    </p>
+    <a href="contact.html" class="btn-cta-big btn-magnetic" aria-label="Obtenir un devis gratuit">
+      Obtenir un devis gratuit
+    </a>
+    <p class="cta-details">
+      Réponse garantie sous 24h · Bonapriso, Douala · +237 698 486 212
+    </p>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-grid">
+  <!-- ═══════════════════════════════════════════
+       FOOTER V2
+  ═══════════════════════════════════════════ -->
+  <footer class="footer-v2" role="contentinfo">
+    <div class="footer-v2-grid">
+
+      <!-- Brand -->
       <div class="footer-brand">
-        <div class="footer-logo">ZELKTRIS</div>
-        <p class="footer-desc">L'agence digitale premium qui transforme les ambitions en réalités numériques. Innovation, excellence et résultats mesurables.</p>
-        <div class="footer-socials">
-          <a href="#" class="social-btn" aria-label="LinkedIn">in</a>
-          <a href="#" class="social-btn" aria-label="Twitter">𝕏</a>
-          <a href="#" class="social-btn" aria-label="Instagram">◉</a>
-          <a href="#" class="social-btn" aria-label="Dribbble">●</a>
-        </div>
+        <a href="index.html" class="nav-logo" style="font-size:1.6rem;" aria-label="Zelktris Agency">ZEL<span>KTRIS</span></a>
+        <p>Agence digitale premium basée à Bonapriso, Douala. Nous créons des expériences numériques qui impressionnent et convertissent.</p>
       </div>
+
+      <!-- Navigation -->
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="about.html">L'Agence</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="blog.html">Insights</a></li>
+        </ul>
+      </div>
+
+      <!-- Services -->
       <div class="footer-col">
         <h4>Services</h4>
         <ul>
-          <li><a href="services.html">Web & Applications</a></li>
-          <li><a href="services.html">Mobile iOS & Android</a></li>
+          <li><a href="services.html">Web &amp; Applications</a></li>
+          <li><a href="services.html">Mobile iOS &amp; Android</a></li>
           <li><a href="services.html">Intelligence Artificielle</a></li>
-          <li><a href="services.html">UI/UX Design</a></li>
-          <li><a href="services.html">Growth Marketing</a></li>
-          <li><a href="services.html">Cloud & DevOps</a></li>
+          <li><a href="services.html">UI / UX Design</a></li>
+          <li><a href="services.html">Cloud &amp; DevOps</a></li>
         </ul>
       </div>
-      <div class="footer-col">
-        <h4>Agence</h4>
-        <ul>
-          <li><a href="about.html">Notre histoire</a></li>
-          <li><a href="about.html">L'équipe</a></li>
-          <li><a href="about.html">Nos valeurs</a></li>
-          <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="blog.html">Blog & Insights</a></li>
-          <li><a href="contact.html">Rejoindre l'équipe</a></li>
-        </ul>
-      </div>
+
+      <!-- Contact -->
       <div class="footer-col">
         <h4>Contact</h4>
-        <ul>
-          <li><a href="#">📍 Douala, Cameroun</a></li>
-          <li><a href="#">📞 +33 1 23 45 67 89</a></li>
-          <li><a href="#">✉️ contact@zelktrisagency.com</a></li>
-          <li><a href="#">🕐 Lun–Ven 9h–18h</a></li>
-          <li><a href="contact.html">→ Nous contacter</a></li>
-        </ul>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+          </svg>
+          <span>+237 698 486 212</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+          <span>contact@zelktrisagency.com</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+          <span>Bonapriso, Douala, Cameroun</span>
+        </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span class="footer-copy">© 2026 Zelktris Agency. Tous droits réservés.</span>
-      <div class="footer-legal">
-        <a href="#">Mentions légales</a>
-        <a href="#">Politique de confidentialité</a>
-        <a href="#">RGPD</a>
+
+    <!-- Bottom bar -->
+    <div class="footer-v2-bottom">
+      <p>&copy; 2025 <a href="index.html">Zelktris Agency</a>. Tous droits réservés. Fait avec passion à Douala.</p>
+      <div class="footer-socials">
+        <!-- LinkedIn -->
+        <a href="#" class="footer-social-btn" aria-label="LinkedIn Zelktris Agency">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <!-- Instagram -->
+        <a href="#" class="footer-social-btn" aria-label="Instagram Zelktris Agency">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <!-- Twitter/X -->
+        <a href="#" class="footer-social-btn" aria-label="Twitter Zelktris Agency">
+          <svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+        </a>
+        <!-- WhatsApp -->
+        <a href="https://wa.me/237698486212" class="footer-social-btn" aria-label="WhatsApp Zelktris Agency" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+        </a>
       </div>
     </div>
   </footer>
-</div>
 
-<script src="galaxy.js"></script>
-<script>
-async function handleNewsletter(e) {
-  e.preventDefault();
-  const email = document.getElementById('nlEmail').value.trim();
-  const btn   = document.getElementById('nlBtn');
-  if (!email) return;
-  btn.textContent = '⏳ Inscription...';
-  btn.disabled = true;
-  try {
-    const apiBase = window.location.hostname === 'localhost' ? 'http://localhost:4000' : 'https://zelktris-agency.onrender.com';
-    const res  = await fetch(apiBase + '/api/newsletter', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email }),
-    });
-    const data = await res.json();
-    btn.textContent = data.success ? '✅ Confirmé !' : '⚠️ Erreur';
-    btn.style.background = data.success ? 'linear-gradient(135deg,#00aa44,#007733)' : 'linear-gradient(135deg,#cc0022,#880011)';
-    setTimeout(() => { btn.textContent = 'S\'abonner'; btn.style.background = ''; btn.disabled = false; }, 3000);
-  } catch {
-    btn.textContent = '⚠️ Erreur réseau';
-    setTimeout(() => { btn.textContent = 'S\'abonner'; btn.style.background = ''; btn.disabled = false; }, 3000);
-  }
-}
-</script>
-  <script src="chatbot.js"></script>
+</div><!-- /page-wrapper -->
+
+<!-- CHATBOT ZARA -->
+<script src="chatbot.js"></script>
+
+<!-- GSAP + ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+<!-- Galaxy + Animations -->
+<script src="galaxy.js" defer></script>
+<script src="animations.js" defer></script>
+
 </body>
 </html>
-
-
